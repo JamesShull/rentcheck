@@ -1,0 +1,44 @@
+<mat-card class="rental-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{streetAddress}} 
+    </mat-card-title>
+    <mat-card-subtitle>
+        {{cityAddress}}, {{stateAddress}}, {{zipAddress}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tab-group>
+        <mat-tab label="Main">
+            <form>
+              <p>
+                <mat-form-field>
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="Price" [(value)]="price">
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field>
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="HOA" [(value)]="hoa">
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field>
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="Mello-Roos" [(value)]="melloRoos">
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field>
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="Rent Estimate" [(value)]="rent">
+                </mat-form-field>
+              </p>
+            </form>
+            <span>{{monthlyIncome | currency}}/mo.&nbsp;{{yield | percent:'1.2-2'}}</span>
+        </mat-tab>
+        <mat-tab label="Details"> details... </mat-tab>
+      </mat-tab-group>
+  </mat-card-content>
+</mat-card>
