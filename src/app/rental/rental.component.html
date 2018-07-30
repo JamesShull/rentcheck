@@ -14,31 +14,38 @@
               <p>
                 <mat-form-field>
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Price" [(value)]="price">
+                  <input matInput placeholder="Price" name="price" [(ngModel)]="price" (blur)="updatePerformance()">
+                  <!--<input matInput placeholder="Price" [formControl]="priceControl">-->
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field>
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="HOA" [(value)]="hoa">
+                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="hoa" (blur)="updatePerformance()">
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field>
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" [(value)]="melloRoos">
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="melloRoos" (blur)="updatePerformance()">
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field>
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Rent Estimate" [(value)]="rent">
+                  <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rent" (blur)="updatePerformance()">
                 </mat-form-field>
               </p>
             </form>
-            <span>{{monthlyIncome | currency}}/mo.&nbsp;{{yield | percent:'1.2-2'}}</span>
+            
+            <p>debug...</p>
+            <span>fake income:{{monthlyIncome | currency}} /mo.,&nbsp;fake yield: {{yield | percent:'1.2-2'}}</span>
+            <p>Mortgage Payment: {{monthlyPayment | currency}} /mo.</p>
+            <p>&nbsp;Principal&nbsp;: {{monthlyPrincipal | currency }}&nbsp;&nbsp;Interest&nbsp;: {{monthlyInterest | currency }}</p>
         </mat-tab>
-        <mat-tab label="Details"> details... </mat-tab>
+        <mat-tab label="Details"> 
+          <p>details...</p>
+        </mat-tab>
       </mat-tab-group>
   </mat-card-content>
 </mat-card>

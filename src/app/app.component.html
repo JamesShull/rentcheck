@@ -1,5 +1,13 @@
 <mat-toolbar class="title-bar" color="primary">
-      <img src="assets/rent_check-512.png" alt="rent-check-icon">
+      <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
       <h2>&nbsp;{{ title }}</h2>
 </mat-toolbar>
-<app-rental></app-rental>
+<app-rental 
+      [interestRate]="interestRate"
+      [loanTerm]="loanTerm"
+      [downPayment]="downPayment"
+      [insuranceRate]="insuranceRate"
+      [maintenanceRate]="maintenanceRate"
+      [propertyTaxRate]="propertyTaxRate"
+      [salaryTaxRate]="salaryTaxRate"
+></app-rental>
