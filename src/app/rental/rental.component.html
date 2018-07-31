@@ -8,43 +8,163 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <span class="income"><h4>{{monthlyIncome | currency}} /mo.</h4></span>
+    <span class="yield"><h4>{{yield | percent:'1.2-2'}}</h4></span>
+    
+    
     <mat-tab-group>
-        <mat-tab label="Main">
-            <form>
+        <mat-tab label="Market">
               <p>
-                <mat-form-field>
+                <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
                   <input matInput placeholder="Price" name="price" [(ngModel)]="price" (blur)="updatePerformance()">
-                  <!--<input matInput placeholder="Price" [formControl]="priceControl">-->
                 </mat-form-field>
-              </p>
-              <p>
-                <mat-form-field>
-                  <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="hoa" (blur)="updatePerformance()">
-                </mat-form-field>
-              </p>
-              <p>
-                <mat-form-field>
-                  <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="melloRoos" (blur)="updatePerformance()">
-                </mat-form-field>
-              </p>
-              <p>
-                <mat-form-field>
+                <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
                   <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rent" (blur)="updatePerformance()">
                 </mat-form-field>
               </p>
-            </form>
-            
-            <p>debug...</p>
-            <span>fake income:{{monthlyIncome | currency}} /mo.,&nbsp;fake yield: {{yield | percent:'1.2-2'}}</span>
+              <p>
+                <mat-form-field class="card-input">
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="hoa" (blur)="updatePerformance()">
+                </mat-form-field>
+                <mat-form-field class="card-input">
+                  <span matPrefix>$ &nbsp;</span>
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="melloRoos" (blur)="updatePerformance()">
+                </mat-form-field>
+              </p>
+        </mat-tab>
+
+
+        <mat-tab label="Details"> 
             <p>Mortgage Payment: {{monthlyPayment | currency}} /mo.</p>
             <p>&nbsp;Principal&nbsp;: {{monthlyPrincipal | currency }}&nbsp;&nbsp;Interest&nbsp;: {{monthlyInterest | currency }}</p>
         </mat-tab>
-        <mat-tab label="Details"> 
-          <p>details...</p>
+
+
+        <mat-tab label="Asm"> 
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
+                      [ngModel]="salaryTaxRateOverride | percent" (blur)="updatePerformance()"
+                      (ngModelChange)="salaryTaxRateOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{salaryTaxRateInput | percent}}</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Interest Rate" name="interestRate" 
+                      [ngModel]="interestRateOverride | percent:'1.2-4'" (blur)="updatePerformance()"
+                      (ngModelChange)="interestRateOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{interestRateInput | percent:'1.2-4'}}</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Loan Term" name="loanTerm" 
+                      [ngModel]="loanTermOverride" (blur)="updatePerformance()"
+                      (ngModelChange)="loanTermOverride=$event">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{loanTermInput}} months</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Down Payment" name="downPayment" 
+                      [ngModel]="downPaymentOverride | percent" (blur)="updatePerformance()"
+                      (ngModelChange)="downPaymentOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{downPaymentInput | percent}}</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Property Rate" name="propertyTaxRate" 
+                      [ngModel]="propertyTaxRateOverride | percent:'1.3-4'" (blur)="updatePerformance()"
+                      (ngModelChange)="propertyTaxRateOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{propertyTaxRateInput | percent:'1.3-4'}}</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Insurance Rate" name="insuranceRate" 
+                      [ngModel]="insuranceRateOverride | percent:'1.2-3'" (blur)="updatePerformance()"
+                      (ngModelChange)="insuranceRateOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{insuranceRateInput | percent:'1.2-3'}}</span>
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
+                      [ngModel]="maintenanceRateOverride | percent:'1.2-3'" (blur)="updatePerformance()"
+                      (ngModelChange)="maintenanceRateOverride=sanitizeInput($event)">
+              </mat-form-field>
+              <span class="assumption-default">&nbsp;{{maintenanceRateInput | percent:'1.2-3'}}</span>
+            </p>
+            <button mat-raised-button color="primary" (click)="editGlobal()">Edit Global Assumptions</button>
+            
+ <!--<mat-divider></mat-divider>-->
+
+            <div *ngIf="showGlobal">
+                <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Income Tax Rate" name="salaryTaxRate" 
+                            [ngModel]="salaryTaxRateInput | percent" (blur)="updatePerformance()"
+                            (ngModelChange)="salaryTaxRateInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{salaryTaxRateInput | percent}}</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Interest Rate" name="interestRate" 
+                            [ngModel]="interestRateInput | percent:'1.2-4'" (blur)="updatePerformance()"
+                            (ngModelChange)="interestRateInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{interestRateInput | percent:'1.2-4'}}</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Loan Term" name="loanTerm" 
+                            [ngModel]="loanTermInput" (blur)="updatePerformance()"
+                            (ngModelChange)="loanTermInput=$event">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{loanTermInput}} months</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Down Payment" name="downPayment" 
+                            [ngModel]="downPaymentInput | percent" (blur)="updatePerformance()"
+                            (ngModelChange)="downPaymentInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{downPaymentInput | percent}}</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Property Rate" name="propertyTaxRate" 
+                            [ngModel]="propertyTaxRateInput | percent:'1.3-4'" (blur)="updatePerformance()"
+                            (ngModelChange)="propertyTaxRateInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{propertyTaxRateInput | percent:'1.3-4'}}</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Insurance Rate" name="insuranceRate" 
+                            [ngModel]="insuranceRateInput | percent:'1.2-3'" (blur)="updatePerformance()"
+                            (ngModelChange)="insuranceRateInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{insuranceRateInput | percent:'1.2-3'}}</span>
+                  </p>
+                  <p>
+                    <mat-form-field class="card-input">
+                      <input matInput placeholder="Global Maintenance Rate" name="salaryTaxRate" 
+                            [ngModel]="maintenanceRateInput | percent:'1.2-3'" (blur)="updatePerformance()"
+                            (ngModelChange)="maintenanceRateInput=sanitizeInput($event)">
+                    </mat-form-field>
+                    <span class="assumption-default">&nbsp;{{maintenanceRateInput | percent:'1.2-3'}}</span>
+                  </p>
+                  <button mat-raised-button color="accent"  (click)="updateGlobal()">Submit Global Assumptions</button>
+            </div>
+            
+
         </mat-tab>
       </mat-tab-group>
   </mat-card-content>
