@@ -7,10 +7,26 @@
     width: 125px !important;
     margin-left: 15px;
 }
+.short-input {
+    width: 75px !important;
+}
+.edit-toggle {
+    margin-left: 50px;
+}
+.outflow {
+    display: inline-block;
+    margin: auto;
+    width: 32%;
+    text-align: center;
+    background-color: #ff4081;
+    border-right: 1px solid black;
+}
+.outflow>p { margin: 0px;}
+.outflow>h4 { margin-top: 5px; margin-bottom: 5px;}
 .income {
     display: inline-block;
     margin: auto;
-    width: 49%;
+    width: 32%;
     text-align: center;
     /*background-color: #ff4081; accent - pink*/
     /*background-color: #28a745; green */
@@ -19,13 +35,17 @@
     background-color: #ff4081;
     border-right: 1px solid black;
 }
+.income>p { margin: 0px;}
+.income>h4 { margin-top: 5px; margin-bottom: 5px;}
 .yield {
     display: inline-block;
     margin: auto;
-    width: 49%;
+    width: 32%;
     text-align: center;
     background-color: #ff4081;
 }
+.yield>p { margin: 0px;}
+.yield>h4 { margin-top: 5px; margin-bottom: 5px;}
 .positive{
     background-color: #28a745;
 }

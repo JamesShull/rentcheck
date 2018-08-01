@@ -1,17 +1,35 @@
 <mat-card class="rental-card">
   <mat-card-header>
     <mat-card-title>
-      {{streetAddress}} 
+        <mat-form-field *ngIf="editAddress">
+          <input matInput placeholder="Street" name="street" [(ngModel)]="streetAddress">
+        </mat-form-field>
+        <span *ngIf="!editAddress"><h2 style="display:inline-block;">{{streetAddress}}</h2></span>
+        <mat-slide-toggle class="edit-toggle" [(ngModel)]="editAddress">Edit Address</mat-slide-toggle>
     </mat-card-title>
-    <mat-card-subtitle>
-        {{cityAddress}}, {{stateAddress}}, {{zipAddress}}
+    <mat-card-subtitle *ngIf="editAddress">
+        <mat-form-field>
+          <input matInput placeholder="City" name="city" [(ngModel)]="cityAddress">
+        </mat-form-field>,&nbsp;
+        <mat-form-field class="short-input">
+          <mat-select [(value)]="stateAddress" placeholder="State">
+              <mat-option *ngFor="let state of stateList" [value]="state">
+                {{state}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>,&nbsp;
+        <mat-form-field class="short-input">
+          <input matInput placeholder="Zip Code" name="zip" [(ngModel)]="zipAddress">
+        </mat-form-field>
+    </mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!editAddress">
+        <span><h3>{{cityAddress}},&nbsp;{{stateAddress}},&nbsp;{{zipAddress}}</h3></span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="income" [class.positive]="monthlyIncome>0"><h4>{{monthlyIncome | currency}} /mo.</h4></span>
-    <span class="yield" [class.positive]="yield>0"><h4>{{yield | percent:'1.2-2'}}</h4></span>
-    
-    
+    <span class="outflow"><p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4></span>
+    <span class="income" [class.positive]="monthlyIncome>0"><p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4></span>
+    <span class="yield" [class.positive]="yield>0"><p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4></span>
     <mat-tab-group>
         <mat-tab label="Market">
               <p>
@@ -35,15 +53,8 @@
                 </mat-form-field>
               </p>
         </mat-tab>
-
-
-        <mat-tab label="Details"> 
-            <p>Mortgage Payment: {{monthlyPayment | currency}} /mo.</p>
-            <p>&nbsp;Principal&nbsp;: {{monthlyPrincipal | currency }}&nbsp;&nbsp;Interest&nbsp;: {{monthlyInterest | currency }}</p>
-        </mat-tab>
-
-
         <mat-tab label="Assumptions"> 
+            <!-- Add purchase date -->
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
@@ -146,6 +157,26 @@
                   </p>
                   <button mat-raised-button color="accent"  (click)="updateGlobal()">Submit Default Assumptions</button>
             </div>
+        </mat-tab>
+        <mat-tab label="Details"> 
+            <!-- Down Payment required -->
+
+            <!-- Expense (monthly / annually -->
+              <!-- Cash outflow monthly -->
+                <!-- Mortgage Payment -->
+                <!-- Property Tax (monthly / annual) -->
+                <!-- HOA & MelloRoos (monthly / annual) -->
+                <!-- Maintenance estimate (monthly / annual) -->
+                <!-- Insurance estimate (monthly / annual) -->
+              <!-- Tax Savings Writeoff (monthly / annual) -->
+                <!-- Interest Writeoff (monthly / annual) -->
+                <!-- Property Tax Writeoff estimate (monthly / annual) -->
+            
+            <!-- Mortgage Payment-->
+              <p>Mortgage Payment: {{monthlyPayment | currency}} / month</p>
+              <p>&nbsp;Principal&nbsp;: {{monthlyPrincipal | currency }}&nbsp;&nbsp;Interest&nbsp;: {{monthlyInterest | currency }}</p> 
+              <!-- Loan Term -->
+              <!-- Ammortization table (term, interest, principal, balance)-->
         </mat-tab>
       </mat-tab-group>
   </mat-card-content>

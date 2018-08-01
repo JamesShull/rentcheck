@@ -5,7 +5,9 @@ import {  MatToolbarModule,
           MatCardModule,
           MatTabsModule,
           MatFormFieldModule,
-          MatButtonModule
+          MatButtonModule,
+          MatSelectModule,
+          MatSlideToggleModule
 } from '@angular/material';
 
 @NgModule({
@@ -16,7 +18,9 @@ import {  MatToolbarModule,
     MatCardModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatToolbarModule,
@@ -24,7 +28,9 @@ import {  MatToolbarModule,
     MatCardModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   declarations: []
 })

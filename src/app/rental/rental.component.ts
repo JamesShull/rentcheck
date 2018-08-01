@@ -29,6 +29,13 @@ export class RentalComponent implements OnInit {
   public salaryTaxRateOverride : number;
   public salaryTaxRateOriginal : number;
 
+  public stateList = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
+                        'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
+                        'KY','LA','MA','MD','ME','MH','MI','MN','MO','MP',
+                        'MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
+                        'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
+                        'TX','UT','VA','VI','VT','WA','WI','WV','WY' ];
+
   // Market Info
   public streetAddress : string; 
   public cityAddress :string; 
@@ -55,15 +62,17 @@ export class RentalComponent implements OnInit {
   private monthlyMaintenance : number;
 
   private showGlobal : boolean;
+  private editAddress : boolean;
 
   constructor() { }
 
   ngOnInit() {
       // card defaults
-      this.streetAddress = '12345 Street';
-      this.cityAddress = 'San Diego';
-      this.stateAddress = 'CA';
-      this.zipAddress = '92101';
+      this.editAddress = true;
+      //this.streetAddress = '12345 Street';
+      //this.cityAddress = 'San Diego';
+      //this.stateAddress = 'CA';
+      //this.zipAddress = '92101';
       this.price = 544000; 
       this.hoa = 250; 
       this.melloRoos = 0; 
