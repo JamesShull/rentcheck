@@ -4,25 +4,32 @@
     max-width: 500px;
 }
 .card-input {
-    width: 100px !important;
-    margin: 0px 15px;
+    width: 125px !important;
+    margin-left: 15px;
 }
 .income {
     display: inline-block;
     margin: auto;
-    width: 50%;
+    width: 49%;
     text-align: center;
     /*background-color: #ff4081; accent - pink*/
     /*background-color: #28a745; green */
     /*background-color: #20c997; teal*/
     /*background-color: #17a2b8; cyan*/
-    background-color: #28a745;
+    background-color: #ff4081;
+    border-right: 1px solid black;
 }
 .yield {
     display: inline-block;
     margin: auto;
-    width: 50%;
+    width: 49%;
     text-align: center;
+    background-color: #ff4081;
+}
+.positive{
     background-color: #28a745;
 }
-.assumption-default { color: grey; }
+.assumption-default { 
+    color: grey; 
+    margin-left: 30px;
+}

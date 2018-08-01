@@ -7,20 +7,27 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RentalComponent implements OnInit {
   // Globals from app-component
-  @Input('interestRate') interestRateInput : number;
+  @Input('interestRate') interestRateDefault : number;
   public interestRateOverride : number;
-  @Input('loanTerm') loanTermInput : number;
+  public interestRateOriginal : number;
+  @Input('loanTerm') loanTermDefault : number;
   public loanTermOverride : number;
-  @Input('downPayment') downPaymentInput : number;
+  public loanTermOriginal : number;
+  @Input('downPayment') downPaymentDefault : number;
   public downPaymentOverride : number;
-  @Input('insuranceRate') insuranceRateInput : number;
+  public downPaymentOriginal : number;
+  @Input('insuranceRate') insuranceRateDefault : number;
   public insuranceRateOverride : number;
-  @Input('maintenanceRate') maintenanceRateInput : number;
+  public insuranceRateOriginal : number;
+  @Input('maintenanceRate') maintenanceRateDefault : number;
   public maintenanceRateOverride : number;
-  @Input('propertyTaxRate') propertyTaxRateInput : number;
+  public maintenanceRateOriginal : number;
+  @Input('propertyTaxRate') propertyTaxRateDefault : number;
   public propertyTaxRateOverride : number;
-  @Input('salaryTaxRate') salaryTaxRateInput : number;
+  public propertyTaxRateOriginal : number;
+  @Input('salaryTaxRate') salaryTaxRateDefault : number;
   public salaryTaxRateOverride : number;
+  public salaryTaxRateOriginal : number;
 
   // Market Info
   public streetAddress : string; 
@@ -64,18 +71,28 @@ export class RentalComponent implements OnInit {
       this.showGlobal = false;
 
       /* User Overrides */
-      this.downPaymentOverride = this.downPaymentInput;
-      this.loanTermOverride = this.loanTermInput;
-      this.interestRateOverride = this.interestRateInput;
-      this.maintenanceRateOverride = this.maintenanceRateInput;
-      this.insuranceRateOverride = this.insuranceRateInput;
-      this.propertyTaxRateOverride = this.propertyTaxRateInput;
-      this.salaryTaxRateOverride = this.salaryTaxRateInput;
+      this.downPaymentOverride = this.downPaymentDefault;
+      this.loanTermOverride = this.loanTermDefault;
+      this.interestRateOverride = this.interestRateDefault;
+      this.maintenanceRateOverride = this.maintenanceRateDefault;
+      this.insuranceRateOverride = this.insuranceRateDefault;
+      this.propertyTaxRateOverride = this.propertyTaxRateDefault;
+      this.salaryTaxRateOverride = this.salaryTaxRateDefault;
+
+      /* Original Defaults */
+      this.downPaymentOriginal = this.downPaymentDefault;
+      this.loanTermOriginal = this.loanTermDefault;
+      this.interestRateOriginal = this.interestRateDefault;
+      this.maintenanceRateOriginal = this.maintenanceRateDefault;
+      this.insuranceRateOriginal = this.insuranceRateDefault;
+      this.propertyTaxRateOriginal = this.propertyTaxRateDefault;
+      this.salaryTaxRateOriginal = this.salaryTaxRateDefault;
 
       this.updatePerformance();
   }
 
   public updatePerformance(){
+    /*
     let log = {
       'price' : this.price,
       'hoa' : this.hoa,
@@ -90,6 +107,8 @@ export class RentalComponent implements OnInit {
       'salaryTaxRateOverride' : this.salaryTaxRateOverride
     };
     console.log(log);
+    */
+
     // Loan calculations
     let principal = (1-this.downPaymentOverride)*this.price;
     let period = 1; // get # months from loan start if your smart
@@ -134,7 +153,7 @@ export class RentalComponent implements OnInit {
   }
 
   public editGlobal(){
-    this.showGlobal = true;
+    this.showGlobal = !this.showGlobal;
   }
 
   public updateGlobal(){
@@ -142,7 +161,4 @@ export class RentalComponent implements OnInit {
     // call global service to reflect to other rental cards
   }
 
-  public sanitizeInput(event:any) : number {
-    return Number(new String(event).replace('%',''));
-  }
 }

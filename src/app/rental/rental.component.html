@@ -8,8 +8,8 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="income"><h4>{{monthlyIncome | currency}} /mo.</h4></span>
-    <span class="yield"><h4>{{yield | percent:'1.2-2'}}</h4></span>
+    <span class="income" [class.positive]="monthlyIncome>0"><h4>{{monthlyIncome | currency}} /mo.</h4></span>
+    <span class="yield" [class.positive]="yield>0"><h4>{{yield | percent:'1.2-2'}}</h4></span>
     
     
     <mat-tab-group>
@@ -43,128 +43,109 @@
         </mat-tab>
 
 
-        <mat-tab label="Asm"> 
+        <mat-tab label="Assumptions"> 
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
-                      [ngModel]="salaryTaxRateOverride | percent" (blur)="updatePerformance()"
-                      (ngModelChange)="salaryTaxRateOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{salaryTaxRateInput | percent}}</span>
+                      [ngModel]="salaryTaxRateOverride*100 | number:'1.0-0'" (blur)="salaryTaxRateOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{salaryTaxRateDefault | percent}})</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
-                      [ngModel]="interestRateOverride | percent:'1.2-4'" (blur)="updatePerformance()"
-                      (ngModelChange)="interestRateOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{interestRateInput | percent:'1.2-4'}}</span>
+                      [ngModel]="interestRateOverride*100 | number:'1.1-4'" (blur)="interestRateOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{interestRateDefault | percent:'1.1-4'}})</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Loan Term" name="loanTerm" 
-                      [ngModel]="loanTermOverride" (blur)="updatePerformance()"
-                      (ngModelChange)="loanTermOverride=$event">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{loanTermInput}} months</span>
+                      [ngModel]="loanTermOverride" (blur)="loanTermOverride=$event.target.value;updatePerformance();">
+              </mat-form-field>mo.
+              <span class="assumption-default" style="margin-left:24px;">(default: {{loanTermDefault}} months)</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Down Payment" name="downPayment" 
-                      [ngModel]="downPaymentOverride | percent" (blur)="updatePerformance()"
-                      (ngModelChange)="downPaymentOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{downPaymentInput | percent}}</span>
+                      [ngModel]="downPaymentOverride*100 | number:'1.0-0'" (blur)="downPaymentOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{downPaymentDefault | percent}})</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Property Rate" name="propertyTaxRate" 
-                      [ngModel]="propertyTaxRateOverride | percent:'1.3-4'" (blur)="updatePerformance()"
-                      (ngModelChange)="propertyTaxRateOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{propertyTaxRateInput | percent:'1.3-4'}}</span>
+                      [ngModel]="propertyTaxRateOverride*100 | number:'1.3-4'" (blur)="propertyTaxRateOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{propertyTaxRateDefault | percent:'1.3-4'}})</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
-                      [ngModel]="insuranceRateOverride | percent:'1.2-3'" (blur)="updatePerformance()"
-                      (ngModelChange)="insuranceRateOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{insuranceRateInput | percent:'1.2-3'}}</span>
+                      [ngModel]="insuranceRateOverride*100 | number:'1.2-3'" (blur)="insuranceRateOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{insuranceRateDefault | percent:'1.2-3'}})</span>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
-                      [ngModel]="maintenanceRateOverride | percent:'1.2-3'" (blur)="updatePerformance()"
-                      (ngModelChange)="maintenanceRateOverride=sanitizeInput($event)">
-              </mat-form-field>
-              <span class="assumption-default">&nbsp;{{maintenanceRateInput | percent:'1.2-3'}}</span>
+                      [ngModel]="maintenanceRateOverride*100| number:'1.2-3'" (blur)="maintenanceRateOverride=$event.target.value/100;updatePerformance();">
+              </mat-form-field>%
+              <span class="assumption-default">&nbsp;(default: {{maintenanceRateDefault | percent:'1.2-3'}})</span>
             </p>
-            <button mat-raised-button color="primary" (click)="editGlobal()">Edit Global Assumptions</button>
-            
- <!--<mat-divider></mat-divider>-->
-
+            <button mat-raised-button color="primary" (click)="editGlobal()">Edit Default Assumptions</button>
             <div *ngIf="showGlobal">
                 <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Income Tax Rate" name="salaryTaxRate" 
-                            [ngModel]="salaryTaxRateInput | percent" (blur)="updatePerformance()"
-                            (ngModelChange)="salaryTaxRateInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{salaryTaxRateInput | percent}}</span>
+                      <input matInput placeholder="Default Income Tax Rate" name="salaryTaxRate" 
+                            [ngModel]="salaryTaxRateDefault*100 | number:'1.0-0'" (blur)="salaryTaxRateDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{salaryTaxRateOriginal | percent}}</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Interest Rate" name="interestRate" 
-                            [ngModel]="interestRateInput | percent:'1.2-4'" (blur)="updatePerformance()"
-                            (ngModelChange)="interestRateInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{interestRateInput | percent:'1.2-4'}}</span>
+                      <input matInput placeholder="Default Interest Rate" name="interestRate" 
+                            [ngModel]="interestRateDefault*100 | number:'1.1-4'" (blur)="interestRateDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{interestRateOriginal | percent:'1.1-4'}}</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Loan Term" name="loanTerm" 
-                            [ngModel]="loanTermInput" (blur)="updatePerformance()"
-                            (ngModelChange)="loanTermInput=$event">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{loanTermInput}} months</span>
+                      <input matInput placeholder="Default Loan Term" name="loanTerm" 
+                            [ngModel]="loanTermDefault" (blur)="loanTermDefault=$event.target.value;updatePerformance();">
+                    </mat-form-field>mo.
+                    <span class="assumption-default" style="margin-left:24px;">{{loanTermOriginal}} months</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Down Payment" name="downPayment" 
-                            [ngModel]="downPaymentInput | percent" (blur)="updatePerformance()"
-                            (ngModelChange)="downPaymentInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{downPaymentInput | percent}}</span>
+                      <input matInput placeholder="Default Down Payment" name="downPayment" 
+                            [ngModel]="downPaymentDefault*100 | number:'1.0-0'" (blur)="downPaymentDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{downPaymentOriginal | percent}}</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Property Rate" name="propertyTaxRate" 
-                            [ngModel]="propertyTaxRateInput | percent:'1.3-4'" (blur)="updatePerformance()"
-                            (ngModelChange)="propertyTaxRateInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{propertyTaxRateInput | percent:'1.3-4'}}</span>
+                      <input matInput placeholder="Default Property Rate" name="propertyTaxRate" 
+                            [ngModel]="propertyTaxRateDefault*100 | number:'1.3-4'" (blur)="propertyTaxRateDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{propertyTaxRateOriginal | percent:'1.3-4'}}</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Insurance Rate" name="insuranceRate" 
-                            [ngModel]="insuranceRateInput | percent:'1.2-3'" (blur)="updatePerformance()"
-                            (ngModelChange)="insuranceRateInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{insuranceRateInput | percent:'1.2-3'}}</span>
+                      <input matInput placeholder="Default Insurance Rate" name="insuranceRate" 
+                            [ngModel]="insuranceRateDefault*100 | number:'1.2-3'" (blur)="insuranceRateDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{insuranceRateOriginal | percent:'1.2-3'}}</span>
                   </p>
                   <p>
                     <mat-form-field class="card-input">
-                      <input matInput placeholder="Global Maintenance Rate" name="salaryTaxRate" 
-                            [ngModel]="maintenanceRateInput | percent:'1.2-3'" (blur)="updatePerformance()"
-                            (ngModelChange)="maintenanceRateInput=sanitizeInput($event)">
-                    </mat-form-field>
-                    <span class="assumption-default">&nbsp;{{maintenanceRateInput | percent:'1.2-3'}}</span>
+                      <input matInput placeholder="Default Maintenance Rate" name="salaryTaxRate" 
+                            [ngModel]="maintenanceRateDefault*100 | number:'1.2-3'" (blur)="maintenanceRateDefault=$event.target.value/100;updatePerformance();">
+                    </mat-form-field>%
+                    <span class="assumption-default">&nbsp;{{maintenanceRateOriginal | percent:'1.2-3'}}</span>
                   </p>
-                  <button mat-raised-button color="accent"  (click)="updateGlobal()">Submit Global Assumptions</button>
+                  <button mat-raised-button color="accent"  (click)="updateGlobal()">Submit Default Assumptions</button>
             </div>
-            
-
         </mat-tab>
       </mat-tab-group>
   </mat-card-content>
