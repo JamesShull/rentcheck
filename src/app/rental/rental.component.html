@@ -158,25 +158,59 @@
                   <button mat-raised-button color="accent"  (click)="updateGlobal()">Submit Default Assumptions</button>
             </div>
         </mat-tab>
-        <mat-tab label="Details"> 
-            <!-- Down Payment required -->
+        <mat-tab label="Details">
 
-            <!-- Expense (monthly / annually -->
-              <!-- Cash outflow monthly -->
-                <!-- Mortgage Payment -->
-                <!-- Property Tax (monthly / annual) -->
-                <!-- HOA & MelloRoos (monthly / annual) -->
-                <!-- Maintenance estimate (monthly / annual) -->
-                <!-- Insurance estimate (monthly / annual) -->
-              <!-- Tax Savings Writeoff (monthly / annual) -->
-                <!-- Interest Writeoff (monthly / annual) -->
-                <!-- Property Tax Writeoff estimate (monthly / annual) -->
-            
-            <!-- Mortgage Payment-->
-              <p>Mortgage Payment: {{monthlyPayment | currency}} / month</p>
-              <p>&nbsp;Principal&nbsp;: {{monthlyPrincipal | currency }}&nbsp;&nbsp;Interest&nbsp;: {{monthlyInterest | currency }}</p> 
-              <!-- Loan Term -->
-              <!-- Ammortization table (term, interest, principal, balance)-->
+            <h3>Down Payment: <span class="detail-text">{{ ((downPaymentOverride*price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
+            <div class="divider"></div>
+
+            <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency}}</span></h3>
+            <ul>
+              <li><h5>Mortgage Payment: <span class="detail-text">{{monthlyPayment | currency}}</span></h5></li>
+              <li><h5>Property Tax: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5></li>
+              <li><h5>HOA: <span class="detail-text">{{hoa | currency}}</span></h5></li>
+              <li><h5>Mello-Roos: <span class="detail-text">{{melloRoos | currency}}</span></h5></li>
+              <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency}}</span></h5></li>
+              <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency}}</span></h5></li>
+            </ul>
+            <div class="divider"></div>
+
+            <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
+            <ul>
+              <li><h5>Interest Write Off: <span class="detail-text">{{salaryTaxRateOverride*monthlyPropertyTax | currency}}</span></h5></li>
+              <li><h5>Property Write Off: <span class="detail-text">{{salaryTaxRateOverride*monthlyInterest | currency}}</span></h5></li>
+            </ul>
+            <div class="divider"></div>
+
+            <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
+            <div class="divider"></div>
+
+            <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
+              <ul>
+                <li><h5>Interest (1st Term): <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
+                <li><h5>Principal (1st Term): <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
+                <li><h5>Loan Term: now() - mortgage start month</h5></li>
+              </ul>
+            <button mat-raised-button color="accent"  (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
+            <div class="line-break"></div><div class="divider"></div>
+            <table *ngIf="showAmmortization" mat-table [dataSource]="ammortizationSchedule" class="mat-elevation-z8 ammortization-table">
+                <!-- Term Column -->
+                <ng-container matColumnDef="term">
+                  <th mat-header-cell *matHeaderCellDef> Term </th>
+                  <td mat-cell *matCellDef="let element"> {{element.term}} </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="interest">
+                  <th mat-header-cell *matHeaderCellDef> Interest </th>
+                  <td mat-cell *matCellDef="let element"> {{element.interest | currency}} </td>
+                </ng-container>
+                <!-- Principal Column -->
+                <ng-container matColumnDef="principal">
+                  <th mat-header-cell *matHeaderCellDef> Principal </th>
+                  <td mat-cell *matCellDef="let element"> {{element.principal | currency}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="ammortizationColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: ammortizationColumns;"></tr>
+            </table>
         </mat-tab>
       </mat-tab-group>
   </mat-card-content>

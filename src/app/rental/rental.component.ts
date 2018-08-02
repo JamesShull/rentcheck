@@ -64,6 +64,10 @@ export class RentalComponent implements OnInit {
   private showGlobal : boolean;
   private editAddress : boolean;
 
+  public ammortizationSchedule : Array<any>;
+  public ammortizationColumns = ['term','interest','principal'];
+  public showAmmortization = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -170,4 +174,24 @@ export class RentalComponent implements OnInit {
     // call global service to reflect to other rental cards
   }
 
+  public generateAmmortizationSchedule() : void{
+    this.updatePerformance();
+    if (this.showAmmortization != true){
+      let principal = (1-this.downPaymentOverride)*this.price;
+      this.ammortizationSchedule = new Array();
+      for(let i=0;i<this.loanTermOverride;i++){
+        this.ammortizationSchedule.push({
+          'term':i,
+          'interest': this.calcInterest(principal,i+1),
+          'principal': this.calcPrincipal(principal, i+1)
+        });
+      }
+      this.showAmmortization = true;
+    }else{
+      this.ammortizationSchedule = new Array();
+      this.showAmmortization = false;
+    }
+    
+    
+  }
 }
