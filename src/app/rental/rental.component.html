@@ -27,7 +27,7 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow"><p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4></span>
+    <span class="outflow" [class.positive]="rent>monthlyOutflow"><p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4></span>
     <span class="income" [class.positive]="monthlyIncome>0"><p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4></span>
     <span class="yield" [class.positive]="yield>0"><p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4></span>
     <mat-tab-group>
