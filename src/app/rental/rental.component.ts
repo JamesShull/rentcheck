@@ -7,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RentalComponent implements OnInit {
   // Globals from app-component
+  @Input('defaults') defaultsGlobal : any;
+
+
   @Input('interestRate') interestRateDefault : number;
   public interestRateOverride : number;
   public interestRateOriginal : number;

@@ -1,11 +1,13 @@
 <mat-toolbar class="title-bar" color="primary">
-      <!--ToDo: Add Menu to edit global defaults-->
-      <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
+      <button mat-button (click)="defaultsDialog();">
+            <img style="filter: contrast(4) invert(1);" src="assets/menu_light.svg" alt="menu icon">
+      </button>
       <span class="title">{{ title }}</span>
+      <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
       <span class="filler"></span>
       <span class="tag-line">rental preformance guesstimation tool</span>
 </mat-toolbar>
-<h3 class="warning">Warning: This site is under construction!!! </h3>
+<!-- Make loop for multiple rental evaluations -->
 <app-rental 
       [interestRate]="interestRate"
       [loanTerm]="loanTerm"
@@ -14,4 +16,5 @@
       [maintenanceRate]="maintenanceRate"
       [propertyTaxRate]="propertyTaxRate"
       [salaryTaxRate]="salaryTaxRate"
+      [defaults]="defaults"
 ></app-rental>
