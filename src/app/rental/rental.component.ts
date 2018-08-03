@@ -105,23 +105,6 @@ export class RentalComponent implements OnInit {
   }
 
   public updatePerformance(){
-    /*
-    let log = {
-      'price' : this.price,
-      'hoa' : this.hoa,
-      'melloRoos' : this.melloRoos,
-      'rent' : this.rent,
-      'interestRateOverride' : this.interestRateOverride,
-      'loanTermOverride' : this.loanTermOverride,
-      'downPaymentOverride' : this.downPaymentOverride,
-      'insuranceRateOverride' : this.insuranceRateOverride,
-      'maintenanceRateOverride' : this.maintenanceRateOverride,
-      'propertyTaxRateOverride' : this.propertyTaxRateOverride,
-      'salaryTaxRateOverride' : this.salaryTaxRateOverride
-    };
-    console.log(log);
-    */
-
     // Loan calculations
     let principal = (1-this.downPaymentOverride)*this.price;
     let period = 1; // get # months from loan start if your smart
