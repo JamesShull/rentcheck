@@ -5,11 +5,13 @@ import { MatImportsModule } from './mat-imports/mat-imports.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RentalComponent } from './rental/rental.component';
+import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RentalComponent
+    RentalComponent,
+    DefaultsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +20,7 @@ import { RentalComponent } from './rental/rental.component';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DefaultsDialogComponent]
 })
 export class AppModule { }

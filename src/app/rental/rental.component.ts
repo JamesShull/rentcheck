@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DefaultsDataInterface } from '../defaults-service/defaults.service';
 
 @Component({
   selector: 'app-rental',
@@ -7,14 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RentalComponent implements OnInit {
   // Globals from app-component
-  @Input('defaults') defaultsGlobal : any;
-  public interestRateOverride : number;
-  public loanTermOverride : number;
-  public downPaymentOverride : number;
-  public insuranceRateOverride : number;
-  public maintenanceRateOverride : number;
-  public propertyTaxRateOverride : number;
-  public salaryTaxRateOverride : number;
+  @Input('defaults') defaultsGlobal : DefaultsDataInterface;
+  public defaultsOverride : DefaultsDataInterface;
 
   public stateList = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
                         'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
@@ -53,30 +48,23 @@ export class RentalComponent implements OnInit {
       this.hoa = 250; this.melloRoos = 0; 
 
       /* User Overrides */
-      this.downPaymentOverride      = this.defaultsGlobal["downPayment"];
-      this.loanTermOverride         = this.defaultsGlobal["loanTerm"];
-      this.interestRateOverride     = this.defaultsGlobal["interestRate"];
-      this.maintenanceRateOverride  = this.defaultsGlobal["maintenanceRate"];
-      this.insuranceRateOverride    = this.defaultsGlobal["insuranceRate"];
-      this.propertyTaxRateOverride  = this.defaultsGlobal["propertyTaxRate"];
-      this.salaryTaxRateOverride    = this.defaultsGlobal["salaryTaxRate"];
-
+      this.defaultsOverride = this.defaultsGlobal;
       this.updatePerformance();
   }
 
   public updatePerformance(){
     // Loan calculations
-    let principal = (1-this.downPaymentOverride)*this.price;
+    let principal = (1-this.defaultsOverride.downPayment)*this.price;
     this.monthlyPayment = this.calcPayment(principal);
     this.monthlyPrincipal = this.calcPrincipal(principal, 1);
     this.monthlyInterest = this.calcInterest(principal, 1);
 
     // Expense Calculations
-    this.monthlyInsurance = principal*(this.insuranceRateOverride/12);
-    this.monthlyMaintenance = principal*(this.maintenanceRateOverride/12);
-    this.monthlyPropertyTax = principal*(this.propertyTaxRateOverride/12);
-    let propertyTaxCap = 10000/this.salaryTaxRateOverride;
-    this.monthlyTaxSavings = this.salaryTaxRateOverride
+    this.monthlyInsurance = principal*(this.defaultsOverride.insuranceRate/12);
+    this.monthlyMaintenance = principal*(this.defaultsOverride.maintenanceRate/12);
+    this.monthlyPropertyTax = principal*(this.defaultsOverride.propertyTaxRate/12);
+    let propertyTaxCap = 10000/this.defaultsOverride.salaryTaxRate;
+    this.monthlyTaxSavings = this.defaultsOverride.salaryTaxRate
                                 *( (this.monthlyPropertyTax<=propertyTaxCap)?this.monthlyPrincipal:10000 
                                     + this.monthlyInterest);
     this.monthlyOutflow = Number(this.hoa)  + Number(this.melloRoos) 
@@ -86,14 +74,16 @@ export class RentalComponent implements OnInit {
 
     // Results
     this.monthlyIncome = this.rent - this.monthlyExpense;
-    this. yield = (this.monthlyIncome*12) /(this.downPaymentOverride*this.price);
+    this. yield = (this.monthlyIncome*12) /(this.defaultsOverride.downPayment*this.price);
   }
   private calcPayment(principal : number) : number{
-    return principal * (this.interestRateOverride/12) * (Math.pow(1 + (this.interestRateOverride/12), this.loanTermOverride)) / (Math.pow(1 + (this.interestRateOverride/12), this.loanTermOverride) - 1);
+    return principal * (this.defaultsOverride.interestRate/12) 
+            * (Math.pow(1 + (this.defaultsOverride.interestRate/12), this.defaultsOverride.loanTerm)) 
+            / (Math.pow(1 + (this.defaultsOverride.interestRate/12), this.defaultsOverride.loanTerm) - 1);
   }
   private calcPrincipal(principal : number, period : number) : number{
     let previous = 0; let current = 0;
-    let calcRate = 1 + (this.interestRateOverride/12); // (1+r)
+    let calcRate = 1 + (this.defaultsOverride.interestRate/12); // (1+r)
     if ( period > 0 ){
       previous = principal*Math.pow(calcRate, period-1)  - this.monthlyPayment*((Math.pow(calcRate, period-1) - 1)/(calcRate - 1));
       current = principal*Math.pow(calcRate, period)  - this.monthlyPayment*((Math.pow(calcRate, period) - 1)/(calcRate - 1));
@@ -119,9 +109,9 @@ export class RentalComponent implements OnInit {
   public generateAmmortizationSchedule() : void{
     this.updatePerformance();
     if (this.showAmmortization != true){
-      let principal = (1-this.downPaymentOverride)*this.price;
+      let principal = (1-this.defaultsOverride.downPayment)*this.price;
       this.ammortizationSchedule = new Array();
-      for(let i=0;i<this.loanTermOverride;i++){
+      for(let i=0;i<this.defaultsOverride.loanTerm;i++){
         this.ammortizationSchedule.push({
           'term':i,
           'interest': this.calcInterest(principal,i+1),
@@ -133,7 +123,5 @@ export class RentalComponent implements OnInit {
       this.ammortizationSchedule = new Array();
       this.showAmmortization = false;
     }
-    
-    
   }
 }

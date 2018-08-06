@@ -1,11 +1,10 @@
 <mat-toolbar class="title-bar" color="primary">
       <button mat-button (click)="defaultsDialog();">
-            <img style="filter: contrast(4) invert(1);" src="assets/menu_light.svg" alt="menu icon">
+            <img style="filter: contrast(4) invert(1);" src="assets/menu.svg" alt="menu icon">
       </button>
       <span class="title">{{ title }}</span>
       <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
       <span class="filler"></span>
       <span class="tag-line">rental preformance guesstimation tool</span>
 </mat-toolbar>
-<!-- Make loop for multiple rental evaluations -->
 <app-rental [defaults]="defaults"></app-rental>
