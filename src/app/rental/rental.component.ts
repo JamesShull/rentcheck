@@ -8,29 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RentalComponent implements OnInit {
   // Globals from app-component
   @Input('defaults') defaultsGlobal : any;
-
-
-  @Input('interestRate') interestRateDefault : number;
   public interestRateOverride : number;
-  public interestRateOriginal : number;
-  @Input('loanTerm') loanTermDefault : number;
   public loanTermOverride : number;
-  public loanTermOriginal : number;
-  @Input('downPayment') downPaymentDefault : number;
   public downPaymentOverride : number;
-  public downPaymentOriginal : number;
-  @Input('insuranceRate') insuranceRateDefault : number;
   public insuranceRateOverride : number;
-  public insuranceRateOriginal : number;
-  @Input('maintenanceRate') maintenanceRateDefault : number;
   public maintenanceRateOverride : number;
-  public maintenanceRateOriginal : number;
-  @Input('propertyTaxRate') propertyTaxRateDefault : number;
   public propertyTaxRateOverride : number;
-  public propertyTaxRateOriginal : number;
-  @Input('salaryTaxRate') salaryTaxRateDefault : number;
   public salaryTaxRateOverride : number;
-  public salaryTaxRateOriginal : number;
 
   public stateList = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
                         'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
@@ -38,34 +22,23 @@ export class RentalComponent implements OnInit {
                         'MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
                         'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
                         'TX','UT','VA','VI','VT','WA','WI','WV','WY' ];
-
   // Market Info
   public streetAddress : string; 
-  public cityAddress :string; 
-  public stateAddress : string;
-  public zipAddress : string;
-  public price : number;
-  public hoa : number;
-  public melloRoos : number;
-  public rent : number;
+  public cityAddress :string; public stateAddress : string; public zipAddress : string;
+  public price : number; public rent : number;
+  public hoa : number; public melloRoos : number;
 
   // Performance Bar
   public monthlyIncome : number;
   public yield : number;
 
   // Calculation and Details
-  public monthlyPayment : number;
-  public monthlyInterest : number; 
-  public monthlyPrincipal : number;
-  private monthlyExpense : number; 
-  private monthlyOutflow : number; 
-  private monthlyTaxSavings : number;
-  private monthlyPropertyTax : number;
-  private monthlyInsurance : number;
-  private monthlyMaintenance : number;
+  public monthlyPayment : number; public monthlyInterest : number; public monthlyPrincipal : number;
+  private monthlyExpense : number;  private monthlyOutflow : number; 
+  private monthlyPropertyTax : number; private monthlyTaxSavings : number;
+  private monthlyInsurance : number; private monthlyMaintenance : number;
 
-  private showGlobal : boolean;
-  private editAddress : boolean;
+  private showGlobal : boolean; private editAddress : boolean;
 
   public ammortizationSchedule : Array<any>;
   public ammortizationColumns = ['term','interest','principal'];
@@ -75,34 +48,18 @@ export class RentalComponent implements OnInit {
 
   ngOnInit() {
       // card defaults
-      this.editAddress = true;
-      //this.streetAddress = '12345 Street';
-      //this.cityAddress = 'San Diego';
-      //this.stateAddress = 'CA';
-      //this.zipAddress = '92101';
-      this.price = 544000; 
-      this.hoa = 250; 
-      this.melloRoos = 0; 
-      this.rent = 2500;
-      this.showGlobal = false;
+      this.editAddress = true; this.showGlobal = false;
+      this.price = 544000; this.rent = 3000;
+      this.hoa = 250; this.melloRoos = 0; 
 
       /* User Overrides */
-      this.downPaymentOverride = this.downPaymentDefault;
-      this.loanTermOverride = this.loanTermDefault;
-      this.interestRateOverride = this.interestRateDefault;
-      this.maintenanceRateOverride = this.maintenanceRateDefault;
-      this.insuranceRateOverride = this.insuranceRateDefault;
-      this.propertyTaxRateOverride = this.propertyTaxRateDefault;
-      this.salaryTaxRateOverride = this.salaryTaxRateDefault;
-
-      /* Original Defaults */
-      this.downPaymentOriginal = this.downPaymentDefault;
-      this.loanTermOriginal = this.loanTermDefault;
-      this.interestRateOriginal = this.interestRateDefault;
-      this.maintenanceRateOriginal = this.maintenanceRateDefault;
-      this.insuranceRateOriginal = this.insuranceRateDefault;
-      this.propertyTaxRateOriginal = this.propertyTaxRateDefault;
-      this.salaryTaxRateOriginal = this.salaryTaxRateDefault;
+      this.downPaymentOverride      = this.defaultsGlobal["downPayment"];
+      this.loanTermOverride         = this.defaultsGlobal["loanTerm"];
+      this.interestRateOverride     = this.defaultsGlobal["interestRate"];
+      this.maintenanceRateOverride  = this.defaultsGlobal["maintenanceRate"];
+      this.insuranceRateOverride    = this.defaultsGlobal["insuranceRate"];
+      this.propertyTaxRateOverride  = this.defaultsGlobal["propertyTaxRate"];
+      this.salaryTaxRateOverride    = this.defaultsGlobal["salaryTaxRate"];
 
       this.updatePerformance();
   }
@@ -110,10 +67,9 @@ export class RentalComponent implements OnInit {
   public updatePerformance(){
     // Loan calculations
     let principal = (1-this.downPaymentOverride)*this.price;
-    let period = 1; // get # months from loan start if your smart
     this.monthlyPayment = this.calcPayment(principal);
-    this.monthlyPrincipal = this.calcPrincipal(principal, period);
-    this.monthlyInterest = this.calcInterest(principal, period);
+    this.monthlyPrincipal = this.calcPrincipal(principal, 1);
+    this.monthlyInterest = this.calcInterest(principal, 1);
 
     // Expense Calculations
     this.monthlyInsurance = principal*(this.insuranceRateOverride/12);
