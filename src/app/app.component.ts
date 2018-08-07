@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
     dialogRef.afterClosed().subscribe(
       result => {
         this.defaultsGlobal = result;
+        this._defaults.saveDefaults();
         this.rental.updateGlobals();
         this.rental.updatePerformance();
       // trigger updates to all cards

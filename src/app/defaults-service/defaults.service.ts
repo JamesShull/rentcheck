@@ -21,8 +21,8 @@ export class DefaultsService {
     return this.defaults;
   }
 
-  public setDefaults(name:string, value:number) : boolean {
-   return true;
+  public saveDefaults() : void {
+    localStorage.setItem('defaults', JSON.stringify(this.defaults));
   }
 }
 
