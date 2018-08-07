@@ -8,8 +8,17 @@ import { DefaultsDataInterface } from '../defaults-service/defaults.service';
 })
 export class RentalComponent implements OnInit {
   // Globals from app-component
-  @Input('defaults') defaultsGlobal : DefaultsDataInterface;
-  public defaultsOverride : DefaultsDataInterface;
+  @Input('defaultsGlobal') defaultsInput : DefaultsDataInterface;
+  private defaultsOverride : DefaultsDataInterface;
+  private dirtyDefaults = {
+    salaryTaxRate: false,
+    interestRate: false,
+    loanTerm: false,
+    downPayment: false,
+    propertyTaxRate: false,
+    insuranceRate: false,
+    maintenanceRate: false
+  };
 
   public stateList = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
                         'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
@@ -18,22 +27,21 @@ export class RentalComponent implements OnInit {
                         'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
                         'TX','UT','VA','VI','VT','WA','WI','WV','WY' ];
   // Market Info
-  public streetAddress : string; 
-  public cityAddress :string; public stateAddress : string; public zipAddress : string;
-  public price : number; public rent : number;
-  public hoa : number; public melloRoos : number;
+  private editAddress : boolean;
+  private streetAddress : string; 
+  private cityAddress :string; public stateAddress : string; public zipAddress : string;
+  private price : number; public rent : number;
+  private hoa : number; public melloRoos : number;
 
   // Performance Bar
-  public monthlyIncome : number;
-  public yield : number;
+  private monthlyIncome : number;
+  private yield : number;
 
   // Calculation and Details
-  public monthlyPayment : number; public monthlyInterest : number; public monthlyPrincipal : number;
+  private monthlyPayment : number; public monthlyInterest : number; public monthlyPrincipal : number;
   private monthlyExpense : number;  private monthlyOutflow : number; 
   private monthlyPropertyTax : number; private monthlyTaxSavings : number;
   private monthlyInsurance : number; private monthlyMaintenance : number;
-
-  private showGlobal : boolean; private editAddress : boolean;
 
   public ammortizationSchedule : Array<any>;
   public ammortizationColumns = ['term','interest','principal'];
@@ -43,13 +51,31 @@ export class RentalComponent implements OnInit {
 
   ngOnInit() {
       // card defaults
-      this.editAddress = true; this.showGlobal = false;
+      this.editAddress = true; 
       this.price = 544000; this.rent = 3000;
       this.hoa = 250; this.melloRoos = 0; 
 
       /* User Overrides */
-      this.defaultsOverride = this.defaultsGlobal;
+      this.defaultsOverride = Object.assign({},this.defaultsInput);
       this.updatePerformance();
+  }
+
+  public inputBlur(event: any){
+    (event.target.name!='loanTerm') ? 
+      this.defaultsOverride[event.target.name]=event.target.value/100 :
+      this.defaultsOverride[event.target.name]=event.target.value;
+    this.dirtyDefaults[event.target.name] = true;
+    this.updatePerformance();
+  }
+
+  public updateGlobals(){
+    if(!this.dirtyDefaults.salaryTaxRate){this.defaultsOverride.salaryTaxRate = this.defaultsInput.salaryTaxRate;}
+    if(!this.dirtyDefaults.interestRate){this.defaultsOverride.interestRate = this.defaultsInput.interestRate;}
+    if(!this.dirtyDefaults.loanTerm){this.defaultsOverride.loanTerm = this.defaultsInput.loanTerm;}
+    if(!this.dirtyDefaults.downPayment){this.defaultsOverride.downPayment = this.defaultsInput.downPayment;}
+    if(!this.dirtyDefaults.propertyTaxRate){this.defaultsOverride.propertyTaxRate = this.defaultsInput.propertyTaxRate;}
+    if(!this.dirtyDefaults.insuranceRate){this.defaultsOverride.insuranceRate = this.defaultsInput.insuranceRate;}
+    if(!this.dirtyDefaults.maintenanceRate){this.defaultsOverride.maintenanceRate = this.defaultsInput.maintenanceRate;}
   }
 
   public updatePerformance(){
@@ -95,15 +121,6 @@ export class RentalComponent implements OnInit {
   private calcInterest(principal : number, period : number) : number{
     let localPrincipal = this.calcPrincipal(principal, period);
     return this.calcPayment(principal) - localPrincipal;
-  }
-
-  public editGlobal(){
-    this.showGlobal = !this.showGlobal;
-  }
-
-  public updateGlobal(){
-    this.showGlobal = false;
-    // call global service to reflect to other rental cards
   }
 
   public generateAmmortizationSchedule() : void{

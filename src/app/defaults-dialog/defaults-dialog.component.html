@@ -39,7 +39,7 @@
   <p>
     <mat-form-field class="card-input">
       <input matInput placeholder="Default Insurance Rate" name="insuranceRate" 
-            [ngModel]="data.defaults.propertyTaxRate*100 | number:'1.2-3'" (blur)="data.defaults.propertyTaxRate=$event.target.value/100;">
+            [ngModel]="data.defaults.insuranceRate*100 | number:'1.2-3'" (blur)="data.defaults.insuranceRate=$event.target.value/100;">
     </mat-form-field>%
     <span class="assumption-default">&nbsp;{{.0020 | percent:'1.2-3'}}</span>
   </p>

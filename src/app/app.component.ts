@@ -12,23 +12,24 @@ import { RentalComponent } from './rental/rental.component';
 })
 export class AppComponent implements OnInit{
   title = 'Rent Check';
-  public defaults : DefaultsDataInterface;
+  public defaultsGlobal : DefaultsDataInterface;
   @ViewChild(RentalComponent) private rental: RentalComponent;
 
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) { } 
   
   ngOnInit(){
-    this.defaults = this._defaults.getDefaults();
+    this.defaultsGlobal = this._defaults.getDefaults();
   }
 
   public defaultsDialog() : void {
     //const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: this.defaults});
-    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this.defaults}});
+    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this.defaultsGlobal}});
 
     dialogRef.afterClosed().subscribe(
       result => {
-        this.defaults = result;
+        this.defaultsGlobal = result;
+        this.rental.updateGlobals();
         this.rental.updatePerformance();
       // trigger updates to all cards
       });
