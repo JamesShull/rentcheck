@@ -27,9 +27,15 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rent>monthlyOutflow"><p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4></span>
-    <span class="income" [class.positive]="monthlyIncome>0"><p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4></span>
-    <span class="yield" [class.positive]="yield>0"><p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4></span>
+    <span class="outflow" [class.positive]="rent>monthlyOutflow" matTooltip="Cash needed to cover expenses each month.">
+      <p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4>
+    </span>
+    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="Estimated monthly income (including principal & tax savings)">
+      <p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4>
+    </span>
+    <span class="yield" [class.positive]="yield>0" matTooltip="Yield Estimate">
+      <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
+    </span>
     <mat-tab-group>
         <mat-tab label="Market">
               <p>
@@ -145,5 +151,9 @@
             </table>
         </mat-tab>
       </mat-tab-group>
+      <div class="card-actions">
+          <button mat-raised-button color="accent" (click)="onDrop()">Remove Rental</button>
+          <button mat-raised-button color="primary" (click)="onSave()">Save Rental</button>
+      </div>
   </mat-card-content>
 </mat-card>

@@ -141,4 +141,55 @@ export class RentalComponent implements OnInit {
       this.showAmmortization = false;
     }
   }
+
+  public onDrop(){
+    if(localStorage.getItem(this.streetAddress) !== null){
+      localStorage.removeItem(this.streetAddress);
+    }
+    let count = Number(localStorage.getItem("card-count"));
+    if( count == NaN ){
+      localStorage.setItem("card-count","0");
+    } else {
+      localStorage.setItem("card-count", (count-1).toString());
+    }
+  }
+  public onSave(){
+    // Check if previously stored
+    let cardStored = localStorage.getItem(this.streetAddress);
+    if ( cardStored === null ){
+      // Increment if new card (otherwise just store data)
+      let count = Number(localStorage.getItem("card-count"));
+      if( count == NaN ){
+        localStorage.setItem("card-count","1");
+      } else {
+        localStorage.setItem("card-count", (count+1).toString());
+      }
+    }
+
+    let rentalStorage = {
+      'streetAddress': this.streetAddress,
+      'cityAddress': this.cityAddress,
+      'stateAddress': this.stateAddress,
+      'zipAddress': this.zipAddress,
+      'price': this.price,
+      'rent': this.rent,
+      'hoa': this.hoa,
+      'melloRoos': this.melloRoos,
+      'interestRate': this.defaultsOverride.interestRate,
+      'loanTerm': this.defaultsOverride.loanTerm,
+      'downPayment': this.defaultsOverride.downPayment,
+      'insuranceRate': this.defaultsOverride.insuranceRate,
+      'maintenanceRate': this.defaultsOverride.maintenanceRate,
+      'propertyTaxRate': this.defaultsOverride.propertyTaxRate,
+      'salaryTaxRate': this.defaultsOverride.salaryTaxRate,
+      'dirtySalaryTaxRate': this.dirtyDefaults.salaryTaxRate,
+      'dirtyInterestRate': this.dirtyDefaults.interestRate,
+      'dirtyLoanTerm': this.dirtyDefaults.loanTerm,
+      'dirtyDownPayment': this.dirtyDefaults.downPayment,
+      'dirtyPropertyTaxRate': this.dirtyDefaults.propertyTaxRate,
+      'dirtyInsuranceRate': this.dirtyDefaults.insuranceRate,
+      'dirtyMaintenanceRate': this.dirtyDefaults.maintenanceRate
+    }
+    localStorage.setItem(this.streetAddress, JSON.stringify(rentalStorage));
+  }
 }

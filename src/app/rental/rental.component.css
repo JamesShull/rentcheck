@@ -1,18 +1,20 @@
 .rental-card {
-    margin: 30px;
-    min-width: 350px;
+    margin: 10px;
+    padding: 10px !important;
+    /*min-width: 375px;*/
     max-width: 500px;
 }
 .card-input {
     width: 125px !important;
     margin-left: 15px;
 }
-.short-input {
-    width: 75px !important;
+.card-actions {
+    width: 100%;
+    text-align: center;
 }
-.edit-toggle {
-    margin-left: 50px;
-}
+.card-actions button {  margin: 5px 15px;}
+.short-input {  width: 75px !important;}
+.edit-toggle {  margin-left: 10px;}
 .outflow {
     display: inline-block;
     margin: auto;
@@ -44,33 +46,12 @@
     text-align: center;
     background-color: #ff4081;
 }
-.yield>p { margin: 0px;}
+.yield>p {  margin: 0px;}
 .yield>h4 { margin-top: 5px; margin-bottom: 5px;}
-.positive{
-    background-color: #28a745;
-}
-/*.assumption-default { 
-    color: grey; 
-    margin-left: 30px;
-}*/
-.detail-text {
-    color: grey;
-}
-.divider {
-    width: 100%;
-    border-top: 1px solid rgba(20, 20, 20, 0.85);
-}
-.tab {
-    display: inline-block;
-    width: 20px;
-}
-.line-break {
-    height:10px;
-}
-.ammortization-table {
-    width: 100%;
-}
-
-ul {
-    list-style: none;
-}
+.positive {  background-color: #28a745;}
+.detail-text {    color: grey;}
+.divider {  width: 100%;    border-top: 1px solid rgba(20, 20, 20, 0.85);}
+.tab {  display: inline-block;  width: 20px;}
+.line-break {   height:10px;}
+.ammortization-table {  width: 100%;}
+ul {    list-style: none;}
