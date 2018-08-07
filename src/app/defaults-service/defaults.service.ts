@@ -18,11 +18,14 @@ export class DefaultsService {
   constructor() { }
 
   public getDefaults() : DefaultsDataInterface {
+    if ( localStorage.getItem("defaults") !== null ) {
+      this.defaults = JSON.parse(localStorage.getItem("defaults"));
+    }
     return this.defaults;
   }
 
   public saveDefaults() : void {
-    localStorage.setItem('defaults', JSON.stringify(this.defaults));
+    localStorage.setItem("defaults", JSON.stringify(this.defaults));
   }
 }
 
