@@ -32,7 +32,8 @@ export class DefaultsService {
     return this.defaults;
   }
 
-  public saveDefaults() : void {
+  public saveDefaults(dialogResult : DefaultsDataInterface) : void {
+    this.defaults = dialogResult;
     localStorage.setItem("defaults", JSON.stringify(this.defaults));
   }
 
