@@ -4,11 +4,12 @@
       </button>
       <span class="title">{{ title }}</span>
       <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
-      <span class="filler"></span>
+      <!--<span class="filler"></span>-->
       <span class="tag-line">non-speculative rental preformance guesstimation tool</span>
 </mat-toolbar>
 <!--Advertisment-->
 <app-rental [defaultsGlobal]="defaultsGlobal"></app-rental>
-<button mat-fab color="primary">+</button>
-
+<button mat-fab color="primary" class="add-button">
+      <img src="assets/plus.png" alt="add rental">
+</button>
 <!--footer-->

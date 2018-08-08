@@ -9,8 +9,16 @@
 .tag-line {
     font-size: 12px;
     color: rgba(210, 210, 210, 0.85);
-    text-align: right;
+    /*text-align: right;*/
+    margin-left: 16px;
 }
 .filler {
     flex: 1 1 auto;
+}
+.add-button {
+    vertical-align: top; margin-top: 26px;
+}
+.add-button img {
+    filter: contrast(4) invert(1);
+    height: 24px;
 }
