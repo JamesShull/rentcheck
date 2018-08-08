@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {  DefaultsService, 
-          DefaultsDataInterface, 
-          RentalDataInterface } from '../defaults-service/defaults.service';
+import {  DefaultsService, DefaultsDataInterface, RentalDataInterface } from '../defaults-service/defaults.service';
 
 @Component({
   selector: 'app-rental',
@@ -12,7 +10,6 @@ import {  DefaultsService,
 
 export class RentalComponent implements OnInit {
   // Globals from defaults.service
-  private defaultsOverride : DefaultsDataInterface;
   private rentalData : RentalDataInterface;
   private stateList : string[];
 
@@ -34,7 +31,6 @@ export class RentalComponent implements OnInit {
 
   ngOnInit() {
     this.rentalData = this._defaults.getNewRental();  // card defaults
-    //this.defaultsOverride = Object.assign({}, this._defaults.getDefaults());
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
   }

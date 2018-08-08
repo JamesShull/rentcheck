@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DefaultsService, DefaultsDataInterface } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -10,26 +10,20 @@ import { RentalComponent } from './rental/rental.component';
   styleUrls: ['./app.component.css'],
   providers : [DefaultsService]
 })
-export class AppComponent implements OnInit{
-
+export class AppComponent{
   title = 'Rent Check';
   public defaultsGlobal : DefaultsDataInterface;
-  @ViewChild(RentalComponent) private rental: RentalComponent;
+  @ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) { } 
-  
-  ngOnInit(){
-    this.defaultsGlobal = this._defaults.getDefaults();
-  }
 
   public defaultsDialog() : void {
-    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this.defaultsGlobal}});
+    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});
 
     dialogRef.afterClosed().subscribe(
       result => {
         if (result != undefined ){
-          this.defaultsGlobal = result;
-          this._defaults.saveDefaults();
+          this._defaults.saveDefaults(result);
           this.rental.updateGlobals();
           this.rental.updatePerformance();
         }
