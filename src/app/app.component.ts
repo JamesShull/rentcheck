@@ -11,10 +11,10 @@ import { RentalComponent } from './rental/rental.component';
   providers : [DefaultsService]
 })
 export class AppComponent implements OnInit{
+
   title = 'Rent Check';
   public defaultsGlobal : DefaultsDataInterface;
   @ViewChild(RentalComponent) private rental: RentalComponent;
-
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) { } 
   
@@ -23,7 +23,6 @@ export class AppComponent implements OnInit{
   }
 
   public defaultsDialog() : void {
-    //const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: this.defaults});
     const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this.defaultsGlobal}});
 
     dialogRef.afterClosed().subscribe(
@@ -34,16 +33,9 @@ export class AppComponent implements OnInit{
           this.rental.updateGlobals();
           this.rental.updatePerformance();
         }
-      });
+      }
+    );
   }
-}
-
-export interface DefaultsDataInterface {
-  interestRate: number;
-  loanTerm: number;
-  downPayment: number;
-  insuranceRate: number;
-  maintenanceRate: number;
-  propertyTaxRate: number;
-  salaryTaxRate: number;
+  
+  //public addRental() : void { alert("ToDo: add another rental card.");}
 }

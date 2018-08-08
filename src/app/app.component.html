@@ -8,8 +8,18 @@
       <span class="tag-line">non-speculative rental preformance guesstimation tool</span>
 </mat-toolbar>
 <!--Advertisment-->
-<app-rental [defaultsGlobal]="defaultsGlobal"></app-rental>
-<button mat-fab color="primary" class="add-button">
+
+<!--
+<div *ngFor="let rental of rentals">
+      <app-rental [defaultsGlobal]="defaultsGlobal" [rentalData]=rental.data></app-rental>
+</div>
+-->
+
+<!--<app-rental [defaultsGlobal]="defaultsGlobal"></app-rental>-->
+<app-rental></app-rental>
+
+
+<!--<button mat-fab color="primary" class="add-button" (click)="addRental();">
       <img src="assets/plus.png" alt="add rental">
-</button>
+</button>-->
 <!--footer-->

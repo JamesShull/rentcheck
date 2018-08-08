@@ -1,15 +1,15 @@
 <mat-card class="rental-card">
   <mat-card-header>
     <mat-card-title>
-        <mat-form-field *ngIf="editAddress">
-          <input matInput placeholder="Street" name="street" [(ngModel)]="streetAddress">
+        <mat-form-field *ngIf="rentalData.editAddress">
+          <input matInput placeholder="Street" name="street" [(ngModel)]="rentalData.streetAddress">
         </mat-form-field>
-        <span *ngIf="!editAddress"><h2 style="display:inline-block;">{{streetAddress}}</h2></span>
-        <mat-slide-toggle class="edit-toggle" [(ngModel)]="editAddress">Edit Address</mat-slide-toggle>
+        <span *ngIf="!rentalData.editAddress"><h2 style="display:inline-block;">{{rentalData.streetAddress}}</h2></span>
+        <mat-slide-toggle class="edit-toggle" [(ngModel)]="rentalData.editAddress">Edit Address</mat-slide-toggle>
     </mat-card-title>
-    <mat-card-subtitle *ngIf="editAddress">
+    <mat-card-subtitle *ngIf="rentalData.editAddress">
         <mat-form-field>
-          <input matInput placeholder="City" name="city" [(ngModel)]="cityAddress">
+          <input matInput placeholder="City" name="city" [(ngModel)]="rentalData.cityAddress">
         </mat-form-field>,&nbsp;
         <mat-form-field class="short-input">
           <mat-select [(value)]="stateAddress" placeholder="State">
@@ -19,15 +19,15 @@
           </mat-select>
         </mat-form-field>,&nbsp;
         <mat-form-field class="short-input">
-          <input matInput placeholder="Zip Code" name="zip" [(ngModel)]="zipAddress">
+          <input matInput placeholder="Zip Code" name="zip" [(ngModel)]="rentalData.zipAddress">
         </mat-form-field>
     </mat-card-subtitle>
-    <mat-card-subtitle *ngIf="!editAddress">
-        <span><h3>{{cityAddress}},&nbsp;{{stateAddress}},&nbsp;{{zipAddress}}</h3></span>
+    <mat-card-subtitle *ngIf="!rentalData.editAddress">
+        <span><h3>{{rentalData.cityAddress}},&nbsp;{{rentalData.stateAddress}},&nbsp;{{rentalData.zipAddress}}</h3></span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rent>monthlyOutflow" matTooltip="Cash needed to cover expenses each month.">
+    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="Cash needed to cover expenses each month.">
       <p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4>
     </span>
     <span class="income" [class.positive]="monthlyIncome>0" matTooltip="Estimated monthly income (including principal & tax savings)">
@@ -41,21 +41,21 @@
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Price" name="price" [(ngModel)]="price" (blur)="updatePerformance();">
+                  <input matInput placeholder="Price" name="price" [(ngModel)]="rentalData.price" (blur)="updatePerformance();">
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rent" (blur)="updatePerformance();">
+                  <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rentalData.rent" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="hoa" (blur)="updatePerformance();">
+                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="melloRoos" (blur)="updatePerformance();">
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
         </mat-tab>
@@ -64,63 +64,63 @@
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
-                      [ngModel]="defaultsOverride.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
-                      [ngModel]="defaultsOverride.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Loan Term" name="loanTerm" 
-                      [ngModel]="defaultsOverride.loanTerm" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
               </mat-form-field>mo.
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Down Payment" name="downPayment" 
-                      [ngModel]="defaultsOverride.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Property Rate" name="propertyTaxRate" 
-                      [ngModel]="defaultsOverride.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
-                      [ngModel]="defaultsOverride.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
-                      [ngModel]="defaultsOverride.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
         </mat-tab>
         <mat-tab label="Details">
-            <h3>Down Payment: <span class="detail-text">{{ ((defaultsOverride.downPayment*price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
+            <h3>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
             <div class="divider"></div>
             <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency}}</span></h3>
             <ul>
               <li><h5>Mortgage Payment: <span class="detail-text">{{monthlyPayment | currency}}</span></h5></li>
               <li><h5>Property Tax: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>HOA: <span class="detail-text">{{hoa | currency}}</span></h5></li>
-              <li><h5>Mello-Roos: <span class="detail-text">{{melloRoos | currency}}</span></h5></li>
+              <li><h5>HOA: <span class="detail-text">{{rentalData.hoa | currency}}</span></h5></li>
+              <li><h5>Mello-Roos: <span class="detail-text">{{rentalData.melloRoos | currency}}</span></h5></li>
               <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency}}</span></h5></li>
               <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
             <ul>
-              <li><h5>Interest Write Off: <span class="detail-text">{{defaultsOverride.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>Property Write Off: <span class="detail-text">{{defaultsOverride.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
+              <li><h5>Interest Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
+              <li><h5>Property Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>

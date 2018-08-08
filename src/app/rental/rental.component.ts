@@ -1,115 +1,96 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DefaultsDataInterface } from '../defaults-service/defaults.service';
+import {  DefaultsService, 
+          DefaultsDataInterface, 
+          RentalDataInterface } from '../defaults-service/defaults.service';
 
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.css']
+  styleUrls: ['./rental.component.css'],
+  providers : [DefaultsService]
 })
-export class RentalComponent implements OnInit {
-  // Globals from app-component
-  @Input('defaultsGlobal') defaultsInput : DefaultsDataInterface;
-  private defaultsOverride : DefaultsDataInterface;
-  private dirtyDefaults = {
-    salaryTaxRate: false,
-    interestRate: false,
-    loanTerm: false,
-    downPayment: false,
-    propertyTaxRate: false,
-    insuranceRate: false,
-    maintenanceRate: false
-  };
 
-  public stateList = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
-                        'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
-                        'KY','LA','MA','MD','ME','MH','MI','MN','MO','MP',
-                        'MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
-                        'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
-                        'TX','UT','VA','VI','VT','WA','WI','WV','WY' ];
-  // Market Info
-  private editAddress : boolean;
-  private streetAddress : string; 
-  private cityAddress :string; public stateAddress : string; public zipAddress : string;
-  private price : number; public rent : number;
-  private hoa : number; public melloRoos : number;
+export class RentalComponent implements OnInit {
+  // Globals from defaults.service
+  private defaultsOverride : DefaultsDataInterface;
+  private rentalData : RentalDataInterface;
+  private stateList : string[];
 
   // Performance Bar
   private monthlyIncome : number;
   private yield : number;
+  private monthlyOutflow : number;
 
   // Calculation and Details
   private monthlyPayment : number; public monthlyInterest : number; public monthlyPrincipal : number;
-  private monthlyExpense : number;  private monthlyOutflow : number; 
+  private monthlyExpense : number;   
   private monthlyPropertyTax : number; private monthlyTaxSavings : number;
   private monthlyInsurance : number; private monthlyMaintenance : number;
-
   public ammortizationSchedule : Array<any>;
   public ammortizationColumns = ['term','interest','principal'];
   public showAmmortization = false;
 
-  constructor() { }
+  constructor(private _defaults: DefaultsService) { }
 
   ngOnInit() {
-      // card defaults
-      this.editAddress = true; 
-      this.price = 544000; this.rent = 3000;
-      this.hoa = 250; this.melloRoos = 0; 
-
-      /* User Overrides */
-      this.defaultsOverride = Object.assign({},this.defaultsInput);
-      this.updatePerformance();
-  }
-
-  public inputBlur(event: any){
-    (event.target.name!='loanTerm') ? 
-      this.defaultsOverride[event.target.name]=event.target.value/100 :
-      this.defaultsOverride[event.target.name]=event.target.value;
-    this.dirtyDefaults[event.target.name] = true;
+    this.rentalData = this._defaults.getNewRental();  // card defaults
+    //this.defaultsOverride = Object.assign({}, this._defaults.getDefaults());
+    this.stateList = this._defaults.getStates();
     this.updatePerformance();
   }
-
-  public updateGlobals(){
-    if(!this.dirtyDefaults.salaryTaxRate){this.defaultsOverride.salaryTaxRate = this.defaultsInput.salaryTaxRate;}
-    if(!this.dirtyDefaults.interestRate){this.defaultsOverride.interestRate = this.defaultsInput.interestRate;}
-    if(!this.dirtyDefaults.loanTerm){this.defaultsOverride.loanTerm = this.defaultsInput.loanTerm;}
-    if(!this.dirtyDefaults.downPayment){this.defaultsOverride.downPayment = this.defaultsInput.downPayment;}
-    if(!this.dirtyDefaults.propertyTaxRate){this.defaultsOverride.propertyTaxRate = this.defaultsInput.propertyTaxRate;}
-    if(!this.dirtyDefaults.insuranceRate){this.defaultsOverride.insuranceRate = this.defaultsInput.insuranceRate;}
-    if(!this.dirtyDefaults.maintenanceRate){this.defaultsOverride.maintenanceRate = this.defaultsInput.maintenanceRate;}
+  private inputBlur(event: any){
+    let name : string = event.target.name;
+    (name!='loanTerm') ? 
+      this.rentalData[name]=event.target.value/100 :
+      this.rentalData[name]=event.target.value;
+    let keyName = 'dirty'+name.substring(0,1).toUpperCase() + name.substring(1);
+    this.rentalData[keyName] = true;
+    this.updatePerformance();
   }
-
+  // outside caller to update defaults
+  public updateGlobals(){
+    let tempDefaults = this._defaults.getDefaults();
+    if(!this.rentalData.dirtySalaryTaxRate){this.rentalData.salaryTaxRate = tempDefaults.salaryTaxRate;}
+    if(!this.rentalData.dirtyInterestRate){this.rentalData.interestRate = tempDefaults.interestRate;}
+    if(!this.rentalData.dirtyLoanTerm){this.rentalData.loanTerm = tempDefaults.loanTerm;}
+    if(!this.rentalData.dirtyDownPayment){this.rentalData.downPayment = tempDefaults.downPayment;}
+    if(!this.rentalData.dirtyPropertyTaxRate){this.rentalData.propertyTaxRate = tempDefaults.propertyTaxRate;}
+    if(!this.rentalData.dirtyInsuranceRate){this.rentalData.insuranceRate = tempDefaults.insuranceRate;}
+    if(!this.rentalData.dirtyMaintenanceRate){this.rentalData.maintenanceRate = tempDefaults.maintenanceRate;}
+  }
   public updatePerformance(){
-    // Loan calculations
-    let principal = (1-this.defaultsOverride.downPayment)*this.price;
+    // Loan
+    let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
     this.monthlyPayment = this.calcPayment(principal);
     this.monthlyPrincipal = this.calcPrincipal(principal, 1);
     this.monthlyInterest = this.calcInterest(principal, 1);
-
-    // Expense Calculations
-    this.monthlyInsurance = principal*(this.defaultsOverride.insuranceRate/12);
-    this.monthlyMaintenance = principal*(this.defaultsOverride.maintenanceRate/12);
-    this.monthlyPropertyTax = principal*(this.defaultsOverride.propertyTaxRate/12);
-    let propertyTaxCap = 10000/this.defaultsOverride.salaryTaxRate;
-    this.monthlyTaxSavings = this.defaultsOverride.salaryTaxRate
-                                *( (this.monthlyPropertyTax<=propertyTaxCap)?this.monthlyPrincipal:10000 
-                                    + this.monthlyInterest);
-    this.monthlyOutflow = Number(this.hoa)  + Number(this.melloRoos) 
+    // Other expenses
+    this.monthlyInsurance = this.rentalData.price*(this.rentalData.insuranceRate/12);
+    this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
+    this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
+    // Tax savings
+    let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
+    let taxBasis = (this.monthlyPropertyTax<=propertyTaxCap)? 
+                      this.monthlyPropertyTax + this.monthlyInterest:
+                      10000 + this.monthlyInterest;
+    this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
+    // Monthly ouflow and expense
+    this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 
                           +this.monthlyInsurance + this.monthlyMaintenance
                           + this.monthlyPayment + this.monthlyPropertyTax;
     this.monthlyExpense = this.monthlyOutflow - this.monthlyTaxSavings - this.monthlyPrincipal;
-
-    // Results
-    this.monthlyIncome = this.rent - this.monthlyExpense;
-    this. yield = (this.monthlyIncome*12) /(this.defaultsOverride.downPayment*this.price);
+    // Income
+    this.monthlyIncome = this.rentalData.rent - this.monthlyExpense;
+    this.yield = (this.monthlyIncome*12) /(this.rentalData.downPayment*this.rentalData.price);
   }
   private calcPayment(principal : number) : number{
-    return principal * (this.defaultsOverride.interestRate/12) 
-            * (Math.pow(1 + (this.defaultsOverride.interestRate/12), this.defaultsOverride.loanTerm)) 
-            / (Math.pow(1 + (this.defaultsOverride.interestRate/12), this.defaultsOverride.loanTerm) - 1);
+    return principal * (this.rentalData.interestRate/12) 
+            * (Math.pow(1 + (this.rentalData.interestRate/12), this.rentalData.loanTerm)) 
+            / (Math.pow(1 + (this.rentalData.interestRate/12), this.rentalData.loanTerm) - 1);
   }
   private calcPrincipal(principal : number, period : number) : number{
     let previous = 0; let current = 0;
-    let calcRate = 1 + (this.defaultsOverride.interestRate/12); // (1+r)
+    let calcRate = 1 + (this.rentalData.interestRate/12); // (1+r)
     if ( period > 0 ){
       previous = principal*Math.pow(calcRate, period-1)  - this.monthlyPayment*((Math.pow(calcRate, period-1) - 1)/(calcRate - 1));
       current = principal*Math.pow(calcRate, period)  - this.monthlyPayment*((Math.pow(calcRate, period) - 1)/(calcRate - 1));
@@ -122,13 +103,12 @@ export class RentalComponent implements OnInit {
     let localPrincipal = this.calcPrincipal(principal, period);
     return this.calcPayment(principal) - localPrincipal;
   }
-
-  public generateAmmortizationSchedule() : void{
+  private generateAmmortizationSchedule() : void{
     this.updatePerformance();
     if (this.showAmmortization != true){
-      let principal = (1-this.defaultsOverride.downPayment)*this.price;
+      let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
       this.ammortizationSchedule = new Array();
-      for(let i=0;i<this.defaultsOverride.loanTerm;i++){
+      for(let i=0;i<this.rentalData.loanTerm;i++){
         this.ammortizationSchedule.push({
           'term':i,
           'interest': this.calcInterest(principal,i+1),
@@ -141,10 +121,9 @@ export class RentalComponent implements OnInit {
       this.showAmmortization = false;
     }
   }
-
   public onDrop(){
-    if(localStorage.getItem(this.streetAddress) !== null){
-      localStorage.removeItem(this.streetAddress);
+    if(localStorage.getItem(this.rentalData.streetAddress) !== null){
+      localStorage.removeItem(this.rentalData.streetAddress);
     }
     let count = Number(localStorage.getItem("card-count"));
     if( count == NaN ){
@@ -155,7 +134,7 @@ export class RentalComponent implements OnInit {
   }
   public onSave(){
     // Check if previously stored
-    let cardStored = localStorage.getItem(this.streetAddress);
+    let cardStored = localStorage.getItem(this.rentalData.streetAddress);
     if ( cardStored === null ){
       // Increment if new card (otherwise just store data)
       let count = Number(localStorage.getItem("card-count"));
@@ -165,31 +144,7 @@ export class RentalComponent implements OnInit {
         localStorage.setItem("card-count", (count+1).toString());
       }
     }
-
-    let rentalStorage = {
-      'streetAddress': this.streetAddress,
-      'cityAddress': this.cityAddress,
-      'stateAddress': this.stateAddress,
-      'zipAddress': this.zipAddress,
-      'price': this.price,
-      'rent': this.rent,
-      'hoa': this.hoa,
-      'melloRoos': this.melloRoos,
-      'interestRate': this.defaultsOverride.interestRate,
-      'loanTerm': this.defaultsOverride.loanTerm,
-      'downPayment': this.defaultsOverride.downPayment,
-      'insuranceRate': this.defaultsOverride.insuranceRate,
-      'maintenanceRate': this.defaultsOverride.maintenanceRate,
-      'propertyTaxRate': this.defaultsOverride.propertyTaxRate,
-      'salaryTaxRate': this.defaultsOverride.salaryTaxRate,
-      'dirtySalaryTaxRate': this.dirtyDefaults.salaryTaxRate,
-      'dirtyInterestRate': this.dirtyDefaults.interestRate,
-      'dirtyLoanTerm': this.dirtyDefaults.loanTerm,
-      'dirtyDownPayment': this.dirtyDefaults.downPayment,
-      'dirtyPropertyTaxRate': this.dirtyDefaults.propertyTaxRate,
-      'dirtyInsuranceRate': this.dirtyDefaults.insuranceRate,
-      'dirtyMaintenanceRate': this.dirtyDefaults.maintenanceRate
-    }
-    localStorage.setItem(this.streetAddress, JSON.stringify(rentalStorage));
+    let rentalStorage = this.rentalData;
+    localStorage.setItem(this.rentalData.streetAddress, JSON.stringify(rentalStorage));
   }
 }
