@@ -21,7 +21,7 @@ export class DefaultsService {
             'TX','UT','VA','VI','VT','WA','WI','WV','WY'];
   
   
-  private source = new Subject<string>();
+  private source = new Subject<boolean>();
   obs$ = this.source.asObservable();
 
   constructor() { }
@@ -36,8 +36,7 @@ export class DefaultsService {
   public saveDefaults(dialogResult : DefaultsDataInterface) : void {
     this.defaults = dialogResult; // save in memory
     localStorage.setItem("defaults", JSON.stringify(this.defaults));  // save in localStorage
-    console.log('service.change fired');
-    this.source.next('hi');
+    this.source.next(true); // notify rentals to update
   }
 
   public getNewRental() : RentalDataInterface {

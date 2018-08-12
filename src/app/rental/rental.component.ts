@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 
 import { DefaultsService, RentalDataInterface } from '../defaults-service/defaults.service';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   providers : []
 })
 
-export class RentalComponent implements OnInit {
+export class RentalComponent implements OnInit, OnDestroy {
   // Globals from defaults.service
   private rentalData : RentalDataInterface;
   private stateList : string[];
@@ -33,7 +33,12 @@ export class RentalComponent implements OnInit {
 
   constructor(private _defaults: DefaultsService) {
     this.subscription = this._defaults.obs$.subscribe(
-      (data) => {console.log('rental recieved event: ' + data);},
+      (trigger) => {
+        if (trigger){
+          this.updateGlobals();
+          this.updatePerformance();
+        }
+      },
       (error) => {console.log(error);},
       ()=> {console.log('complete');}
     );
@@ -43,6 +48,9 @@ export class RentalComponent implements OnInit {
     this.rentalData = this._defaults.getNewRental();  // card defaults
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   private inputBlur(event: any){

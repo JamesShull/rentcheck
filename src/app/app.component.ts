@@ -16,13 +16,7 @@ export class AppComponent{
   public defaultsGlobal : DefaultsDataInterface;
   @ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
-  constructor(private _defaults: DefaultsService, public dialog: MatDialog) {
-    this._defaults.obs$.subscribe(
-      (data) => {console.log('app recieved string: ' + data);},
-      (error) => {console.log(error);},
-      ()=> {console.log('complete');}
-    );
-   } 
+  constructor(private _defaults: DefaultsService, public dialog: MatDialog) {} 
 
   public defaultsDialog() : void {
     const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});
@@ -31,8 +25,8 @@ export class AppComponent{
       result => {
         if (result != undefined ){
           this._defaults.saveDefaults(result);
-          this.rental.updateGlobals();
-          this.rental.updatePerformance();
+          //this.rental.updateGlobals();
+          //this.rental.updatePerformance();
         }
       }
     );
