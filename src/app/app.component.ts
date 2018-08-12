@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { DefaultsService, DefaultsDataInterface } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RentalComponent } from './rental/rental.component';
 
 @Component({
@@ -15,7 +16,13 @@ export class AppComponent{
   public defaultsGlobal : DefaultsDataInterface;
   @ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
-  constructor(private _defaults: DefaultsService, public dialog: MatDialog) { } 
+  constructor(private _defaults: DefaultsService, public dialog: MatDialog) {
+    this._defaults.obs$.subscribe(
+      (data) => {console.log('app recieved string: ' + data);},
+      (error) => {console.log(error);},
+      ()=> {console.log('complete');}
+    );
+   } 
 
   public defaultsDialog() : void {
     const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});

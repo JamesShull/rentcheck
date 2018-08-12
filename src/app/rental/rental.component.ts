@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {  DefaultsService, DefaultsDataInterface, RentalDataInterface } from '../defaults-service/defaults.service';
+import { Component, OnInit} from '@angular/core';
+
+import { DefaultsService, RentalDataInterface } from '../defaults-service/defaults.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
   styleUrls: ['./rental.component.css'],
-  providers : [DefaultsService]
+  providers : []
 })
 
 export class RentalComponent implements OnInit {
@@ -27,13 +29,22 @@ export class RentalComponent implements OnInit {
   public ammortizationColumns = ['term','interest','principal'];
   public showAmmortization = false;
 
-  constructor(private _defaults: DefaultsService) { }
+  public subscription : Subscription;
+
+  constructor(private _defaults: DefaultsService) {
+    this.subscription = this._defaults.obs$.subscribe(
+      (data) => {console.log('rental recieved event: ' + data);},
+      (error) => {console.log(error);},
+      ()=> {console.log('complete');}
+    );
+   }
 
   ngOnInit() {
     this.rentalData = this._defaults.getNewRental();  // card defaults
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
   }
+
   private inputBlur(event: any){
     let name : string = event.target.name;
     (name!='loanTerm') ? 

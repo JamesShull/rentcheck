@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class DefaultsService {
   private defaults : DefaultsDataInterface = {
     interestRate: .04625,
@@ -15,13 +13,16 @@ export class DefaultsService {
     salaryTaxRate : 0.22
   };
 
-  private states : string[] = 
-          [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
+  private states : string[] = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
             'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
             'KY','LA','MA','MD','ME','MH','MI','MN','MO','MP',
             'MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
             'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
             'TX','UT','VA','VI','VT','WA','WI','WV','WY'];
+  
+  
+  private source = new Subject<string>();
+  obs$ = this.source.asObservable();
 
   constructor() { }
 
@@ -33,8 +34,10 @@ export class DefaultsService {
   }
 
   public saveDefaults(dialogResult : DefaultsDataInterface) : void {
-    this.defaults = dialogResult;
-    localStorage.setItem("defaults", JSON.stringify(this.defaults));
+    this.defaults = dialogResult; // save in memory
+    localStorage.setItem("defaults", JSON.stringify(this.defaults));  // save in localStorage
+    console.log('service.change fired');
+    this.source.next('hi');
   }
 
   public getNewRental() : RentalDataInterface {
