@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import {  MatToolbarModule, 
           MatInputModule,
           MatCardModule,
@@ -10,12 +11,15 @@ import {  MatToolbarModule,
           MatSelectModule,
           MatSlideToggleModule,
           MatTableModule,
-          MatDialogModule
+          MatDialogModule,
+          MatDatepickerModule,
+          MatNativeDateModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
@@ -26,10 +30,13 @@ import {  MatToolbarModule,
     MatSelectModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatToolbarModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
     MatTabsModule,
@@ -39,7 +46,9 @@ import {  MatToolbarModule,
     MatSelectModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: []
 })

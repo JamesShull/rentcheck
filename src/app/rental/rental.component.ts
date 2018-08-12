@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { DefaultsService, RentalDataInterface } from '../defaults-service/defaults.service';
 import { Subscription } from 'rxjs';
@@ -21,15 +22,20 @@ export class RentalComponent implements OnInit, OnDestroy {
   private monthlyOutflow : number;
 
   // Calculation and Details
-  private monthlyPayment : number; public monthlyInterest : number; public monthlyPrincipal : number;
+  public   purchaseDate = new FormControl(new Date());
+  private monthlyPayment : number; 
+  private monthlyInterest : number; 
+  private monthlyPrincipal : number;
   private monthlyExpense : number;   
-  private monthlyPropertyTax : number; private monthlyTaxSavings : number;
-  private monthlyInsurance : number; private monthlyMaintenance : number;
-  public ammortizationSchedule : Array<any>;
-  public ammortizationColumns = ['term','interest','principal'];
-  public showAmmortization = false;
+  private monthlyPropertyTax : number; 
+  private monthlyTaxSavings : number;
+  private monthlyInsurance : number; 
+  private monthlyMaintenance : number;
+  private ammortizationSchedule : Array<any>;
+  private ammortizationColumns = ['term','interest','principal'];
+  private showAmmortization = false;
 
-  public subscription : Subscription;
+  private subscription : Subscription;
 
   constructor(private _defaults: DefaultsService) {
     this.subscription = this._defaults.obs$.subscribe(
