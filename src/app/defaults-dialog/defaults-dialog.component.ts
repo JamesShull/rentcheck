@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DefaultsDataInterface } from '../defaults-service/defaults.service';
+import { IDefaultsData } from '../defaults-service/defaults.service';
 
 @Component({
   selector: 'app-defaults-dialog',
@@ -11,7 +11,7 @@ export class DefaultsDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DefaultsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {defaults: DefaultsDataInterface}
+    @Inject(MAT_DIALOG_DATA) public data: {defaults: IDefaultsData}
   ) { }
 
   onCancel(): void {

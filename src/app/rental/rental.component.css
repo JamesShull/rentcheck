@@ -15,6 +15,7 @@
 }
 .card-actions button {  margin: 5px 15px;}
 .short-input {  width: 75px !important;}
+.mid-input { width: 125px !important;}
 .edit-toggle {  margin-left: 10px;}
 .outflow {
     display: inline-block;

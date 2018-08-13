@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DefaultsService {
-  private defaults : DefaultsDataInterface = {
+  private defaults : IDefaultsData = {
     interestRate: .04625,
     loanTerm : 360,
     downPayment : .20,
@@ -26,21 +26,22 @@ export class DefaultsService {
 
   constructor() { }
 
-  public getDefaults() : DefaultsDataInterface {
+  public getDefaults() : IDefaultsData {
     if ( localStorage.getItem("defaults") !== null ) {
       this.defaults = JSON.parse(localStorage.getItem("defaults"));
     }
     return this.defaults;
   }
 
-  public saveDefaults(dialogResult : DefaultsDataInterface) : void {
+  public saveDefaults(dialogResult : IDefaultsData) : void {
     this.defaults = dialogResult; // save in memory
     localStorage.setItem("defaults", JSON.stringify(this.defaults));  // save in localStorage
     this.source.next(true); // notify rentals to update
   }
 
-  public getNewRental() : RentalDataInterface {
-    let newRental : RentalDataInterface = {
+  public getNewRental() : IRentalData {
+    let newRental : IRentalData = {
+      rentalId: undefined,
       editAddress: true,
       streetAddress: undefined,
       cityAddress: undefined,
@@ -73,7 +74,7 @@ export class DefaultsService {
   }
 }
 
-export interface DefaultsDataInterface {
+export interface IDefaultsData {
   interestRate: number;
   loanTerm: number;
   downPayment: number;
@@ -83,7 +84,8 @@ export interface DefaultsDataInterface {
   salaryTaxRate: number;
 }
 
-export interface RentalDataInterface {
+export interface IRentalData {
+  rentalId: number,
   editAddress: boolean,
   streetAddress: string,
   cityAddress: string,

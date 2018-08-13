@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { DefaultsService, RentalDataInterface } from '../defaults-service/defaults.service';
+import { DefaultsService, IRentalData } from '../defaults-service/defaults.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 
 export class RentalComponent implements OnInit, OnDestroy {
   // Globals from defaults.service
-  private rentalData : RentalDataInterface;
+  private rentalData : IRentalData;
   private stateList : string[];
 
   // Performance Bar
@@ -142,29 +142,14 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.showAmmortization = false;
     }
   }
+
+  //To Do: save with Rental ID instead of address
   public onDrop(){
     if(localStorage.getItem(this.rentalData.streetAddress) !== null){
       localStorage.removeItem(this.rentalData.streetAddress);
     }
-    let count = Number(localStorage.getItem("card-count"));
-    if( count == NaN ){
-      localStorage.setItem("card-count","0");
-    } else {
-      localStorage.setItem("card-count", (count-1).toString());
-    }
   }
   public onSave(){
-    // Check if previously stored
-    let cardStored = localStorage.getItem(this.rentalData.streetAddress);
-    if ( cardStored === null ){
-      // Increment if new card (otherwise just store data)
-      let count = Number(localStorage.getItem("card-count"));
-      if( count == NaN ){
-        localStorage.setItem("card-count","1");
-      } else {
-        localStorage.setItem("card-count", (count+1).toString());
-      }
-    }
     let rentalStorage = this.rentalData;
     localStorage.setItem(this.rentalData.streetAddress, JSON.stringify(rentalStorage));
   }

@@ -9,17 +9,12 @@
 </mat-toolbar>
 <!--Advertisment-->
 
+<app-rental *ngFor="let rental of rentals"></app-rental>
 <!--
-<div *ngFor="let rental of rentals">
-      <app-rental [defaultsGlobal]="defaultsGlobal" [rentalData]=rental.data></app-rental>
-</div>
+<app-rental ></app-rental>
 -->
 
-<!--<app-rental [defaultsGlobal]="defaultsGlobal"></app-rental>-->
-<app-rental ></app-rental>
-
-
-<!--<button mat-fab color="primary" class="add-button" (click)="addRental();">
+<button mat-fab color="primary" class="add-button" (click)="addRental();">
       <img src="assets/plus.png" alt="add rental">
-</button>-->
+</button>
 <!--footer-->

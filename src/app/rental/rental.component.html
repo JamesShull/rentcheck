@@ -8,7 +8,7 @@
         <mat-slide-toggle class="edit-toggle" [(ngModel)]="rentalData.editAddress">Edit Address</mat-slide-toggle>
     </mat-card-title>
     <mat-card-subtitle *ngIf="rentalData.editAddress">
-        <mat-form-field>
+        <mat-form-field  class="mid-input">
           <input matInput placeholder="City" name="city" [(ngModel)]="rentalData.cityAddress">
         </mat-form-field>,&nbsp;
         <mat-form-field class="short-input">
