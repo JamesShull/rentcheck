@@ -25,19 +25,18 @@ export class AppComponent implements OnInit {
   }
 
   private initRentals(){
-    let tempRentals = JSON.parse(localStorage.getItem('rentals'));
+    let rentalItem = localStorage.getItem('rentals');
+    let tempRentals : Array<number> = (rentalItem) ? rentalItem.split(',').map(Number) : new Array();
     this.rentals = new Array();
-
-    // default first card
-    this.rentals.push(new Date().getTime());
-    if (tempRentals){
-      console.log('rentals: ');
-      console.log(tempRentals);
-      this.rentals.push()
-      for (let i=0;i<tempRentals.length;i++){
-        this.rentals.push( Number(tempRentals[i]) );
-      }
-    }
+    for (let i=0;i<tempRentals.length;i++){this.rentals.push( Number(tempRentals[i]) );}
+    if (tempRentals.length == 0){this.addRental();}
+    //if (tempRentals){
+    //  for (let i=0;i<tempRentals.length;i++){
+    //    this.rentals.push( Number(tempRentals[i]) );
+    //  }
+    //} else {
+    //  this.addRental();
+    //}
   }
 
   public defaultsDialog() : void {
@@ -51,8 +50,7 @@ export class AppComponent implements OnInit {
   }
   
   public addRental() : void { 
-    this.rentalCount++;
-    this.rentals.push('rental-'+this.rentalCount.toString());
-    localStorage.setItem("card-count",this.rentalCount.toString());
+    this.rentals.push(new Date().getTime());
+    localStorage.setItem('rentals', this.rentals.toString());
   }
 }

@@ -12,7 +12,7 @@
           <input matInput placeholder="City" name="city" [(ngModel)]="rentalData.cityAddress">
         </mat-form-field>,&nbsp;
         <mat-form-field class="short-input">
-          <mat-select [(value)]="stateAddress" placeholder="State">
+          <mat-select [(value)]="rentalData.stateAddress" placeholder="State">
               <mat-option *ngFor="let state of stateList" [value]="state">
                 {{state}}
               </mat-option>

@@ -24,7 +24,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   private monthlyOutflow : number;
 
   // Calculation and Details
-  public   purchaseDate = new FormControl(new Date());
+  public  purchaseDate = new FormControl(new Date());
   private monthlyPayment : number; 
   private monthlyInterest : number; 
   private monthlyPrincipal : number;
@@ -42,21 +42,24 @@ export class RentalComponent implements OnInit, OnDestroy {
   constructor(private _defaults: DefaultsService) { }
 
   ngOnInit() {
-    this.subscription = this._defaults.obs$.subscribe(
-      (trigger) => {
-        if (trigger){
-          this.updateGlobals();
-          this.updatePerformance();
-        }
-      },
+    this.subscription = this._defaults.obs$.subscribe( 
+      (trigger) => { if (trigger){this.updatePerformance();}},
       (error) => {console.log(error);},
       ()=> {console.log('complete');}
     );
-    this.rentalData = this._defaults.getNewRental();  // card defaults
-    // ToDo: update to pull from localStorage
-    //getLocalStorage()
-      // if (!emtpy){localStorage.getItem('this.rentalIdInput')...}
-    this.rentalData.rentalId = (new Date()).getTime();  //utc time
+
+    let savedRental = JSON.parse(localStorage.getItem(this.rentalIdInput.toString()));
+    if (savedRental){
+      this.rentalData = savedRental;
+      //this.rentalData = this._defaults.getNewRental();
+      //this.restoreFromStorage(savedRental);
+    }else{
+      console.log('rental is loading defaults');
+      //load defaults with current rentalIdInput
+      this.rentalData = this._defaults.getNewRental();
+      this.rentalData.rentalId = this.rentalIdInput;
+      this.onSave();  // save for the future?
+    }
 
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
@@ -86,6 +89,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     if(!this.rentalData.dirtyMaintenanceRate){this.rentalData.maintenanceRate = tempDefaults.maintenanceRate;}
   }
   public updatePerformance(){
+    this.updateGlobals();
     // Loan
     let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
     this.monthlyPayment = this.calcPayment(principal);
@@ -151,12 +155,17 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   //To Do: save with Rental ID instead of address
   public onDrop(){
-    if(localStorage.getItem(this.rentalData.streetAddress) !== null){
-      localStorage.removeItem(this.rentalData.streetAddress);
+    if(localStorage.getItem(this.rentalData.rentalId.toString()) !== null){
+      localStorage.removeItem(this.rentalData.rentalId.toString());
     }
   }
   public onSave(){
     let rentalStorage = this.rentalData;
-    localStorage.setItem(this.rentalData.streetAddress, JSON.stringify(rentalStorage));
+    localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(rentalStorage));
+  }
+
+  private restoreFromStorage(savedRental : IRentalData){
+    this.rentalData.rentalId = savedRental.rentalId;
+
   }
 }
