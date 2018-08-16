@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { DefaultsService, IRentalData } from '../defaults-service/defaults.service';
@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 
 export class RentalComponent implements OnInit, OnDestroy {
+  @Input('savedRentalID') rentalIdInput : number;
+
   // Globals from defaults.service
   private rentalData : IRentalData;
   private stateList : string[];
@@ -37,7 +39,9 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   private subscription : Subscription;
 
-  constructor(private _defaults: DefaultsService) {
+  constructor(private _defaults: DefaultsService) { }
+
+  ngOnInit() {
     this.subscription = this._defaults.obs$.subscribe(
       (trigger) => {
         if (trigger){
@@ -48,10 +52,12 @@ export class RentalComponent implements OnInit, OnDestroy {
       (error) => {console.log(error);},
       ()=> {console.log('complete');}
     );
-   }
-
-  ngOnInit() {
     this.rentalData = this._defaults.getNewRental();  // card defaults
+    // ToDo: update to pull from localStorage
+    //getLocalStorage()
+      // if (!emtpy){localStorage.getItem('this.rentalIdInput')...}
+    this.rentalData.rentalId = (new Date()).getTime();  //utc time
+
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
   }

@@ -14,21 +14,30 @@ import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.compo
 export class AppComponent implements OnInit {
   title = 'Rent Check';
   rentalCount = 1;
-  rentals : Array<string>;
+  rentals : Array<number>;
   public defaultsGlobal : IDefaultsData;
   //@ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   
   ngOnInit(){
-    let count = Number(localStorage.getItem("card-count"));
-    if( count == NaN || count == 0 ){
-      count = 1;
-    } 
-    localStorage.setItem("card-count",count.toString());
-    this.rentalCount = count;
+    this.initRentals();
+  }
+
+  private initRentals(){
+    let tempRentals = JSON.parse(localStorage.getItem('rentals'));
     this.rentals = new Array();
-    for (let i=0; i<count; i++){this.rentals.push('rental-'+(count+1).toString());}
+
+    // default first card
+    this.rentals.push(new Date().getTime());
+    if (tempRentals){
+      console.log('rentals: ');
+      console.log(tempRentals);
+      this.rentals.push()
+      for (let i=0;i<tempRentals.length;i++){
+        this.rentals.push( Number(tempRentals[i]) );
+      }
+    }
   }
 
   public defaultsDialog() : void {
