@@ -13,7 +13,6 @@ import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.compo
 })
 export class AppComponent implements OnInit {
   title = 'Rent Check';
-  rentalCount = 1;
   rentals : Array<number>;
   public defaultsGlobal : IDefaultsData;
   //@ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
@@ -30,13 +29,6 @@ export class AppComponent implements OnInit {
     this.rentals = new Array();
     for (let i=0;i<tempRentals.length;i++){this.rentals.push( Number(tempRentals[i]) );}
     if (tempRentals.length == 0){this.addRental();}
-    //if (tempRentals){
-    //  for (let i=0;i<tempRentals.length;i++){
-    //    this.rentals.push( Number(tempRentals[i]) );
-    //  }
-    //} else {
-    //  this.addRental();
-    //}
   }
 
   public defaultsDialog() : void {
@@ -47,6 +39,12 @@ export class AppComponent implements OnInit {
         if (result != undefined ){this._defaults.saveDefaults(result);}
       }
     );
+  }
+  public onDrop(rentalId : number) : void {
+    this.rentals = this.rentals.filter(el=>{if(el!= rentalId){return el;}});
+    let tempRentals = localStorage.getItem('rentals').split(',').map(Number);
+    tempRentals = tempRentals.filter(el=>{if(el!= rentalId){return el;}});
+    localStorage.setItem('rentals', tempRentals.toString());
   }
   
   public addRental() : void { 

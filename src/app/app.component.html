@@ -12,7 +12,7 @@
 <!--
 <app-rental *ngFor="let rental of rentals"></app-rental>
 -->
-<app-rental *ngFor="let rental of rentals" [savedRentalID]="rental"></app-rental>
+<app-rental *ngFor="let rental of rentals" [savedRentalID]="rental" (drop)="onDrop($event)"></app-rental>
 
 
 <button mat-fab color="primary" class="add-button" (click)="addRental();">

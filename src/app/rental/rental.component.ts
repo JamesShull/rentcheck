@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { DefaultsService, IRentalData } from '../defaults-service/defaults.service';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 
 export class RentalComponent implements OnInit, OnDestroy {
   @Input('savedRentalID') rentalIdInput : number;
+  @Output() drop = new EventEmitter<number>();
 
   // Globals from defaults.service
   private rentalData : IRentalData;
@@ -42,25 +43,23 @@ export class RentalComponent implements OnInit, OnDestroy {
   constructor(private _defaults: DefaultsService) { }
 
   ngOnInit() {
+    // Get ready for updates from the defaults menu
     this.subscription = this._defaults.obs$.subscribe( 
       (trigger) => { if (trigger){this.updatePerformance();}},
       (error) => {console.log(error);},
       ()=> {console.log('complete');}
     );
 
+    // Pull in stored rental data
     let savedRental = JSON.parse(localStorage.getItem(this.rentalIdInput.toString()));
     if (savedRental){
       this.rentalData = savedRental;
-      //this.rentalData = this._defaults.getNewRental();
-      //this.restoreFromStorage(savedRental);
     }else{
-      console.log('rental is loading defaults');
-      //load defaults with current rentalIdInput
       this.rentalData = this._defaults.getNewRental();
       this.rentalData.rentalId = this.rentalIdInput;
-      this.onSave();  // save for the future?
     }
 
+    // Update views
     this.stateList = this._defaults.getStates();
     this.updatePerformance();
   }
@@ -158,14 +157,13 @@ export class RentalComponent implements OnInit, OnDestroy {
     if(localStorage.getItem(this.rentalData.rentalId.toString()) !== null){
       localStorage.removeItem(this.rentalData.rentalId.toString());
     }
+    this.drop.emit(this.rentalIdInput);
   }
   public onSave(){
-    let rentalStorage = this.rentalData;
-    localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(rentalStorage));
+    localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(this.rentalData));
   }
 
   private restoreFromStorage(savedRental : IRentalData){
     this.rentalData.rentalId = savedRental.rentalId;
-
   }
 }
