@@ -22,3 +22,10 @@
     filter: contrast(4) invert(1);
     height: 24px;
 }
+.footer {
+    width : 100%;
+    text-align: center;
+    min-height: 15px;
+    background-color: rgb(250,250,250);
+    color: rgb(100, 100, 100);
+}

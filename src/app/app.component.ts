@@ -13,6 +13,7 @@ import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.compo
 })
 export class AppComponent implements OnInit {
   title = 'Rent Check';
+  year = (new Date()).getFullYear().toString();
   rentals : Array<number>;
   public defaultsGlobal : IDefaultsData;
   //@ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?

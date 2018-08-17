@@ -27,13 +27,13 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="Cash needed to cover expenses each month.">
+    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="cash needed to cover all expenses">
       <p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4>
     </span>
-    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="Estimated monthly income (including principal & tax savings)">
+    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="including mortgage principal & tax savings">
       <p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4>
     </span>
-    <span class="yield" [class.positive]="yield>0" matTooltip="Yield Estimate">
+    <span class="yield" [class.positive]="yield>0" matTooltip="annualized">
       <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
     </span>
     <mat-tab-group>
@@ -55,58 +55,65 @@
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();">
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();" matTooltip="parcel tax (common in CA)">
                 </mat-form-field>
               </p>
         </mat-tab>
         <mat-tab label="Assumptions"> 
             <p>
               <mat-form-field class="card-input">
-                <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" >
+                <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" 
+                  matTooltip="prinicipal and interest change monthly" (blur)="datePurchased()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
-                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);" matTooltip="effects tax savings">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
-                      [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);" matTooltip="influences mortgage payment and outflow">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Loan Term" name="loanTerm" 
-                      [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);" matTooltip="30yrs = 360 months">
               </mat-form-field>mo.
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Down Payment" name="downPayment" 
-                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);" matTooltip="heavily effects performance">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Property Rate" name="propertyTaxRate" 
-                      [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);" matTooltip="confirm correct for properties of interest">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
-                      [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="insurance premiums (annualized)">
               </mat-form-field>%
             </p>
             <p>
               <mat-form-field class="card-input">
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
-                      [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+                      [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="maintenance costs (annualized)">
+              </mat-form-field>%
+            </p>
+            <p>
+              <mat-form-field class="card-input">
+                <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
+                      [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="vacancy from turnover (annualized)">
               </mat-form-field>%
             </p>
         </mat-tab>

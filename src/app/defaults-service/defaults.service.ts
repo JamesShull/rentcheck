@@ -9,6 +9,7 @@ export class DefaultsService {
     downPayment : .20,
     insuranceRate : .0020,
     maintenanceRate : .0018,
+    vacancyRate : .042,
     propertyTaxRate : .01095,
     salaryTaxRate : 0.22
   };
@@ -51,20 +52,24 @@ export class DefaultsService {
       rent: 3000,
       hoa: 250,
       melloRoos: 0,
+      purchaseDate: undefined,
       interestRate: .04625,
       loanTerm: 360,
       downPayment: 0.20,
       insuranceRate: .0020,
       maintenanceRate: .0018,
+      vacancyRate: .042,
       propertyTaxRate: .01095,
       salaryTaxRate: .22,
+      dirtyPurchaseDate: false,
       dirtySalaryTaxRate: false,
       dirtyInterestRate: false,
       dirtyLoanTerm: false,
       dirtyDownPayment: false,
       dirtyPropertyTaxRate: false,
       dirtyInsuranceRate: false,
-      dirtyMaintenanceRate: false
+      dirtyMaintenanceRate: false,
+      dirtyVacancyRate: false
     }
     return newRental;
   }
@@ -80,6 +85,7 @@ export interface IDefaultsData {
   downPayment: number;
   insuranceRate: number;
   maintenanceRate: number;
+  vacancyRate: number;
   propertyTaxRate: number;
   salaryTaxRate: number;
 }
@@ -95,18 +101,22 @@ export interface IRentalData {
   rent: number,
   hoa: number,
   melloRoos: number,
+  purchaseDate: Date,
   interestRate: number,
   loanTerm: number,
   downPayment: number,
   insuranceRate: number,
   maintenanceRate: number,
+  vacancyRate: number,
   propertyTaxRate: number,
   salaryTaxRate: number,
+  dirtyPurchaseDate: boolean,
   dirtySalaryTaxRate: boolean,
   dirtyInterestRate: boolean,
   dirtyLoanTerm: boolean,
   dirtyDownPayment: boolean,
   dirtyPropertyTaxRate: boolean,
   dirtyInsuranceRate: boolean,
-  dirtyMaintenanceRate: boolean
+  dirtyMaintenanceRate: boolean,
+  dirtyVacancyRate: boolean
 }

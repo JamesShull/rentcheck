@@ -34,6 +34,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   private monthlyTaxSavings : number;
   private monthlyInsurance : number; 
   private monthlyMaintenance : number;
+  private monthlyVacancy : number;
   private ammortizationSchedule : Array<any>;
   private ammortizationColumns = ['term','interest','principal'];
   private showAmmortization = false;
@@ -43,19 +44,18 @@ export class RentalComponent implements OnInit, OnDestroy {
   constructor(private _defaults: DefaultsService) { }
 
   ngOnInit() {
-    // Get ready for updates from the defaults menu
+    // Get ready for updates from the defaults menu by subscribing to default service subject (as observable)
     this.subscription = this._defaults.obs$.subscribe( 
       (trigger) => { if (trigger){this.updatePerformance();}},
       (error) => {console.log(error);},
       ()=> {console.log('complete');}
     );
 
-    // Pull in stored rental data
     let savedRental = JSON.parse(localStorage.getItem(this.rentalIdInput.toString()));
     if (savedRental){
-      this.rentalData = savedRental;
+      this.rentalData = savedRental;                    // Pull in saved rental data
     }else{
-      this.rentalData = this._defaults.getNewRental();
+      this.rentalData = this._defaults.getNewRental();  // initialize with defaults
       this.rentalData.rentalId = this.rentalIdInput;
     }
 
@@ -67,13 +67,20 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private inputBlur(event: any){
+  private inputBlur(event: any){  // Called by input fields during editing
     let name : string = event.target.name;
-    (name!='loanTerm') ? 
+    (name!='loanTerm' && name!='purchaseDate') ? 
       this.rentalData[name]=event.target.value/100 :
       this.rentalData[name]=event.target.value;
+    console.log(name);
+    console.log(this.rentalData[name]);
     let keyName = 'dirty'+name.substring(0,1).toUpperCase() + name.substring(1);
     this.rentalData[keyName] = true;
+    this.updatePerformance();
+  }
+  private datePurchased(): void {
+    this.rentalData.purchaseDate = this.purchaseDate.value;
+    this.rentalData.dirtyPurchaseDate = true;
     this.updatePerformance();
   }
   // outside caller to update defaults
@@ -86,17 +93,21 @@ export class RentalComponent implements OnInit, OnDestroy {
     if(!this.rentalData.dirtyPropertyTaxRate){this.rentalData.propertyTaxRate = tempDefaults.propertyTaxRate;}
     if(!this.rentalData.dirtyInsuranceRate){this.rentalData.insuranceRate = tempDefaults.insuranceRate;}
     if(!this.rentalData.dirtyMaintenanceRate){this.rentalData.maintenanceRate = tempDefaults.maintenanceRate;}
+    if(!this.rentalData.dirtyVacancyRate){this.rentalData.vacancyRate = tempDefaults.vacancyRate;}
   }
   public updatePerformance(){
     this.updateGlobals();
     // Loan
     let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
     this.monthlyPayment = this.calcPayment(principal);
-    this.monthlyPrincipal = this.calcPrincipal(principal, 1);
-    this.monthlyInterest = this.calcInterest(principal, 1);
+    let date : Date = this.purchaseDate.value; let today : Date = new Date();
+    let term = (today.getFullYear() - date.getFullYear())*12 + (today.getMonth() - date.getMonth()) + 1;
+    this.monthlyPrincipal = this.calcPrincipal(principal, term);
+    this.monthlyInterest = this.calcInterest(principal, term);
     // Other expenses
     this.monthlyInsurance = this.rentalData.price*(this.rentalData.insuranceRate/12);
     this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
+    this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
@@ -107,7 +118,8 @@ export class RentalComponent implements OnInit, OnDestroy {
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 
                           +this.monthlyInsurance + this.monthlyMaintenance
-                          + this.monthlyPayment + this.monthlyPropertyTax;
+                          + this.monthlyPayment + this.monthlyPropertyTax
+                          + this.monthlyVacancy;
     this.monthlyExpense = this.monthlyOutflow - this.monthlyTaxSavings - this.monthlyPrincipal;
     // Income
     this.monthlyIncome = this.rentalData.rent - this.monthlyExpense;
@@ -151,8 +163,6 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.showAmmortization = false;
     }
   }
-
-  //To Do: save with Rental ID instead of address
   public onDrop(){
     if(localStorage.getItem(this.rentalData.rentalId.toString()) !== null){
       localStorage.removeItem(this.rentalData.rentalId.toString());
@@ -161,9 +171,5 @@ export class RentalComponent implements OnInit, OnDestroy {
   }
   public onSave(){
     localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(this.rentalData));
-  }
-
-  private restoreFromStorage(savedRental : IRentalData){
-    this.rentalData.rentalId = savedRental.rentalId;
   }
 }
