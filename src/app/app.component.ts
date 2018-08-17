@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { DefaultsService, IDefaultsData } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
