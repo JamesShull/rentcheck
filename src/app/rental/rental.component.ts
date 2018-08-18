@@ -16,28 +16,28 @@ export class RentalComponent implements OnInit, OnDestroy {
   @Output() drop = new EventEmitter<number>();
 
   // Globals from defaults.service
-  private rentalData : IRentalData;
+  public rentalData : IRentalData;
   private stateList : string[];
 
   // Performance Bar
-  private monthlyIncome : number;
-  private yield : number;
-  private monthlyOutflow : number;
+  public monthlyIncome : number;
+  public yield : number;
+  public monthlyOutflow : number;
 
   // Calculation and Details
   public  purchaseDate = new FormControl(new Date());
-  private monthlyPayment : number; 
-  private monthlyInterest : number; 
-  private monthlyPrincipal : number;
-  private monthlyExpense : number;   
-  private monthlyPropertyTax : number; 
-  private monthlyTaxSavings : number;
-  private monthlyInsurance : number; 
-  private monthlyMaintenance : number;
-  private monthlyVacancy : number;
-  private ammortizationSchedule : Array<any>;
-  private ammortizationColumns = ['term','interest','principal'];
-  private showAmmortization = false;
+  public monthlyPayment : number; 
+  public monthlyInterest : number; 
+  public monthlyPrincipal : number;
+  public monthlyExpense : number;   
+  public monthlyPropertyTax : number; 
+  public monthlyTaxSavings : number;
+  public monthlyInsurance : number; 
+  public monthlyMaintenance : number;
+  public monthlyVacancy : number;
+  public ammortizationSchedule : Array<any>;
+  public ammortizationColumns = ['term','interest','principal'];
+  public showAmmortization = false;
 
   private subscription : Subscription;
 
@@ -67,7 +67,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private inputBlur(event: any){  // Called by input fields during editing
+  public inputBlur(event: any){  // Called by input fields during editing
     let name : string = event.target.name;
     (name!='loanTerm' && name!='purchaseDate') ? 
       this.rentalData[name]=event.target.value/100 :
@@ -78,13 +78,13 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.rentalData[keyName] = true;
     this.updatePerformance();
   }
-  private datePurchased(): void {
+  public datePurchased(): void {
     this.rentalData.purchaseDate = this.purchaseDate.value;
     this.rentalData.dirtyPurchaseDate = true;
     this.updatePerformance();
   }
   // outside caller to update defaults
-  public updateGlobals(){
+  private updateGlobals(){
     let tempDefaults = this._defaults.getDefaults();
     if(!this.rentalData.dirtySalaryTaxRate){this.rentalData.salaryTaxRate = tempDefaults.salaryTaxRate;}
     if(!this.rentalData.dirtyInterestRate){this.rentalData.interestRate = tempDefaults.interestRate;}
@@ -145,7 +145,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     let localPrincipal = this.calcPrincipal(principal, period);
     return this.calcPayment(principal) - localPrincipal;
   }
-  private generateAmmortizationSchedule() : void{
+  public generateAmmortizationSchedule() : void{
     this.updatePerformance();
     if (this.showAmmortization != true){
       let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
