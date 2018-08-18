@@ -6,9 +6,9 @@
       <span class="title" matTooltip="Rental Performance Guesstimator">{{ title }}</span>
       <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
       <!--<span class="filler"></span>-->
-      <!--<span class="tag-line">non-speculative rental preformance guesstimation tool</span>-->
 </mat-toolbar>
 <!--Advertisment-->
+<p class="warning">This website is still in beta, please excuse the mess.</p>
 <app-rental *ngFor="let rental of rentals" [savedRentalID]="rental" (drop)="onDrop($event)"></app-rental>
 <button mat-fab color="primary" class="add-button" (click)="addRental();">
       <img src="assets/plus.png" alt="add rental">
