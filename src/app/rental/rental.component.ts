@@ -53,7 +53,8 @@ export class RentalComponent implements OnInit, OnDestroy {
 
     let savedRental = JSON.parse(localStorage.getItem(this.rentalIdInput.toString()));
     if (savedRental){
-      this.rentalData = savedRental;                    // Pull in saved rental data
+      this.rentalData = savedRental; // Pull in saved rental data
+      this.purchaseDate = new FormControl(new Date(savedRental.purchaseDate));
     }else{
       this.rentalData = this._defaults.getNewRental();  // initialize with defaults
       this.rentalData.rentalId = this.rentalIdInput;
@@ -79,7 +80,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.updatePerformance();
   }
   public datePurchased(): void {
-    this.rentalData.purchaseDate = this.purchaseDate.value;
+    this.rentalData.purchaseDate = Date(this.purchaseDate.value).getTime();
     this.rentalData.dirtyPurchaseDate = true;
     this.updatePerformance();
   }
