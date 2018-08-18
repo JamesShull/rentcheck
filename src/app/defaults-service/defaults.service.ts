@@ -101,7 +101,7 @@ export interface IRentalData {
   rent: number,
   hoa: number,
   melloRoos: number,
-  purchaseDate: Date,
+  purchaseDate: number,
   interestRate: number,
   loanTerm: number,
   downPayment: number,
