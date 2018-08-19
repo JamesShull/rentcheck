@@ -80,7 +80,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.updatePerformance();
   }
   public datePurchased(): void {
-    this.rentalData.purchaseDate = Date(this.purchaseDate.value).getTime();
+    this.rentalData.purchaseDate = (new Date(this.purchaseDate.value)).getTime();
     this.rentalData.dirtyPurchaseDate = true;
     this.updatePerformance();
   }
