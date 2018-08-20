@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { DefaultsService, IDefaultsData } from './defaults-service/defaults.service';
+import { DefaultsService } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
 import { environment } from '../environments/environment.prod';
 
@@ -12,20 +12,21 @@ import { environment } from '../environments/environment.prod';
   providers : [DefaultsService]
 })
 export class AppComponent implements OnInit {
-  title = 'Rent Check';
+  title = 'rent check';
   year = (new Date()).getFullYear().toString();
-  rentals : Array<number>;
-  showAbout = false;
-  showContact = false;
   appVersion = environment.version;
-  public defaultsGlobal : IDefaultsData;
+  //rentals : Array<number>;
+  //showAbout = false;
+  //showContact = false;
+  //public defaultsGlobal : IDefaultsData;
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   
   ngOnInit(){
-    this.initRentals();
+    //this.initRentals();
   }
 
+  /*
   public toggleAbout(){
     this.showAbout = !this.showAbout;
   }
@@ -40,16 +41,12 @@ export class AppComponent implements OnInit {
     for (let i=0;i<tempRentals.length;i++){this.rentals.push( Number(tempRentals[i]) );}
     if (tempRentals.length == 0){this.addRental();}
   }
-
+  */
   public defaultsDialog() : void {
     const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});
-
-    dialogRef.afterClosed().subscribe(
-      result => {
-        if (result != undefined ){this._defaults.saveDefaults(result);}
-      }
-    );
+    dialogRef.afterClosed().subscribe(result => {if (result != undefined ){this._defaults.saveDefaults(result);}});
   }
+  /*
   public onDrop(rentalId : number) : void {
     this.rentals = this.rentals.filter(el=>{if(el!= rentalId){return el;}});
     let tempRentals = localStorage.getItem('rentals').split(',').map(Number);
@@ -61,4 +58,5 @@ export class AppComponent implements OnInit {
     this.rentals.push(new Date().getTime());
     localStorage.setItem('rentals', this.rentals.toString());
   }
+  */
 }

@@ -10,7 +10,7 @@ export class DefaultsService {
     insuranceRate : .0020,
     maintenanceRate : .0018,
     vacancyRate : .042,
-    propertyTaxRate : .01095,
+    propertyTaxRate : .015,
     salaryTaxRate : 0.22
   };
 
@@ -59,7 +59,7 @@ export class DefaultsService {
       insuranceRate: .0020,
       maintenanceRate: .0018,
       vacancyRate: .042,
-      propertyTaxRate: .01095,
+      propertyTaxRate: .015,
       salaryTaxRate: .22,
       dirtyPurchaseDate: false,
       dirtySalaryTaxRate: false,

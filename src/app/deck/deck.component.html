@@ -1,0 +1,6 @@
+<app-rental *ngFor="let rental of rentals" [savedRentalID]="rental" (drop)="onDrop($event)"></app-rental>
+<app-about *ngIf="showAbout" (close)="toggleAbout();"></app-about>
+<app-contact *ngIf="showContact" (close)="toggleContact();"></app-contact>
+<button mat-fab color="primary" class="add-button" (click)="addRental();">
+      <img src="assets/plus.png" alt="add rental">
+</button>
