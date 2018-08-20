@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -6,10 +6,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-  @Output() close = new EventEmitter<any>();
   constructor() { }
 
-  public onClose(){
-    this.close.emit();
-  }
 }

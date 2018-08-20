@@ -157,12 +157,13 @@ export class RentalComponent implements OnInit, OnDestroy {
       let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
       this.ammortizationSchedule = new Array();
       for(let i=0;i<=this.rentalData.loanTerm;i++){
-        if ( (i>0 && i <= 12) || i == 60 || i == 120 || i == 240 || i == 360)
-        this.ammortizationSchedule.push({
-          'term':i,
-          'interest': this.calcInterest(principal,i+1),
-          'principal': this.calcPrincipal(principal, i+1)
-        });
+        if ( (i>0 && i <= 12) || i == 60 || i == 120 || i == 240 || i == 360){
+          this.ammortizationSchedule.push({
+            'term':i,
+            'interest': this.calcInterest(principal,i+1),
+            'principal': this.calcPrincipal(principal, i+1)
+          });
+        }
       }
       this.showAmmortization = true;
     }else{

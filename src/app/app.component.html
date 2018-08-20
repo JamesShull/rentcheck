@@ -9,20 +9,13 @@
       <!--<span class="filler"></span>-->
 </mat-toolbar>
 
-<!--Advertisment-->
-<!--<p class="warning">This website is still in beta, please excuse the mess.</p>-->
+<!--Google Ads will go here-->
 
-<!--<app-rental *ngFor="let rental of rentals" [savedRentalID]="rental" (drop)="onDrop($event)"></app-rental>
-<app-about *ngIf="showAbout" (close)="toggleAbout();"></app-about>
-<app-contact *ngIf="showContact" (close)="toggleContact();"></app-contact>
-<button mat-fab color="primary" class="add-button" (click)="addRental();">
-      <img src="assets/plus.png" alt="add rental">
-</button>-->
 <router-outlet></router-outlet>
 
 <footer class="footer">
       <a mat-button routerLink="/home" routerLinkActive="active"><img src="assets/myCheck_dark.png" alt="rent check home" width="24px;">&nbsp;Home</a>
 	<a mat-button routerLink="/about" routerLinkActive="active">About</a>
       <a mat-button routerLink="/contactus" routerLinkActive="active">Contact Us</a>
-      <h4>USA Copyright © {{year}} James Shull. All rights reserved.</h4>
+      <h4>Copyright © {{year}} James Shull. All rights reserved.</h4>
 </footer>
