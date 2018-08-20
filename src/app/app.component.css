@@ -17,7 +17,7 @@
     flex: 1 1 auto;
 }
 .add-button {
-    vertical-align: top; margin-top: 26px; margin-left: 175px; 
+    vertical-align: top; margin: 26px 0px 26px 175px; 
 }
 .add-button img {
     filter: contrast(4) invert(1);
