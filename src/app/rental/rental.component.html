@@ -134,6 +134,7 @@
             <ul>
               <li><h5>Interest Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
               <li><h5>Property Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
+              <li><h5>Depreciation Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
@@ -142,7 +143,7 @@
               <ul>
                 <li><h5>Interest (1st Term): <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
                 <li><h5>Principal (1st Term): <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
-                <li><h5>Loan Term: now() - mortgage start month</h5></li>
+                <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
               </ul>
             <button mat-raised-button color="accent"  (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
             <div class="line-break"></div><div class="divider"></div>

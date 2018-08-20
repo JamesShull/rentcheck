@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   title = 'Rent Check';
   year = (new Date()).getFullYear().toString();
   rentals : Array<number>;
+  showAbout = false;
+  showContact = false;
   public defaultsGlobal : IDefaultsData;
   //@ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
@@ -22,6 +24,13 @@ export class AppComponent implements OnInit {
   
   ngOnInit(){
     this.initRentals();
+  }
+
+  public toggleAbout(){
+    this.showAbout = !this.showAbout;
+  }
+  public toggleContact(){
+    this.showContact = !this.showContact;
   }
 
   private initRentals(){

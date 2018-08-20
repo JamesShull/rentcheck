@@ -26,11 +26,13 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   // Calculation and Details
   public  purchaseDate = new FormControl(new Date());
+  public term: number;
   public monthlyPayment : number; 
   public monthlyInterest : number; 
   public monthlyPrincipal : number;
   public monthlyExpense : number;   
-  public monthlyPropertyTax : number; 
+  public monthlyPropertyTax : number;
+  public monthlyDepreciation : number; 
   public monthlyTaxSavings : number;
   public monthlyInsurance : number; 
   public monthlyMaintenance : number;
@@ -73,8 +75,6 @@ export class RentalComponent implements OnInit, OnDestroy {
     (name!='loanTerm' && name!='purchaseDate') ? 
       this.rentalData[name]=event.target.value/100 :
       this.rentalData[name]=event.target.value;
-    console.log(name);
-    console.log(this.rentalData[name]);
     let keyName = 'dirty'+name.substring(0,1).toUpperCase() + name.substring(1);
     this.rentalData[keyName] = true;
     this.updatePerformance();
@@ -102,19 +102,21 @@ export class RentalComponent implements OnInit, OnDestroy {
     let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
     this.monthlyPayment = this.calcPayment(principal);
     let date : Date = this.purchaseDate.value; let today : Date = new Date();
-    let term = (today.getFullYear() - date.getFullYear())*12 + (today.getMonth() - date.getMonth()) + 1;
-    this.monthlyPrincipal = this.calcPrincipal(principal, term);
-    this.monthlyInterest = this.calcInterest(principal, term);
+    this.term = (today.getFullYear() - date.getFullYear())*12 + (today.getMonth() - date.getMonth()) + 1;
+    this.monthlyPrincipal = this.calcPrincipal(principal, this.term);
+    this.monthlyInterest = this.calcInterest(principal, this.term);
     // Other expenses
     this.monthlyInsurance = this.rentalData.price*(this.rentalData.insuranceRate/12);
     this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
+    this.monthlyDepreciation = ((this.rentalData.price * 0.8) / (27.5*12));
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
     let taxBasis = (this.monthlyPropertyTax<=propertyTaxCap)? 
                       this.monthlyPropertyTax + this.monthlyInterest:
                       10000 + this.monthlyInterest;
+    taxBasis += this.monthlyDepreciation;
     this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 

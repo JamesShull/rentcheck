@@ -4,6 +4,7 @@
     /*min-width: 375px;*/
     max-width: 500px;
     display: inline-block;
+    vertical-align: top;
 }
 .card-input {
     width: 125px !important;
