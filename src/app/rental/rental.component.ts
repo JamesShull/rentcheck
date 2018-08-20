@@ -110,7 +110,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
-    this.monthlyDepreciation = ((this.rentalData.price * 0.8) / (27.5*12));
+    this.monthlyDepreciation = ((this.rentalData.price * 0.5) / (27.5*12));
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
     /* //Investment properties maybe don't fall victim to SALT cap
@@ -156,7 +156,8 @@ export class RentalComponent implements OnInit, OnDestroy {
     if (this.showAmmortization != true){
       let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
       this.ammortizationSchedule = new Array();
-      for(let i=0;i<this.rentalData.loanTerm;i++){
+      for(let i=0;i<=this.rentalData.loanTerm;i++){
+        if ( (i>0 && i <= 12) || i == 60 || i == 120 || i == 240 || i == 360)
         this.ammortizationSchedule.push({
           'term':i,
           'interest': this.calcInterest(principal,i+1),
