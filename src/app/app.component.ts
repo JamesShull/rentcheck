@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { DefaultsService, IDefaultsData } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
-//import { RentalComponent } from './rental/rental.component';
+import { environment } from '../environments/environment.prod';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   rentals : Array<number>;
   showAbout = false;
   showContact = false;
+  appVersion = environment.version;
   public defaultsGlobal : IDefaultsData;
-  //@ViewChild(RentalComponent) private rental: RentalComponent;  // update to ViewChildren?
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   

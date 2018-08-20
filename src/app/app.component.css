@@ -5,7 +5,11 @@
     margin-top: -10px;
 }
 .title {
-    margin: 0 16px;
+    margin: 0px 16px;
+}
+.version {
+    font-size: 12px;
+    margin-top: 10px;
 }
 .tag-line {
     font-size: 12px;

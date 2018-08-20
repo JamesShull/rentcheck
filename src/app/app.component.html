@@ -5,10 +5,11 @@
       </button>
       <span class="title" matTooltip="Rental Performance Guesstimator">{{ title }}</span>
       <img src="assets/myCheck_light.png" alt="rent-check-icon" height="32px;">
+      <span class="version">&nbsp;v.{{appVersion}}</span>
       <!--<span class="filler"></span>-->
 </mat-toolbar>
 <!--Advertisment-->
-<p class="warning">This website is still in beta, please excuse the mess.</p>
+<!--<p class="warning">This website is still in beta, please excuse the mess.</p>-->
 <app-rental *ngFor="let rental of rentals" [savedRentalID]="rental" (drop)="onDrop($event)"></app-rental>
 <app-about *ngIf="showAbout" (close)="toggleAbout();"></app-about>
 <app-contact *ngIf="showContact" (close)="toggleContact();"></app-contact>
