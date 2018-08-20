@@ -113,10 +113,13 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyDepreciation = ((this.rentalData.price * 0.8) / (27.5*12));
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
+    /* //Investment properties maybe don't fall victim to SALT cap
     let taxBasis = (this.monthlyPropertyTax<=propertyTaxCap)? 
                       this.monthlyPropertyTax + this.monthlyInterest:
                       10000 + this.monthlyInterest;
     taxBasis += this.monthlyDepreciation;
+    */
+    let taxBasis =  this.monthlyPropertyTax + this.monthlyInterest + this.monthlyDepreciation;
     this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 
