@@ -59,11 +59,12 @@
                 </mat-form-field>
               </p>
         </mat-tab>
+        <!--   --   assumptions   --       -->
         <mat-tab label="Assumptions"> 
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="prinicipal and interest change monthly">
                 <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" 
-                  matTooltip="prinicipal and interest change monthly" (blur)="datePurchased()">
+                  (blur)="datePurchased()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
@@ -93,7 +94,7 @@
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="confirm correct for properties of interest">
+              <mat-form-field class="card-input" matTooltip="typical CA property tax is about 1.25%">
                 <input matInput placeholder="Property Rate" name="propertyTaxRate" 
                       [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
@@ -111,12 +112,19 @@
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="vacancy from turnover (annualized)">
+              <mat-form-field class="card-input" matTooltip="vacancy from turnover">
                 <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
                       [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
+            <p>
+                <mat-form-field class="card-input" matTooltip="usually 10% of rent">
+                  <input matInput placeholder="Management Rate" name="managementRate"
+                        [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+                </mat-form-field>%
+            </p>
         </mat-tab>
+        <!--   --   Details   --       -->
         <mat-tab label="Details">
             <h3>Cost (with fees): <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
             <h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5>
@@ -130,7 +138,8 @@
               <li><h5>Mello-Roos: <span class="detail-text">{{rentalData.melloRoos | currency}}</span></h5></li>
               <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency}}</span></h5></li>
               <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency}}</span></h5></li>
-              <li *ngIf="rentalData.downPayment<0.2"><h5>PMI (Mortgage Insurance): <span class="detail-text">{{montlyPMI | currency}}</span></h5></li>
+              <li *ngIf="rentalData.downPayment<0.2"><h5>PMI (Mortgage Insurance): <span class="detail-text">{{monthlyPMI | currency}}</span></h5></li>
+              <li *ngIf="rentalData.managementRate>0"><h5>Managment Fee: <span class="detail-text">{{monthlyManagement | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>

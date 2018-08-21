@@ -11,7 +11,8 @@ export class DefaultsService {
     maintenanceRate : .0018,
     vacancyRate : .042,
     propertyTaxRate : .015,
-    salaryTaxRate : 0.22
+    salaryTaxRate : 0.22,
+    managementRate : 0.1
   };
 
   private states : string[] = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
@@ -61,6 +62,7 @@ export class DefaultsService {
       vacancyRate: .042,
       propertyTaxRate: .015,
       salaryTaxRate: .22,
+      managementRate: .1,
       dirtyPurchaseDate: false,
       dirtySalaryTaxRate: false,
       dirtyInterestRate: false,
@@ -69,7 +71,8 @@ export class DefaultsService {
       dirtyPropertyTaxRate: false,
       dirtyInsuranceRate: false,
       dirtyMaintenanceRate: false,
-      dirtyVacancyRate: false
+      dirtyVacancyRate: false,
+      dirtyManagementRate: false
     }
     return newRental;
   }
@@ -88,6 +91,7 @@ export interface IDefaultsData {
   vacancyRate: number;
   propertyTaxRate: number;
   salaryTaxRate: number;
+  managementRate: number;
 }
 
 export interface IRentalData {
@@ -110,6 +114,7 @@ export interface IRentalData {
   vacancyRate: number,
   propertyTaxRate: number,
   salaryTaxRate: number,
+  managementRate: number,
   dirtyPurchaseDate: boolean,
   dirtySalaryTaxRate: boolean,
   dirtyInterestRate: boolean,
@@ -118,5 +123,6 @@ export interface IRentalData {
   dirtyPropertyTaxRate: boolean,
   dirtyInsuranceRate: boolean,
   dirtyMaintenanceRate: boolean,
-  dirtyVacancyRate: boolean
+  dirtyVacancyRate: boolean,
+  dirtyManagementRate: boolean
 }

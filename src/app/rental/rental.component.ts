@@ -42,6 +42,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   public monthlyPMI : number;
   public monthlyMaintenance : number;
   public monthlyVacancy : number;
+  public monthlyManagement: number;
   public ammortizationSchedule : Array<any>;
   public ammortizationColumns = ['term','interest','principal'];
   public showAmmortization = false;
@@ -105,8 +106,8 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.updateGlobals();
     // Loan
     let principal = (1-this.rentalData.downPayment)*this.rentalData.price;
-    this.monthlyPayment = this.calcPayment(principal);
     let date : Date = this.purchaseDate.value; let today : Date = new Date();
+    this.monthlyPayment = this.calcPayment(principal);
     this.term = (today.getFullYear() - date.getFullYear())*12 + (today.getMonth() - date.getMonth()) + 1;
     this.monthlyPrincipal = this.calcPrincipal(principal, this.term);
     this.monthlyInterest = this.calcInterest(principal, this.term);
@@ -117,6 +118,8 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
     this.monthlyDepreciation = ((this.rentalData.price * this.depreciationPercentage) / (27.5*12));
+    this.monthlyManagement = (this.rentalData.rent * this.rentalData.managementRate) ;
+    // Investment total
     this.cost = (this.rentalData.price*this.rentalData.downPayment) + (this.rentalData.price*this.feesPercentage);
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
@@ -131,7 +134,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 
                           +this.monthlyInsurance + this.monthlyPMI + this.monthlyMaintenance 
-                          + this.monthlyPayment + this.monthlyPropertyTax
+                          + this.monthlyPayment + this.monthlyPropertyTax + this.monthlyManagement
                           + this.monthlyVacancy;
     this.monthlyExpense = this.monthlyOutflow - this.monthlyTaxSavings - this.monthlyPrincipal;
     // Income

@@ -15,6 +15,9 @@
     height: 30px;
     padding-bottom: 6px;
 }
+.filler {
+    flex-grow: 1;
+}
 .version {
     font-size: 12px;
     margin-left: 10px;
