@@ -149,16 +149,19 @@
               <li><h5>Depreciation Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
-            <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
-            <div class="divider"></div>
             <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
               <ul>
                 <li><h5>Interest (1st Term): <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
                 <li><h5>Principal (1st Term): <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
                 <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
               </ul>
-            <button mat-raised-button color="accent"  (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
-            <div class="line-break"></div><div class="divider"></div>
+            <div class="card-actions">
+              <button mat-raised-button color="accent" (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
+            </div>
+            <div class="line-break"></div>
+            <div class="divider"></div>
+            <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
+            <div class="divider"></div>
             <table *ngIf="showAmmortization" mat-table [dataSource]="ammortizationSchedule" class="mat-elevation-z8 ammortization-table">
                 <ng-container matColumnDef="term">
                   <th mat-header-cell *matHeaderCellDef> Term </th>
