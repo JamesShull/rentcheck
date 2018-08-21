@@ -27,13 +27,13 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="cash needed to cover all expenses">
+    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="cashflow">
       <p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4>
     </span>
-    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="including mortgage principal & tax savings">
+    <span class="income" [class.positive]="monthlyIncome>0">
       <p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4>
     </span>
-    <span class="yield" [class.positive]="yield>0" matTooltip="annualized">
+    <span class="yield" [class.positive]="yield>0" matTooltip="Cap Rate: {{(monthlyIncome*12) / cost | percent:'1.2-2'}}">
       <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
     </span>
     <mat-tab-group>
@@ -146,7 +146,7 @@
             <ul>
               <li><h5>Interest Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
               <li><h5>Property Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>Depreciation Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
+              <li><h5>Depreciation Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
@@ -160,7 +160,7 @@
             </div>
             <div class="line-break"></div>
             <div class="divider"></div>
-            <h3>Expenses (monthly): <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
+            <h3>Expenses: <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
             <div class="divider"></div>
             <table *ngIf="showAmmortization" mat-table [dataSource]="ammortizationSchedule" class="mat-elevation-z8 ammortization-table">
                 <ng-container matColumnDef="term">
