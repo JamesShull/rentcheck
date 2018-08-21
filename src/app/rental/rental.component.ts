@@ -25,8 +25,12 @@ export class RentalComponent implements OnInit, OnDestroy {
   public monthlyOutflow : number;
 
   // Calculation and Details
-  public  purchaseDate = new FormControl(new Date());
+  public purchaseDate = new FormControl(new Date());
+  public cost : number;
   public term: number;
+  public depreciationPercentage = 0.5;
+  public feesPercentage = 0.0125;
+  public pmiPercentage = 0.009;
   public monthlyPayment : number; 
   public monthlyInterest : number; 
   public monthlyPrincipal : number;
@@ -35,6 +39,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   public monthlyDepreciation : number; 
   public monthlyTaxSavings : number;
   public monthlyInsurance : number; 
+  public monthlyPMI : number;
   public monthlyMaintenance : number;
   public monthlyVacancy : number;
   public ammortizationSchedule : Array<any>;
@@ -106,11 +111,13 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyPrincipal = this.calcPrincipal(principal, this.term);
     this.monthlyInterest = this.calcInterest(principal, this.term);
     // Other expenses
+    this.monthlyPMI = (this.rentalData.downPayment<0.20)? principal*this.pmiPercentage: 0;
     this.monthlyInsurance = this.rentalData.price*(this.rentalData.insuranceRate/12);
     this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
-    this.monthlyDepreciation = ((this.rentalData.price * 0.5) / (27.5*12));
+    this.monthlyDepreciation = ((this.rentalData.price * this.depreciationPercentage) / (27.5*12));
+    this.cost = (this.rentalData.price*this.rentalData.downPayment) + (this.rentalData.price*this.feesPercentage);
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
     /* //Investment properties maybe don't fall victim to SALT cap
@@ -123,7 +130,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 
-                          +this.monthlyInsurance + this.monthlyMaintenance
+                          +this.monthlyInsurance + this.monthlyPMI + this.monthlyMaintenance 
                           + this.monthlyPayment + this.monthlyPropertyTax
                           + this.monthlyVacancy;
     this.monthlyExpense = this.monthlyOutflow - this.monthlyTaxSavings - this.monthlyPrincipal;

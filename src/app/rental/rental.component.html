@@ -118,7 +118,9 @@
             </p>
         </mat-tab>
         <mat-tab label="Details">
-            <h3>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
+            <h3>Cost (with fees): <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
+            <h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5>
+            <h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency }}</span></h5>
             <div class="divider"></div>
             <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency}}</span></h3>
             <ul>
@@ -128,6 +130,7 @@
               <li><h5>Mello-Roos: <span class="detail-text">{{rentalData.melloRoos | currency}}</span></h5></li>
               <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency}}</span></h5></li>
               <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency}}</span></h5></li>
+              <li *ngIf="rentalData.downPayment<0.2"><h5>PMI (Mortgage Insurance): <span class="detail-text">{{montlyPMI | currency}}</span></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
