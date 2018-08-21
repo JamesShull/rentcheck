@@ -6,7 +6,7 @@
       <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">{{ title }}</a>
       <img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">
       <span class="filler"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu" matTooltip="Menu">
             <img src="assets/more_vert.svg" alt="menu icon">
       </button>
       <mat-menu #menu="matMenu">

@@ -15,14 +15,6 @@ export class DeckComponent implements OnInit {
   ngOnInit() {
     this.initRentals();
   }
-  /*
-  public toggleAbout(){
-    this.showAbout = !this.showAbout;
-  }
-  public toggleContact(){
-    this.showContact = !this.showContact;
-  }
-  */
   private initRentals(){
     let rentalItem = localStorage.getItem('rentals');
     let tempRentals : Array<number> = (rentalItem) ? rentalItem.split(',').map(Number) : new Array();
