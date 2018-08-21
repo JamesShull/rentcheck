@@ -69,51 +69,51 @@
               </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="effects tax savings">
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
-                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);" matTooltip="effects tax savings">
+                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="influences mortgage payment and outflow">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
-                      [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);" matTooltip="influences mortgage payment and outflow">
+                      [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="30yrs = 360 months">
                 <input matInput placeholder="Loan Term" name="loanTerm" 
-                      [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);" matTooltip="30yrs = 360 months">
+                      [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
               </mat-form-field>mo.
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="heavily effects performance">
                 <input matInput placeholder="Down Payment" name="downPayment" 
-                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);" matTooltip="heavily effects performance">
+                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="confirm correct for properties of interest">
                 <input matInput placeholder="Property Rate" name="propertyTaxRate" 
-                      [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);" matTooltip="confirm correct for properties of interest">
+                      [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="insurance premiums (annualized)">
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
-                      [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="insurance premiums (annualized)">
+                      [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="maintenance costs (annualized)">
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
-                      [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="maintenance costs (annualized)">
+                      [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
-              <mat-form-field class="card-input">
+              <mat-form-field class="card-input" matTooltip="vacancy from turnover (annualized)">
                 <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
-                      [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);" matTooltip="vacancy from turnover (annualized)">
+                      [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
         </mat-tab>
