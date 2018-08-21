@@ -18,11 +18,12 @@
 .filler {
     flex-grow: 1;
 }
+/*
 .version {
     font-size: 12px;
     margin-left: 10px;
     margin-top: 10px;
-}
+}*/
 .footer {
     width : 100%;
     text-align: center;
