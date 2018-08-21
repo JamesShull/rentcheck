@@ -120,7 +120,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyDepreciation = ((this.rentalData.price * this.depreciationPercentage) / (27.5*12));
     this.monthlyManagement = (this.rentalData.rent * this.rentalData.managementRate) ;
     // Investment total
-    this.cost = (this.rentalData.price*this.rentalData.downPayment) + (this.rentalData.price*this.feesPercentage);
+    this.cost = this.rentalData.price*(this.rentalData.downPayment + this.feesPercentage);
     // Tax savings
     let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
     /* //Investment properties maybe don't fall victim to SALT cap
@@ -139,7 +139,8 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyExpense = this.monthlyOutflow - this.monthlyTaxSavings - this.monthlyPrincipal;
     // Income
     this.monthlyIncome = this.rentalData.rent - this.monthlyExpense;
-    this.yield = (this.monthlyIncome*12) /(this.rentalData.downPayment*this.rentalData.price);
+    //this.yield = (this.monthlyIncome*12) /(this.rentalData.downPayment*this.rentalData.price);
+    this.yield = (this.monthlyIncome*12) / this.cost;
   }
   private calcPayment(principal : number) : number{
     return principal * (this.rentalData.interestRate/12) 

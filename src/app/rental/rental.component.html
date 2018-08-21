@@ -27,13 +27,13 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="cashflow">
-      <p>outflow</p><h4>{{monthlyOutflow | currency}} / mo.</h4>
+    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="monthly cashflow">
+      <p>outflow</p><h4>{{monthlyOutflow | currency}}</h4>
     </span>
-    <span class="income" [class.positive]="monthlyIncome>0">
-      <p>income</p><h4>{{monthlyIncome | currency}} / mo.</h4>
+    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="resulting monthly income">
+      <p>income</p><h4>{{monthlyIncome | currency}}</h4>
     </span>
-    <span class="yield" [class.positive]="yield>0" matTooltip="Cap Rate: {{(monthlyIncome*12) / cost | percent:'1.2-2'}}">
+    <span class="yield" [class.positive]="yield>0" matTooltip="Cap Rate: {{(monthlyIncome*12) / (rentalData.price*(1+feesPercentage)) | percent:'1.2-2'}}">
       <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
     </span>
     <mat-tab-group>
@@ -95,7 +95,7 @@
             </p>
             <p>
               <mat-form-field class="card-input" matTooltip="typical CA property tax is about 1.25%">
-                <input matInput placeholder="Property Rate" name="propertyTaxRate" 
+                <input matInput placeholder="Property Tax Rate" name="propertyTaxRate" 
                       [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
