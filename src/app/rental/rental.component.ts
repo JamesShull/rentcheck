@@ -65,6 +65,7 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.purchaseDate = new FormControl(new Date(savedRental.purchaseDate));
     }else{
       this.rentalData = this._defaults.getNewRental();  // initialize with defaults
+      this.purchaseDate = new FormControl(new Date(this.rentalIdInput));
       this.rentalData.rentalId = this.rentalIdInput;
     }
 

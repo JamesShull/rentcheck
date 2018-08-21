@@ -13,7 +13,8 @@ import {  MatToolbarModule,
           MatTableModule,
           MatDialogModule,
           MatDatepickerModule,
-          MatNativeDateModule
+          MatNativeDateModule,
+          MatMenuModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,7 +33,8 @@ import {  MatToolbarModule,
     MatTableModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   exports: [
     MatToolbarModule,
@@ -48,7 +50,8 @@ import {  MatToolbarModule,
     MatTableModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   declarations: []
 })
