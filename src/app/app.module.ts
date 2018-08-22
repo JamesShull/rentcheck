@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { DeckComponent } from './deck/deck.component';
 import { ErrorComponent } from './error/error.component';
+import { HowtoComponent } from './howto/howto.component';
 
 const appRoutes : Routes = [
   {path:'home', component: DeckComponent},
@@ -30,7 +31,8 @@ const appRoutes : Routes = [
     AboutComponent,
     ContactComponent,
     DeckComponent,
-    ErrorComponent
+    ErrorComponent,
+    HowtoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,

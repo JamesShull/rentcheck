@@ -3,9 +3,12 @@
       <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
             <img src="assets/menu.svg" alt="menu icon">
       </button>
-      <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">{{ title }}</a>
       <img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">
+      <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">{{ title }}</a>
       <span class="filler"></span>
+      <button mat-icon-button class="add-button" (click)="addRental();" matTooltip="Add Rental">
+            <img src="assets/plus.png" alt="add rental">
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="menu" class="menu" matTooltip="Menu">
             <img src="assets/more_vert.svg" alt="menu icon">
       </button>
@@ -13,8 +16,8 @@
             <button mat-menu-item (click)="clearLocalStorage();">Clear Data</button>
             <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
             <button mat-menu-item routerLink="/contactus" routerLinkActive="active">Contact Us</button>
-            <span mat-menu-item>v.{{appVersion}}</span>
       </mat-menu>
+      <span class="version">v.{{appVersion}}</span>
 </mat-toolbar>
 
 <!--Google Ads will go here-->

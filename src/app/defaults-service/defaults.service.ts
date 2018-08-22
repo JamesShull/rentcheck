@@ -24,9 +24,15 @@ export class DefaultsService {
   
   
   private source = new Subject<boolean>();
+  private addSource = new Subject<any>();
   obs$ = this.source.asObservable();
+  addObs$ = this.addSource.asObservable();
 
   constructor() { }
+
+  public addRental() {
+    this.addSource.next();
+  }
 
   public getDefaults() : IDefaultsData {
     if ( localStorage.getItem("defaults") !== null ) {

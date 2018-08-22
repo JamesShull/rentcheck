@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-//import { DefaultsService, IDefaultsData } from '../defaults-service/defaults.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DefaultsService, IDefaultsData } from '../defaults-service/defaults.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-deck',
@@ -10,10 +11,20 @@ export class DeckComponent implements OnInit {
   rentals : Array<number>;
   showAbout = false;
   showContact = false;
-  constructor() { }
+  private subscription : Subscription;
+
+  constructor(private _defaults: DefaultsService) { }
 
   ngOnInit() {
     this.initRentals();
+    this.subscription = this._defaults.addObs$.subscribe( 
+      () => {this.addRental();},
+      (error) => {console.log(error);},
+      ()=> {console.log('complete');}
+    );
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
   private initRentals(){
     let rentalItem = localStorage.getItem('rentals');

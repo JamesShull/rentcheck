@@ -18,6 +18,10 @@ export class AppComponent {
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   
+  public addRental(){
+    this._defaults.addRental();
+  }
+
   public clearLocalStorage(){
     let len = localStorage.length
     for ( let i = 0; i < len; i++ ) {
