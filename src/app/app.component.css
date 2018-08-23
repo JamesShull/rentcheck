@@ -6,11 +6,6 @@
     filter: contrast(4) invert(1);
     height: 24px;
 }
-/*
-.right {
-    margin-right: 30px;
-}
-*/
 .title {
     padding-left: 6px;
     padding-right: 6px;
@@ -22,6 +17,22 @@
 }
 .filler {
     flex: 1 1 auto;
+}
+.help{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgba(63, 81, 181,.5);
+}
+.help button{
+    color: rgb(220, 220, 220);
+    font-size: 24px;
+    border-right: 1px solid rgb(190, 190, 190);
+}
+.help p{
+    margin: auto 16px;
+    align-items: flex-start;
+    vertical-align: middle;
 }
 .version {
     font-size: 12px;

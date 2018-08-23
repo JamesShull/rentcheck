@@ -13,12 +13,14 @@ import { ContactComponent } from './contact/contact.component';
 import { DeckComponent } from './deck/deck.component';
 import { ErrorComponent } from './error/error.component';
 import { HowtoComponent } from './howto/howto.component';
+import { GuideComponent } from './guide/guide.component';
 
 const appRoutes : Routes = [
   {path:'home', component: DeckComponent},
   {path:'index.html', component: DeckComponent},
   {path:'about', component: AboutComponent},
   {path:'contactus', component: ContactComponent},
+  {path:'guide', component: GuideComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', component: ErrorComponent } // update to have error view
 ];
@@ -32,7 +34,8 @@ const appRoutes : Routes = [
     ContactComponent,
     DeckComponent,
     ErrorComponent,
-    HowtoComponent
+    HowtoComponent,
+    GuideComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,

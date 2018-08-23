@@ -144,9 +144,18 @@
             <div class="divider"></div>
             <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
             <ul>
-              <li><h5>Interest Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
-              <li><h5>Property Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>Depreciation Write Off: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
+              <li>
+                <h5 class="tax">Interest Write Off: <span class="detail-text">{{monthlyInterest | currency}}</span></h5>
+                <h5 class="tax">Interest Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5>
+              </li>
+              <li>
+                <h5 class="tax">Property Write Off: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5>
+                <h5 class="tax">Property Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5>
+              </li>
+              <li>
+                <h5 class="tax">Depreciation Write Off: <span class="detail-text">{{monthlyDepreciation | currency}}</span></h5>
+                <h5 class="tax">Depreciation Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5>
+              </li>
             </ul>
             <div class="divider"></div>
             <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>

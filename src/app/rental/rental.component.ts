@@ -62,7 +62,11 @@ export class RentalComponent implements OnInit, OnDestroy {
     let savedRental = JSON.parse(localStorage.getItem(this.rentalIdInput.toString()));
     if (savedRental){
       this.rentalData = savedRental; // Pull in saved rental data
-      this.purchaseDate = new FormControl(new Date(savedRental.purchaseDate));
+      if (savedRental.purchaseDate){
+        this.purchaseDate = new FormControl(new Date(savedRental.purchaseDate));
+      }else{
+        this.purchaseDate = new FormControl(new Date());
+      }
     }else{
       this.rentalData = this._defaults.getNewRental();  // initialize with defaults
       this.purchaseDate = new FormControl(new Date(this.rentalIdInput));
@@ -102,6 +106,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     if(!this.rentalData.dirtyInsuranceRate){this.rentalData.insuranceRate = tempDefaults.insuranceRate;}
     if(!this.rentalData.dirtyMaintenanceRate){this.rentalData.maintenanceRate = tempDefaults.maintenanceRate;}
     if(!this.rentalData.dirtyVacancyRate){this.rentalData.vacancyRate = tempDefaults.vacancyRate;}
+    if(!this.rentalData.dirtyManagementRate){this.rentalData.managementRate = tempDefaults.managementRate;}
   }
   public updatePerformance(){
     this.updateGlobals();
@@ -130,7 +135,11 @@ export class RentalComponent implements OnInit, OnDestroy {
                       10000 + this.monthlyInterest;
     taxBasis += this.monthlyDepreciation;
     */
+
+    // maintenance, insurance, management should all be deducted too. is it?
+
     let taxBasis =  this.monthlyPropertyTax + this.monthlyInterest + this.monthlyDepreciation;
+    taxBasis += this.monthlyPMI + this.monthlyInsurance + this.monthlyMaintenance +this.monthlyVacancy;
     this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
     // Monthly ouflow and expense
     this.monthlyOutflow = Number(this.rentalData.hoa)  + Number(this.rentalData.melloRoos) 

@@ -1,4 +1,4 @@
-
+<!-- ToolBar -->
 <mat-toolbar color="primary">
       <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
             <img src="assets/menu.svg" alt="menu icon">
@@ -19,11 +19,20 @@
       </mat-menu>
 </mat-toolbar>
 
+<!-- Main Body -->
+<div class="help" *ngIf="showHelp">
+      <button mat-button class="menu" (click)="closeHelp()">X</button>
+      <p>Welcome to rencheck.ninja! Feel free to jump right in with the rental card below, but you can also check out the  
+            <a routerLink="/guide" routerLinkActive="active">guide</a>.
+      </p>
+</div>
 <!--Google Ads will go here-->
 <router-outlet></router-outlet>
 
+<!-- Footer -->
 <footer class="footer">
       <a mat-button routerLink="/home" routerLinkActive="active"><img src="assets/myCheck_dark.png" alt="rent check home" width="24px;">&nbsp;Home</a>
+      <a mat-button routerLink="/guide" routerLinkActive="active">Guide</a>
       <a mat-button routerLink="/about" routerLinkActive="active">About</a>
       <a mat-button routerLink="/contactus" routerLinkActive="active">Contact Us</a>
       <h4>Copyright © {{year}} James Shull. All rights reserved.</h4>

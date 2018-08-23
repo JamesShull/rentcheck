@@ -15,6 +15,7 @@ export class AppComponent {
   title = 'rentcheck';
   year = (new Date()).getFullYear().toString();
   appVersion = environment.version;
+  showHelp = true;
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   
@@ -29,6 +30,10 @@ export class AppComponent {
         localStorage.removeItem(localStorage.key(i));
       }
     }
+  }
+
+  public closeHelp(){
+    this.showHelp = false;
   }
 
   public defaultsDialog() : void {

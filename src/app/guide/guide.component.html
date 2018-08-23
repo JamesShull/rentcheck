@@ -1,0 +1,28 @@
+<h4>Background</h4>
+  <p><i>rentcheck.ninja</i> give estimates of rental performance. 
+    By entering just a few numbers and making many assumptions, the performance can be quickly estimated.
+    The assumptions can be edited on a per rental basis or set for all rentals with the <img src="assets/menu.svg" alt="menu" height="14px;"> menu.
+  </p>
+<div class="divider"></div>
+<h4 style="display:inline-block;margin-right: 30px;">Definitions</h4>
+<mat-form-field>
+  <mat-select [(value)]="selectedTerm" placeholder="Term Explanation">
+      <mat-option *ngFor="let item of terms" [value]="item">
+        {{item.term}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+<p class="def" *ngIf="selectedTerm">{{selectedTerm.definition}}</p>
+<div class="divider"></div>
+<h4>Tips & Tricks</h4>
+<ol><h4>Usage</h4>
+  <li>Confirm and save defaults for your situation (income tax rate, property tax for your area, downpayment, etc.)</li>
+  <li>The add button on the right side of the tool bar lets you add another rental calculator for comparisons.</li>
+  <li>If you're returning to rentcheck.ninja, save the rental information with save button to save yourself the typing.</li>
+</ol>
+<ol><h4>Performance</h4>
+  <li>Leveraging the property (putting down a smaller downpayment) can boost yield and potential for capital gains, but dramatically increases risk.</li>
+  <li>Finding low cost properties can boost yield as well, but that can decrease potential for capital gains and increased vacancy rates if the area does not support high quality renters.</li>
+  <li>A one bedroom can earn more per buck than two bedroom. Again, there is greater risk of a higher vacancy rate.</li>
+  <li>Although harder to manage, properties outside of your area might perform much better (rent relative to price is not always constant).</li>
+</ol>
