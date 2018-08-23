@@ -55,7 +55,7 @@
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();" matTooltip="parcel tax (common in CA)">
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [disabled]="rentalData.stateAddress!='CA'" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();" matTooltip="parcel tax (common in CA)">
                 </mat-form-field>
               </p>
         </mat-tab>
