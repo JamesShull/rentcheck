@@ -45,3 +45,7 @@
     color: rgb(100, 100, 100);
 }
 .footer h4 { margin-top: 10px; margin-bottom: 6px;}
+.footer a {
+    padding: 0px 10px;
+    min-width: 66px !important;
+}
