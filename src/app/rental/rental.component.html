@@ -38,6 +38,7 @@
     </span>
     <mat-tab-group>
         <mat-tab label="Market">
+          <div class="centered">
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
@@ -48,7 +49,7 @@
                   <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rentalData.rent" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
-              <p>
+              <p class="centered">
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
                   <input matInput placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
@@ -58,9 +59,11 @@
                   <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();" matTooltip="parcel tax (common in CA)">
                 </mat-form-field>
               </p>
+          </div>
         </mat-tab>
         <!--   --   assumptions   --       -->
-        <mat-tab label="Assumptions"> 
+        <mat-tab label="Assumptions">
+          <div class="centered">
             <p>
               <mat-form-field class="card-input" matTooltip="prinicipal and interest change monthly">
                 <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" 
@@ -123,12 +126,15 @@
                         [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
                 </mat-form-field>%
             </p>
+          </div>
         </mat-tab>
         <!--   --   Details   --       -->
         <mat-tab label="Details">
             <h3>Cost (with fees): <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
-            <h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5>
-            <h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency }}</span></h5>
+            <ul>
+                <li><h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5></li>
+                <li><h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency }}</span></h5></li>
+            </ul>
             <div class="divider"></div>
             <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency}}</span></h3>
             <ul>
@@ -143,20 +149,13 @@
             </ul>
             <div class="divider"></div>
             <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
-            <ul>
-              <li>
-                <h5 class="tax">Interest Write Off: <span class="detail-text">{{monthlyInterest | currency}}</span></h5>
-                <h5 class="tax">Interest Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5>
-              </li>
-              <li>
-                <h5 class="tax">Property Write Off: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5>
-                <h5 class="tax">Property Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5>
-              </li>
-              <li>
-                <h5 class="tax">Depreciation Write Off: <span class="detail-text">{{monthlyDepreciation | currency}}</span></h5>
-                <h5 class="tax">Depreciation Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5>
-              </li>
-            </ul>
+            <h5 class="tax">Interest Write Off: <span class="detail-text">{{monthlyInterest | currency}}</span></h5>
+            <h5 class="tax">Interest Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5>
+            <h5 class="tax">Property Write Off: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5>
+            <h5 class="tax">Property Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5>
+            <h5 class="tax">Depreciation Write Off: <span class="detail-text">{{monthlyDepreciation | currency}}</span></h5>
+            <h5 class="tax">Depreciation Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5>
+            <br><br>
             <div class="divider"></div>
             <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
               <ul>
