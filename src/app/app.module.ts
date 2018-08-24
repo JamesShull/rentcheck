@@ -12,7 +12,6 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { DeckComponent } from './deck/deck.component';
 import { ErrorComponent } from './error/error.component';
-import { HowtoComponent } from './howto/howto.component';
 import { GuideComponent } from './guide/guide.component';
 
 const appRoutes : Routes = [
