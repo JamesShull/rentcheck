@@ -33,7 +33,6 @@ const appRoutes : Routes = [
     ContactComponent,
     DeckComponent,
     ErrorComponent,
-    HowtoComponent,
     GuideComponent
   ],
   imports: [
