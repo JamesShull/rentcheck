@@ -3,8 +3,9 @@
       <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
             <img src="assets/menu.svg" alt="menu icon">
       </button>
-      <img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">
-      <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">{{ title }}</a>
+      <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">
+            <img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">{{ title }}
+      </a>
       <span class="filler"></span>
       <button mat-icon-button class="menu" (click)="addRental();" matTooltip="Add Rental">
             <img src="assets/plus.png" alt="add rental">

@@ -7,13 +7,11 @@
     height: 24px;
 }
 .title {
-    padding-left: 6px;
-    padding-right: 6px;
     min-width: 100px;
 }
 .icon {
     height: 30px;
-    padding-bottom: 6px;
+    padding: 0px 6px 6px 6px;
 }
 .filler {
     flex: 1 1 auto;
