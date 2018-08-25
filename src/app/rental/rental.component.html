@@ -28,10 +28,10 @@
   </mat-card-header>
   <mat-card-content>
     <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="monthly cashflow">
-      <p>outflow</p><h4>{{monthlyOutflow | currency}}</h4>
+      <p>outflow</p><h4>{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</h4>
     </span>
     <span class="income" [class.positive]="monthlyIncome>0" matTooltip="resulting monthly income">
-      <p>income</p><h4>{{monthlyIncome | currency}}</h4>
+      <p>income</p><h4>{{monthlyIncome | currency:'USD':'symbol':'1.0-0'}}</h4>
     </span>
     <span class="yield" [class.positive]="yield>0" matTooltip="Cap Rate: {{(monthlyIncome*12) / (rentalData.price*(1+feesPercentage)) | percent:'1.2-2'}}">
       <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
@@ -124,32 +124,32 @@
             <h3>Investment: <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
             <ul>
                 <li><h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5></li>
-                <li><h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency }}</span></h5></li>
+                <li><h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency:'USD':'symbol':'1.0-0' }}</span></h5></li>
             </ul>
             <div class="divider"></div>
-            <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency}}</span></h3>
+            <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</span></h3>
             <ul>
-              <li><h5>Mortgage Payment: <span class="detail-text">{{monthlyPayment | currency}}</span></h5></li>
-              <li><h5>Property Tax: <span class="detail-text">{{monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>HOA: <span class="detail-text">{{rentalData.hoa | currency}}</span></h5></li>
-              <li><h5>Mello-Roos: <span class="detail-text">{{rentalData.melloRoos | currency}}</span></h5></li>
-              <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency}}</span></h5></li>
-              <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency}}</span></h5></li>
-              <li *ngIf="rentalData.downPayment<0.2"><h5>PMI (Mortgage Insurance): <span class="detail-text">{{monthlyPMI | currency}}</span></h5></li>
-              <li *ngIf="rentalData.managementRate>0"><h5>Managment Fee: <span class="detail-text">{{monthlyManagement | currency}}</span></h5></li>
+              <li><h5>Mortgage Payment: <span class="detail-text">{{monthlyPayment | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Property Tax: <span class="detail-text">{{monthlyPropertyTax | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>HOA: <span class="detail-text">{{rentalData.hoa | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Mello-Roos: <span class="detail-text">{{rentalData.melloRoos | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Maintenance: <span class="detail-text">{{monthlyMaintenance | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Insurance: <span class="detail-text">{{monthlyInsurance | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li *ngIf="rentalData.downPayment<0.2"><h5>PMI (Mortgage Insurance): <span class="detail-text">{{monthlyPMI | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li *ngIf="rentalData.managementRate>0"><h5>Managment Fee: <span class="detail-text">{{monthlyManagement | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
             </ul>
             <div class="divider"></div>
-            <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency}}</span></h3>
+            <h3>Tax Savings (monthly): <span class="detail-text">{{monthlyTaxSavings | currency:'USD':'symbol':'1.0-0'}}</span></h3>
             <ul>
-              <li><h5>Interest Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency}}</span></h5></li>
-              <li><h5>Property Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency}}</span></h5></li>
-              <li><h5>Depreciation Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency}}</span></h5></li>
+              <li><h5>Interest Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyInterest | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Property Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyPropertyTax | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+              <li><h5>Depreciation Tax Savings: <span class="detail-text">{{rentalData.salaryTaxRate*monthlyDepreciation | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
             </ul>
             <div class="divider"></div>
-            <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
+            <h3>Mortgage Payment: {{monthlyPayment | currency:'USD':'symbol':'1.0-0'}}</h3>
               <ul>
-                <li><h5>Interest: <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
-                <li><h5>Principal: <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
+                <li><h5>Interest: <span class="detail-text">{{monthlyInterest | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
+                <li><h5>Principal: <span class="detail-text">{{monthlyPrincipal | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
                 <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
               </ul>
             <div class="card-actions">
@@ -165,11 +165,11 @@
                 </ng-container>
                 <ng-container matColumnDef="interest">
                   <th mat-header-cell *matHeaderCellDef> Interest </th>
-                  <td mat-cell *matCellDef="let element"> {{element.interest | currency}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.interest | currency:'USD':'symbol':'1.0-0'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="principal">
                   <th mat-header-cell *matHeaderCellDef> Principal </th>
-                  <td mat-cell *matCellDef="let element"> {{element.principal | currency}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.principal | currency:'USD':'symbol':'1.0-0'}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="ammortizationColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: ammortizationColumns;"></tr>
