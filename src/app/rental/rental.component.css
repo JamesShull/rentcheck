@@ -59,7 +59,7 @@
 .detail-text {    color: grey;}
 .details ul li h5 { margin-top: 5px; margin-bottom: 5px;}
 .details ul, h3 { margin-top: 6px; margin-bottom: 6px;}
-.tax { display: inline-block; margin: 4px 5px 4px 0px; width:calc(50% - 20px);}
+.half { display: inline-block; margin: 5px 15px; width:calc(50% - 30px);}
 .divider {  width: 100%;    border-top: 1px solid rgba(20, 20, 20, 0.85);}
 .tab {  display: inline-block;  width: 20px;}
 .line-break {   height:10px;}

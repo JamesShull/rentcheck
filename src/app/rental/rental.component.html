@@ -71,7 +71,7 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
-              <mat-form-field class="card-input" matTooltip="influences mortgage payment and outflow">
+              <mat-form-field class="card-input" style="margin-left:0px;" matTooltip="influences mortgage payment and outflow">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
                       [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
