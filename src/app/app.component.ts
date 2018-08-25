@@ -24,6 +24,7 @@ export class AppComponent {
   }
 
   public clearLocalStorage(){
+    this.showHelp = true;
     let len = localStorage.length
     for ( let i = 0; i < len; i++ ) {
       if (localStorage.key(i).substr(0,6) != 'google' ){

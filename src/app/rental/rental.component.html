@@ -42,7 +42,7 @@
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Price" name="price" [(ngModel)]="rentalData.price" (blur)="updatePerformance();">
+                  <input matInput placeholder="Price Estimate" name="price" [(ngModel)]="rentalData.price" (blur)="updatePerformance();">
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
@@ -65,38 +65,32 @@
         <mat-tab label="Assumptions">
           <div class="centered">
             <p>
-              <mat-form-field class="card-input" matTooltip="prinicipal and interest change monthly">
+              <mat-form-field class="card-input date" matTooltip="prinicipal and interest change monthly">
                 <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" 
                   (blur)="datePurchased()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="card-input" matTooltip="effects tax savings">
-                <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
-                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
-              </mat-form-field>%
-            </p>
-            <p>
               <mat-form-field class="card-input" matTooltip="influences mortgage payment and outflow">
                 <input matInput placeholder="Interest Rate" name="interestRate" 
                       [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
               </mat-form-field>%
             </p>
             <p>
+              <mat-form-field class="card-input" matTooltip="heavily effects performance">
+                <input matInput placeholder="Down Payment" name="downPayment" 
+                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+              </mat-form-field>%
               <mat-form-field class="card-input" matTooltip="30yrs = 360 months">
                 <input matInput placeholder="Loan Term" name="loanTerm" 
                       [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
               </mat-form-field>mo.
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="heavily effects performance">
-                <input matInput placeholder="Down Payment" name="downPayment" 
-                      [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
+              <mat-form-field class="card-input" matTooltip="effects tax savings">
+                <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
+                      [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>%
-            </p>
-            <p>
               <mat-form-field class="card-input" matTooltip="typical CA property tax is about 1.25%">
                 <input matInput placeholder="Property Tax Rate" name="propertyTaxRate" 
                       [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
@@ -107,8 +101,6 @@
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
                       [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
-            </p>
-            <p>
               <mat-form-field class="card-input" matTooltip="maintenance costs (annualized)">
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
                       [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
@@ -119,18 +111,17 @@
                 <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
                       [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>%
-            </p>
-            <p>
-                <mat-form-field class="card-input" matTooltip="usually 10% of rent">
-                  <input matInput placeholder="Management Rate" name="managementRate"
-                        [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
-                </mat-form-field>%
+              <mat-form-field class="card-input" matTooltip="usually 10% of rent">
+                <input matInput placeholder="Management Rate" name="managementRate"
+                      [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
+              </mat-form-field>%
             </p>
           </div>
         </mat-tab>
         <!--   --   Details   --       -->
         <mat-tab label="Details">
-            <h3>Cost (with fees): <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
+          <div class="details">
+            <h3>Investment: <span class="detail-text">{{ (cost/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h3>
             <ul>
                 <li><h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5></li>
                 <li><h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency }}</span></h5></li>
@@ -159,16 +150,15 @@
             <div class="divider"></div>
             <h3>Mortgage Payment: {{monthlyPayment | currency}}</h3>
               <ul>
-                <li><h5>Interest (1st Term): <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
-                <li><h5>Principal (1st Term): <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
+                <li><h5>Interest: <span class="detail-text">{{monthlyInterest | currency}}</span></h5></li>
+                <li><h5>Principal: <span class="detail-text">{{monthlyPrincipal | currency}}</span></h5></li>
                 <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
               </ul>
             <div class="card-actions">
-              <button mat-raised-button color="accent" (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
+              <button *ngIf="showAmmortization" mat-raised-button color="accent" (click)="generateAmmortizationSchedule()">Hide Ammortization Schedule</button>
+              <button *ngIf="!showAmmortization" mat-raised-button color="accent" (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
             </div>
             <div class="line-break"></div>
-            <div class="divider"></div>
-            <h3>Expenses: <span class="detail-text">{{monthlyExpense | currency}}</span></h3>
             <div class="divider"></div>
             <table *ngIf="showAmmortization" mat-table [dataSource]="ammortizationSchedule" class="mat-elevation-z8 ammortization-table">
                 <ng-container matColumnDef="term">
@@ -186,6 +176,7 @@
                 <tr mat-header-row *matHeaderRowDef="ammortizationColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: ammortizationColumns;"></tr>
             </table>
+          </div>
         </mat-tab>
       </mat-tab-group>
       <div class="card-actions">
