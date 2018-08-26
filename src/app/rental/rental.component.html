@@ -54,9 +54,9 @@
                   <span matPrefix>$ &nbsp;</span>
                   <input matInput placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
                 </mat-form-field>
-                <mat-form-field class="card-input">
+                <mat-form-field class="card-input" matTooltip="parcel tax (common in CA)">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();" matTooltip="parcel tax (common in CA)">
+                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
           </div>
