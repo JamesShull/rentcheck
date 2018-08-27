@@ -1,8 +1,17 @@
 <!-- ToolBar -->
 <mat-toolbar color="primary">
-      <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu right">
             <img src="assets/menu.svg" alt="menu icon">
       </button>
+      <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
+            <button mat-menu-item routerLink="/guide" routerLinkActive="active">Guide</button>
+            <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
+            <button mat-menu-item routerLink="/contactus" routerLinkActive="active">Contact Us</button>
+            <button mat-menu-item routerLink="/privacy" routerLinkActive="active">Privacy Policy</button>
+            <div style="border-bottom: 2px solid rgba(63, 81, 181,.5);"></div>
+            <button mat-menu-item (click)="clearLocalStorage();">Reset App</button>
+      </mat-menu>
       <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Rental Performance Guesstimator">
             <img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">{{ title }}
       </a>
@@ -10,21 +19,15 @@
       <button mat-icon-button class="menu" (click)="addRental();" matTooltip="Add Rental">
             <img src="assets/plus.png" alt="add rental">
       </button>
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu right" matTooltip="Menu">
+      <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
             <img src="assets/more_vert.svg" alt="menu icon">
       </button>
-      <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="clearLocalStorage();">Reset</button>
-            <button mat-menu-item routerLink="/guide" routerLinkActive="active">Guide</button>
-            <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
-            <button mat-menu-item routerLink="/contactus" routerLinkActive="active">Contact Us</button>
-      </mat-menu>
 </mat-toolbar>
 
 <!-- Main Body -->
 <div class="help" *ngIf="showHelp">
       <button mat-button class="menu" (click)="closeHelp()">X</button>
-      <p>Welcome to rencheck.ninja! Feel free to jump right in with the rental card below, but you can also check out the  
+      <p>Welcome to rencheck.ninja! We have a  
             <a routerLink="/guide" routerLinkActive="active">guide</a>.
       </p>
 </div>
@@ -37,6 +40,7 @@
       <a mat-button routerLink="/guide" routerLinkActive="active">Guide</a>
       <a mat-button routerLink="/about" routerLinkActive="active">About</a>
       <a mat-button routerLink="/contactus" routerLinkActive="active">Contact Us</a>
+      <a mat-button routerLink="/prvacy" routerLinkActive="active">Privacy Policy</a>
       <h4>Copyright © {{year}} James Shull. All rights reserved.</h4>
       <span class="version">rentcheck.ninja - version {{appVersion}}</span>
 </footer>

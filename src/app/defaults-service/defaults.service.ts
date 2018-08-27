@@ -10,7 +10,7 @@ export class DefaultsService {
     insuranceRate : .0020,
     maintenanceRate : .0018,
     vacancyRate : .042,
-    propertyTaxRate : .015,
+    propertyTaxRate : .0125,
     salaryTaxRate : 0.22,
     managementRate : 0.1
   };
@@ -55,8 +55,8 @@ export class DefaultsService {
       cityAddress: undefined,
       stateAddress: undefined,
       zipAddress: undefined,
-      price: 544000,
-      rent: 3000,
+      price: 500000,
+      rent: 3200,
       hoa: 250,
       melloRoos: 0,
       purchaseDate: undefined,
@@ -66,7 +66,7 @@ export class DefaultsService {
       insuranceRate: .0020,
       maintenanceRate: .0018,
       vacancyRate: .042,
-      propertyTaxRate: .015,
+      propertyTaxRate: .0125,
       salaryTaxRate: .22,
       managementRate: .1,
       dirtyPurchaseDate: false,

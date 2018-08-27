@@ -1,28 +1,66 @@
-<h4>Background</h4>
-  <p><i>rentcheck.ninja</i> give estimates of rental performance. 
-    By entering just a few numbers and making many assumptions, the performance can be quickly estimated.
-    The assumptions can be edited on a per rental basis or set for all rentals with the <img src="assets/menu.svg" alt="menu" height="14px;"> menu.
+<div class="guide-body">
+  <h3>Usage</h3>
+  <p> rencheck.ninja uses rental 'cards' to evaluate the performance of real estate property. 
+      You can add cards with the add button, <img src="assets/plus.png" alt="add" height="14px;">.
+      Add the input data to the 'Market' tab to see the cash outflow, income and yield the property will generate.
+      If you want to manipulate the assumptions of all rental cards, click into the global defaults menu, <img src="assets/more_vert.svg" alt="menu" height="14px;">.
+      You can also manipulate the assumptions on per rental basis in the 'Assumptions' tab of each rental card.
+      Check the 'Details' tab to see more information about the calculations.
   </p>
-<div class="divider"></div>
-<h4 style="display:inline-block;margin-right: 30px;">Definitions</h4>
-<mat-form-field>
-  <mat-select [(value)]="selectedTerm" placeholder="Term Explanation">
-      <mat-option *ngFor="let item of terms" [value]="item">
-        {{item.term}}
-      </mat-option>
-  </mat-select>
-</mat-form-field>
-<p class="def" *ngIf="selectedTerm">{{selectedTerm.definition}}</p>
-<div class="divider"></div>
-<h4>Tips & Tricks</h4>
-<ol><h4>Usage</h4>
-  <li>Confirm and save defaults for your situation (income tax rate, property tax for your area, downpayment, etc.)</li>
-  <li>The add button on the right side of the tool bar lets you add another rental calculator for comparisons.</li>
-  <li>If you're returning to rentcheck.ninja, save the rental information with save button to save yourself the typing.</li>
-</ol>
-<ol><h4>Performance</h4>
-  <li>Leveraging the property (putting down a smaller downpayment) can boost yield and potential for capital gains, but dramatically increases risk.</li>
-  <li>Finding low cost properties can boost yield as well, but that can decrease potential for capital gains and increased vacancy rates if the area does not support high quality renters.</li>
-  <li>A one bedroom can earn more per buck than two bedroom. Again, there is greater risk of a higher vacancy rate.</li>
-  <li>Although harder to manage, properties outside of your area might perform much better (rent relative to price is not always constant).</li>
-</ol>
+  <div class="divider"></div>
+  <h4>Background</h4>
+    <p><i>rentcheck.ninja</i> give estimates of rental performance. 
+      By entering just a few numbers and making many assumptions, the performance can be quickly estimated.
+      The assumptions can be edited on a per rental basis or set for all rentals with the <img src="assets/more_vert.svg" alt="menu" height="14px;"> menu.
+    </p>
+  <div class="divider"></div>
+  <h4 style="display:inline-block;margin-right: 30px;">Definitions</h4>
+  <mat-form-field>
+    <mat-select [(value)]="selectedTerm" placeholder="Term Explanation">
+        <mat-option *ngFor="let item of terms" [value]="item">
+          {{item.term}}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p class="def" *ngIf="selectedTerm">{{selectedTerm.definition}}</p>
+  <div class="divider"></div>
+  <h4>Tips & Tricks</h4>
+  <ol><h4>Usage tips</h4>
+    <li>Outflow has to be less than rent to have the sweet feeling of the green background</li>
+    <li>Confirm and save defaults for your situation (income tax rate, property tax for your area, downpayment, etc.)</li>
+    <li>The add button on the right side of the tool bar lets you add another rental calculator for comparisons.</li>
+    <li>If you're returning to rentcheck.ninja, save the rental information with save button to save yourself the typing.</li>
+  </ol>
+  <ol><h4>Performance tips</h4>
+    <li>Leveraging the property (putting down a smaller downpayment) can boost yield and potential for capital gains, but dramatically increases risk.</li>
+    <li>Finding low cost properties can boost yield as well, but that can decrease potential for capital gains and increased vacancy rates if the area does not support high quality renters.</li>
+    <li>A one bedroom can earn more per buck than two bedroom. Again, there is greater risk of a higher vacancy rate.</li>
+    <li>Although harder to manage, properties outside of your area might perform much better (rent relative to price is not always constant).</li>
+  </ol>
+  <ol><h4>Speculation</h4>
+    <li>
+      <ul>Buy low, sell high!
+        <li>Selling real estate is a lengthy process with high transaction costs. Reallocating capital is crazy painful (unless your a broker).</li>
+        <li>If your selling high, you're also buying high unless you can sit on cash for a number of years losing out on rental income.</li>
+        <li>Selling also means giving up the existing investment's tax basis, which means getting like performance is that much harder.</li>
+        <li>If your leveraging the investment, it also means restarting the 30 year clock for the mortgage.</li>
+        <li>If you are re-allocating to a different property, ask your tax advisor about 1031 exchanges to postpone taxes.</li>
+      </ul>
+    </li>
+    <li>
+      <ul>Capital Gains
+        <li>rentcheck.ninja does not speculate on the capital gains, which can contribute to a majority of returns in markets like San Francisco or New York.</li>
+        <li>The focues of this site is the promotion of finding passive income that rentals can generate.</li>
+        <li>Like wine, rentals get better with age because property taxes and interest are pegged to purchase price, but rents move with the market.</li>
+        <li>If you're speculating on price, during your evaluation don't forget exit costs, mostly capital gains tax, depreciation recapture and transaction costs.</li>
+      </ul>
+    </li>
+    <li>Macoeconomic factors are too hard to predict and introduce too much variability in modeling asset prices, so I'll leave that to the risk takers.</li>
+  </ol>
+  <div class="divider"></div>
+  <h3>Pulling the trigger</h3>
+  <ul>
+    <li>If you want discuss anything related to rental properties before pulling the trigger, let me know (no solicitations, please) <a href="mailto:james.shull@gmail.com?Subject=rentcheck">james.shull@gmail.com</a>.</li>
+    <li>For those in lovely Southern California looking to make a purchase, I can get you in touch with a great agent / broker, just shoot me an <a href="mailto:james.shull@gmail.com?Subject=broker">email</a>.</li>
+  </ul>
+</div>
