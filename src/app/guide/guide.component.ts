@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class GuideComponent implements OnInit {
   public terms = [
     { term:'', definition:''},
-    { term:'outflow', definition:'Cash Outflow, is the amount of money required each month, not including tax savings at the end of the year. Often landlords like to have outflow less than rent to cover all the expenses.'},
+    { term:'outflow', definition:'Cash Outflow is the amount of money required each month, not including tax savings at the end of the year. Often landlords like to have outflow less than rent to cover all the expenses.'},
     { term:'income', definition:'How much money the rental should make each month. This includes tax savings, so the benefits are only fully realized after tax refunds are received.'},
     { term:'yield', definition:'This is the annual income over the amount invested (i.e. downpayment plus transaction fees)'},
     { term:'cap rate', definition:'Capitalization Rate is the annual income over the asset value (i.e. property price plus transaction fees). Often used to determine '},

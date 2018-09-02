@@ -1,6 +1,26 @@
 .guide-body {
   margin: 0px 10px; 
 }
+.guide-body h4 {
+  margin-bottom: 5px;
+}
+.guide-body ul {
+  padding-left: 15px;
+  list-style: none;
+}
+.guide-body li {
+  padding-bottom: 3px;
+}
+.guide-body ul>li::before {
+  content:">"; 
+  /*color: #3f51b5; 
+  color: #ff4081;*/
+  font-weight: 700;
+  width: 1em; 
+  margin-left: .5em; 
+  margin-right: .5em;
+}
+/*.guide-body ol {}*/
 .def {
   background-color: rgb(255, 247, 177);
 }

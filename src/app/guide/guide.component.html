@@ -1,20 +1,15 @@
 <div class="guide-body">
   <h3>Usage</h3>
-  <p> rencheck.ninja uses rental 'cards' to evaluate the performance of real estate property. 
-      You can add cards with the add button on right side of the toolbar, <img src="assets/plus.png" alt="add" height="14px;">.
-      Add the input data to the 'Market' tab to see the cash outflow, income and yield the property will generate.
-      If you want to manipulate the assumptions of all rental cards, click into the global defaults menu on the right side of the toolbar, <img src="assets/more_vert.svg" alt="menu" height="14px;">.
-      You can also manipulate the assumptions on per rental basis in the 'Assumptions' tab of each rental card.
-      Check the 'Details' tab to see more information about the calculations, an abridged mortgage ammortization schedule, etc.
-  </p>
+  <ul>
+    <li><i>rencheck.ninja</i> uses rental 'cards' to evaluate the performance of real estate property.</li>
+    <li>Add the input data to the 'Market' tab to see the cash outflow, income and yield the property will generate.</li>
+    <li>You can add cards with the add button on right side of the toolbar, <img src="assets/plus.png" alt="add" height="14px;">.</li>
+    <li>If you want to manipulate the assumptions of all rental cards, click into the global defaults menu on the right side of the toolbar, <img src="assets/more_vert.svg" alt="menu" height="14px;">.</li>
+    <li>You can also manipulate the assumptions on per rental basis in the 'Assumptions' tab of each rental card.</li>
+    <li>Check the 'Details' tab to see more information about the calculations, an abridged mortgage ammortization schedule, etc.</li>
+  </ul>
   <div class="divider"></div>
-  <h4>Background</h4>
-    <p><i>rentcheck.ninja</i> give estimates of rental performance. 
-      By entering just a few numbers and making many assumptions, the performance can be quickly estimated.
-      The assumptions can be edited on a per rental basis or set for all rentals with the <img src="assets/more_vert.svg" alt="menu" height="14px;"> menu.
-    </p>
-  <div class="divider"></div>
-  <h4 style="display:inline-block;margin-right: 30px;">Definitions</h4>
+  <h3 style="display:inline-block;margin-right: 30px;">Definitions</h3>
   <mat-form-field>
     <mat-select [(value)]="selectedTerm" placeholder="Term Explanation">
         <mat-option *ngFor="let item of terms" [value]="item">
@@ -24,12 +19,17 @@
   </mat-form-field>
   <p class="def" *ngIf="selectedTerm">{{selectedTerm.definition}}</p>
   <div class="divider"></div>
-  <h4>Tips & Tricks</h4>
+  <h3>Background</h3>
+    <p><i>rentcheck.ninja</i> gives quick estimates of rental performance. The idea is to support workers and families, not institutions. 
+      By entering just a few numbers and making a few assumptions, the performance can be roughly and quickly estimated.
+    </p>
+  <div class="divider"></div>
+  <h3>Tips & Tricks</h3>
   <ol><h4>Usage tips</h4>
-    <li>Outflow has to be less than rent to have the sweet feeling of the green background</li>
+    <li>Outflow has to be less than rent to have the green background</li>
     <li>Confirm and save defaults for your situation (income tax rate, property tax for your area, downpayment, etc.)</li>
     <li>The add button on the right side of the tool bar lets you add another rental calculator for comparisons.</li>
-    <li>If you're returning to rentcheck.ninja, save the rental information with save button to save yourself the typing.</li>
+    <li>If you're returning to <i>rentcheck.ninja</i>, save the rental information with save button to save yourself the typing.</li>
   </ol>
   <ol><h4>Performance tips</h4>
     <li>Leveraging the property (putting down a smaller downpayment) can boost yield and potential for capital gains, but dramatically increases risk.</li>
@@ -55,12 +55,12 @@
         <li>If you're speculating on price, during your evaluation don't forget exit costs, mostly capital gains tax, depreciation recapture and transaction costs.</li>
       </ul>
     </li>
-    <li>Macoeconomic factors are too hard to predict and introduce too much variability in modeling asset prices, so I'll leave that to the risk takers.</li>
+    <li><ul>Macoeconomic factors are too hard to predict and introduce too much variability in modeling asset prices, so I'll leave that to the risk takers.</ul></li>
   </ol>
   <div class="divider"></div>
   <h3>Pulling the trigger</h3>
   <ul>
     <li>If you want discuss anything related to rental properties before pulling the trigger, let me know (no solicitations, please) <a href="mailto:james.shull@gmail.com?Subject=rentcheck">james.shull@gmail.com</a>.</li>
-    <li>For those in lovely Southern California looking to make a purchase, I can get you in touch with a great agent / broker, just shoot me an <a href="mailto:james.shull@gmail.com?Subject=broker">email</a>.</li>
+    <li>For those investing in lovely Southern California, I can get you in touch with a great agent / broker, just shoot me an <a href="mailto:james.shull@gmail.com?Subject=broker">email</a>.</li>
   </ul>
 </div>
