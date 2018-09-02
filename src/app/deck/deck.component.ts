@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefaultsService, IDefaultsData } from '../defaults-service/defaults.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-deck',
@@ -13,7 +14,7 @@ export class DeckComponent implements OnInit {
   showContact = false;
   private subscription : Subscription;
 
-  constructor(private _defaults: DefaultsService) { }
+  constructor(private _defaults: DefaultsService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.initRentals();
@@ -42,5 +43,6 @@ export class DeckComponent implements OnInit {
   public addRental() : void { 
     this.rentals.push(new Date().getTime());
     localStorage.setItem('rentals', this.rentals.toString());
+    this.snackBar.open('New rental added','',{duration: 2000});
   }
 }

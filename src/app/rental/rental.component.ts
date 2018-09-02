@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 
 import { DefaultsService, IRentalData } from '../defaults-service/defaults.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-rental',
@@ -49,7 +50,7 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   private subscription : Subscription;
 
-  constructor(private _defaults: DefaultsService) { }
+  constructor(private _defaults: DefaultsService, private snackBar : MatSnackBar) { }
 
   ngOnInit() {
     // Get ready for updates from the defaults menu by subscribing to default service subject (as observable)
@@ -200,5 +201,10 @@ export class RentalComponent implements OnInit, OnDestroy {
   }
   public onSave(){
     localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(this.rentalData));
+    if (this.rentalData.streetAddress){
+      this.snackBar.open('saved rental '+this.rentalData.streetAddress+' for next time','',{duration: 2000});
+    }else{
+      this.snackBar.open('saved rental data for next time','',{duration: 2000});
+    }
   }
 }
