@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
   public clearLocalStorage(){
     this.showHelp = true;
     let len = localStorage.length
+    console.log(len);
     for ( let i = 0; i < len; i++ ) {
+      console.log(localStorage.key(i));
       if (localStorage.key(i).substr(0,6) != 'google' ){
         localStorage.removeItem(localStorage.key(i));
       }

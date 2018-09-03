@@ -32,7 +32,7 @@ export class DeckComponent implements OnInit {
     let tempRentals : Array<number> = (rentalItem) ? rentalItem.split(',').map(Number) : new Array();
     this.rentals = new Array();
     for (let i=0;i<tempRentals.length;i++){this.rentals.push( Number(tempRentals[i]) );}
-    if (tempRentals.length == 0){this.addRental();}
+    if (tempRentals.length == 0){this.addRental(true);}
   }
   public onDrop(rentalId : number) : void {
     this.rentals = this.rentals.filter(el=>{if(el!= rentalId){return el;}});
@@ -41,9 +41,9 @@ export class DeckComponent implements OnInit {
     localStorage.setItem('rentals', tempRentals.toString());
     this.snackBar.open('Removed rental','',{duration: 1500});
   }
-  public addRental() : void { 
+  public addRental(init?:boolean) : void { 
     this.rentals.push(new Date().getTime());
     localStorage.setItem('rentals', this.rentals.toString());
-    this.snackBar.open('New rental added','',{duration: 1500});
+    if (!init){this.snackBar.open('New rental added','',{duration: 1500});}
   }
 }
