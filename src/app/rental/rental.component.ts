@@ -202,9 +202,9 @@ export class RentalComponent implements OnInit, OnDestroy {
   public onSave(){
     localStorage.setItem(this.rentalData.rentalId.toString(), JSON.stringify(this.rentalData));
     if (this.rentalData.streetAddress){
-      this.snackBar.open('saved rental '+this.rentalData.streetAddress+' for next time','',{duration: 2000});
+      this.snackBar.open('saved rental '+this.rentalData.streetAddress+' for next time','',{duration: 1500});
     }else{
-      this.snackBar.open('saved rental data for next time','',{duration: 2000});
+      this.snackBar.open('saved rental data for next time','',{duration: 1500});
     }
   }
 }

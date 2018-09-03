@@ -1,5 +1,5 @@
 <!-- ToolBar -->
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="fixed">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="menu right">
             <img src="assets/menu.svg" alt="menu icon">
       </button>
@@ -24,6 +24,7 @@
             <img src="assets/more_vert.svg" alt="menu icon">
       </button>
 </mat-toolbar>
+<div class="top-buffer"></div>
 
 <!-- Main Body -->
 <div class="help" *ngIf="showHelp">

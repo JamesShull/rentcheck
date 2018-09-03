@@ -39,10 +39,11 @@ export class DeckComponent implements OnInit {
     let tempRentals = localStorage.getItem('rentals').split(',').map(Number);
     tempRentals = tempRentals.filter(el=>{if(el!= rentalId){return el;}});
     localStorage.setItem('rentals', tempRentals.toString());
+    this.snackBar.open('Removed rental','',{duration: 1500});
   }
   public addRental() : void { 
     this.rentals.push(new Date().getTime());
     localStorage.setItem('rentals', this.rentals.toString());
-    this.snackBar.open('New rental added','',{duration: 2000});
+    this.snackBar.open('New rental added','',{duration: 1500});
   }
 }
