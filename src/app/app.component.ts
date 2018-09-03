@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { DefaultsService } from './defaults-service/defaults.service';
@@ -11,7 +11,7 @@ import { environment } from '../environments/environment.prod';
   styleUrls: ['./app.component.css'],
   providers : [DefaultsService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'rentcheck';
   year = (new Date()).getFullYear().toString();
   appVersion = environment.version;
@@ -19,6 +19,10 @@ export class AppComponent {
 
   constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
   
+  ngOnInit(){
+    this.showHelp = (localStorage.getItem('showHelp')==='false')? false: true;
+  }
+
   public addRental(){
     this._defaults.addRental();
   }
@@ -31,10 +35,12 @@ export class AppComponent {
         localStorage.removeItem(localStorage.key(i));
       }
     }
+    //window.location.replace('home');
   }
 
   public closeHelp(){
     this.showHelp = false;
+    localStorage.setItem('showHelp','false');
   }
 
   public defaultsDialog() : void {
