@@ -153,8 +153,8 @@
                 <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
               </ul>
             <div class="card-actions">
-              <button *ngIf="showAmmortization" mat-raised-button color="accent" (click)="generateAmmortizationSchedule()">Hide Ammortization Schedule</button>
-              <button *ngIf="!showAmmortization" mat-raised-button (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
+              <button *ngIf="showAmmortization" mat-stroked-button (click)="generateAmmortizationSchedule()">Hide Ammortization Schedule</button>
+              <button *ngIf="!showAmmortization" mat-stroked-button (click)="generateAmmortizationSchedule()">Show Ammortization Schedule</button>
             </div>
             <div class="line-break"></div>
             <div class="divider"></div>
