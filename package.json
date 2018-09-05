@@ -1,11 +1,12 @@
 {
   "name": "rentcheck",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "author": "James Shull",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build",
+    "build": "ng build --prod",
+    "postbuild": "./src/zipit.sh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
