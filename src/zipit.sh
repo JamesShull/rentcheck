@@ -10,4 +10,6 @@ gzip -9 ../dist/rentcheck/styles.*.css
 for f in ../dist/rentcheck/*.gz; do mv "$f" "${f%.gz}"; done
 
 # Send to AWS
-aws s3 cp --include "*.js" --include "*.css" --include "*.html"
+aws s3 cp dist/rentcheck s3://rentcheck.ninja --recursive --exclude "*" --include "*.js" --content-type "text/javascript" --content-encoding "gzip" --acl public-read
+aws s3 cp dist/rentcheck s3://rentcheck.ninja --recursive --exclude "*" --include "*.css" --content-type "text/css" --content-encoding "gzip" --acl public-read
+aws s3 cp dist/rentcheck s3://rentcheck.ninja --recursive --exclude "*" --include "*.html" --acl public-read
