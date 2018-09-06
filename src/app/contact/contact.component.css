@@ -6,3 +6,12 @@
   display: inline-block;
   vertical-align: top;
 }
+.credit-list{
+  padding-left: 10px;
+}
+.credit-list li {
+  line-height: 36px;
+}
+.credit-list li img {
+  vertical-align: middle;
+}
