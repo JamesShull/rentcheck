@@ -207,4 +207,15 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.snackBar.open('saved rental data for next time','',{duration: 1500});
     }
   }
+  /*
+  public onInvest(){
+    let street = (this.rentalData.stateAddress) ? this.rentalData.stateAddress: '';
+    let zip = (this.rentalData.zipAddress) ? this.rentalData.zipAddress: '';
+    if (street && zip){
+      window.open('mailto:james.shull@gmail.com?Subject=invest,'+this.rentalData.streetAddress+' - '+this.rentalData.zipAddress,'_blank')
+    } else {
+      window.open('mailto:james.shull@gmail.com?Subject=invest','_blank')
+    }
+  }
+  */
 }
