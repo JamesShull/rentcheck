@@ -119,7 +119,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyPrincipal = this.calcPrincipal(principal, this.term);
     this.monthlyInterest = this.calcInterest(principal, this.term);
     // Other expenses
-    this.monthlyPMI = (this.rentalData.downPayment<0.20)? principal*this.pmiPercentage: 0;
+    this.monthlyPMI = (this.rentalData.downPayment<0.20)? principal*(this.pmiPercentage/12): 0;
     this.monthlyInsurance = this.rentalData.price*(this.rentalData.insuranceRate/12);
     this.monthlyMaintenance = this.rentalData.price*(this.rentalData.maintenanceRate/12);
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
