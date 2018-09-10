@@ -46,3 +46,26 @@
     </ul>
   </mat-card-content>
 </mat-card>
+<mat-card class="contact-card">
+  <mat-card-header>
+    <mat-card-title><h2>Contact Us (testing)</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Please send us any questions, comments or feedback.</p>
+    <form>
+      <p><mat-form-field class="input-text">
+          <input matInput placeholder="First and/or Last Name" name="emailName" [ngModel]="fromName">
+        </mat-form-field>
+      </p>
+      <p><mat-form-field class="input-text">
+          <input matInput placeholder="Email Address" name="emailFrom" [ngModel]="fromEmail">
+        </mat-form-field>
+      </p>
+      <p><mat-form-field class="input-body">
+          <textarea matInput placeholder="Question or Comment" name="emailBody" [ngModel]="fromBody" rows="3"></textarea>
+        </mat-form-field>
+      </p>
+      <p class="send-button"><button mat-raised-button (click)="onSend()">Send</button></p>
+    </form>
+  </mat-card-content>
+</mat-card>

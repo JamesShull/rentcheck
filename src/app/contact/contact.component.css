@@ -15,3 +15,6 @@
 .credit-list li img {
   vertical-align: middle;
 }
+.input-text { width: 80%;}
+.input-body { width: 90%;}
+.send-button { width: 100%; text-align: center;}
