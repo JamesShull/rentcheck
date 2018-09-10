@@ -1,10 +1,34 @@
-<mat-card class="contact-card">
+<!--<mat-card class="contact-card">
   <mat-card-header>
     <mat-card-title><h2>Contact Us</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <p>Please send us any questions, comments or feedback.</p>
     <p><a href="mailto:james.shull@gmail.com?Subject=rentcheck">james.shull@gmail.com</a></p>
+  </mat-card-content>
+</mat-card>
+-->
+<mat-card class="contact-card">
+  <mat-card-header>
+    <mat-card-title><h2>Contact Us</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Please send us any questions, comments or feedback.</p>
+    <form>
+      <p><mat-form-field class="input-text">
+          <input matInput placeholder="First and/or Last Name" name="emailName" [(ngModel)]="emailName">
+        </mat-form-field>
+      </p>
+      <p><mat-form-field class="input-text">
+          <input matInput placeholder="Email Address" name="emailFrom" [(ngModel)]="emailFrom">
+        </mat-form-field>
+      </p>
+      <p><mat-form-field class="input-body">
+          <textarea matInput placeholder="Question or Comment" name="emailContent" [(ngModel)]="emailContent" rows="3"></textarea>
+        </mat-form-field>
+      </p>
+      <p class="send-button"><button mat-raised-button color="primary" (click)="onSend()">Send</button></p>
+    </form>
   </mat-card-content>
 </mat-card>
 <mat-card class="contact-card">
@@ -30,9 +54,13 @@
           UI components.
         </span>
       </li>
-      <li>Hosting is provided by <a href="https://aws.amazon.com/">
+      <li>Static site hosting is provided by <a href="https://aws.amazon.com/">
           <img src="assets/aws-s3.svg" alt="s3 icon" height="36px;"></a>
            AWS S3 (Amazon Web Services - Simple Storage Service).
+      </li>
+      <li>AWS is also providing 'Serverless' back end support via 
+        <img src="assets/aws-api.svg" alt="s3 icon" height="36px;"> + <img src="assets/aws-lambda.svg" alt="s3 icon" height="36px;">
+         (AWS API Gateway integrated with AWS Lambda)
       </li>
       <li>Development is done on <a href="https://code.visualstudio.com/">
         <img src="assets/vscode-icon.svg" alt="s3 icon" height="24px;"></a> Visual Studio Code.
@@ -46,26 +74,4 @@
     </ul>
   </mat-card-content>
 </mat-card>
-<mat-card class="contact-card">
-  <mat-card-header>
-    <mat-card-title><h2>Contact Us (testing)</h2></mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>Please send us any questions, comments or feedback.</p>
-    <form>
-      <p><mat-form-field class="input-text">
-          <input matInput placeholder="First and/or Last Name" name="emailName" [ngModel]="fromName">
-        </mat-form-field>
-      </p>
-      <p><mat-form-field class="input-text">
-          <input matInput placeholder="Email Address" name="emailFrom" [ngModel]="fromEmail">
-        </mat-form-field>
-      </p>
-      <p><mat-form-field class="input-body">
-          <textarea matInput placeholder="Question or Comment" name="emailBody" [ngModel]="fromBody" rows="3"></textarea>
-        </mat-form-field>
-      </p>
-      <p class="send-button"><button mat-raised-button (click)="onSend()">Send</button></p>
-    </form>
-  </mat-card-content>
-</mat-card>
+
