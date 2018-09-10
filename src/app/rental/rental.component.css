@@ -8,12 +8,13 @@
     vertical-align: top;
 }
 .card-input {
-    width: 125px !important;
-    margin-left: 15px;
+    width: 100px !important;
+    margin-left: 25px;
 }
 .date {
-    padding-right: 28px;
-    margin-left: 0px;
+    width: 100px !important;
+    padding-right: 25px;
+    /*margin-left: 0px;*/
 }
 .card-actions {
     width: 100%;
