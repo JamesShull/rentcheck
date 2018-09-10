@@ -1,6 +1,6 @@
 const SES = require("aws-sdk").SES;
-const fs = require('fs');
-const settings = JSON.parse(fs.readFileSync('settings.json', 'utf8'));
+const fs = require("fs");
+const settings = JSON.parse(fs.readFileSync('./settings.json', 'utf8'));
 
 const account = settings.account;
 const password = settings.password;
@@ -66,8 +66,8 @@ exports.handler =  (event, context) => {
     // Handle promise's fulfilled/rejected states
     var response = {
         statusCode: 200,
-        //headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://rentcheck.ninja'},
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://rentcheck.ninja/*'},
+        //headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
         body: 'A ninja will answer as soon as possible!'
     };
     

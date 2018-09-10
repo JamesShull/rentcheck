@@ -26,7 +26,6 @@ export class ContactComponent implements OnInit {
         'Content-Type':  'application/json'
       })
     };
-    console.log(requestBody);
 
     // Send it
     this.http.post(
@@ -36,14 +35,14 @@ export class ContactComponent implements OnInit {
       ).subscribe(
         results => {
           if(results["statusCode"] == 200){
-            this.snackbar.open(results["body"],'Close',{duration: 1500});
+            this.snackbar.open(results["body"],'Close',{duration: 3000});
+            this.emailContent = '';
+            this.emailName = '';
+            this.emailFrom = '';
           }
         },
-        err => console.error(err),
+        err => {console.log('error');console.error(err);},
         () => {
-          this.emailContent = '';
-          this.emailName = '';
-          this.emailFrom = '';
           // Service completed successfully
         }
     );

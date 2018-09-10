@@ -16,7 +16,8 @@
     min-width: 60px;
 }
 .menu img{
-    filter: contrast(4) invert(1);
+    /*filter: contrast(4) invert(1);*/
+    filter: contrast(4);
     height: 24px;
 }
 .title {
