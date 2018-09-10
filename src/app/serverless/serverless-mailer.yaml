@@ -1,6 +1,6 @@
 ﻿AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: An AWS Serverless Specification template describing your function.
+Description: Send Email from rentcheck.ninja
 Resources:
   serverlessmailer:
     Type: 'AWS::Serverless::Function'
@@ -8,7 +8,13 @@ Resources:
       Handler: index.handler
       Runtime: nodejs8.10
       CodeUri: .
-      Description: ''
+      Description: Send Email from rentcheck.ninja
       MemorySize: 128
       Timeout: 3
-      Role: 'arn:aws:iam::879189804904:role/service-role/mailer'
+      Role: 'arn:aws:iam::879189804904:role/west-mailer'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST

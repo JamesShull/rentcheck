@@ -1,18 +1,22 @@
 const SES = require("aws-sdk").SES;
-const account = 'james.shull@gmail.com';
-const password = 'i<3wileen';
+const fs = require('fs');
+const settings = JSON.parse(fs.readFileSync('settings.json', 'utf8'));
+
+const account = settings.account;
+const password = settings.password;
 
 exports.handler =  (event, context) => {
-    // TODO implement
-    //if (!event.email.match(/^[^@]+@[^@]+$/)) {
-    //    console.log('Not sending: invalid email address', event);
-    //    context.done(null, "Failed");
-    //    return;
-    //}
-    //
-    //const name = event.name.substr(0, 40).replace(/[^\w\s]/g, '');
+    //const replyAddress = "jdubshull@gmail.com";
+    if (!event.email.match(/^[^@]+@[^@]+$/)) {
+        console.log('Not sending: invalid email address', event);
+        context.done(null, "Failed on email address");
+        return;
+    }
+    const replyAddress = event.email;
     
-    const name = 'Mr. RentCheck';
+    const name = event.name.substr(0, 50).replace(/[^\w\s]/g, '');
+    //const name = 'James'
+    
     
     const htmlBody = `
         <!DOCTYPE html>
@@ -20,13 +24,14 @@ exports.handler =  (event, context) => {
           <head>
           </head>
           <body>
-            <p>Hi `+ name + `,</p>
+            <p>From: `+ name + `</p>
+            <p>`+ event.content +`</p>
             <p>...</p>
           </body>
         </html>
     `;
 
-    const textBody = 'Hi ' + name + ', here is some email content.';
+    const textBody = 'Hi ' + name + ', ' + event.content;
 
     // Create sendEmail params
     const params = {
@@ -46,33 +51,37 @@ exports.handler =  (event, context) => {
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "Test Email"
+          Data: "rentcheck feedback - " + event.name
         }
       },
-      Source: "Tester <james.shull@gmail.com>"
+      Source: "Tester <rentcheck.ninja@gmail.com>",
+      ReplyToAddresses: [replyAddress]
     };
   
     // Create the promise and SES service object
-    const sendPromise = new SES({ apiVersion: "2010-12-01" })
+    const sendPromise = new SES({ apiVersion: "2010-12-01", region: 'us-west-2' })
         .sendEmail(params)
         .promise();
 
     // Handle promise's fulfilled/rejected states
+    var response = {
+        statusCode: 200,
+        //headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://rentcheck.ninja'},
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        body: 'A ninja will answer as soon as possible!'
+    };
+    
     sendPromise
         .then(data => {
             console.log(data.MessageId);
-            context.done(null, "Success");
+            context.done(null, response);
         })
         .catch(err => {
           console.error(err, err.stack);
-          context.done(null, "Failed");
+          response.statusCode = 500;
+          response.body = JSON.stringify('Something went wrong');
+          context.done(null, response);
     });
-    
-    /*
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Hello from Lambda!')
-    };
-    return response;
-    */
+  // Add callback as a matter of style callback(null, response)
+  // then change lambda function to exports.handler =  (event, context, callback) => {
 };
