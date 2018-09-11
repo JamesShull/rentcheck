@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Load Rentals from File</h2>
+<div mat-dialog-content>
+  <!--<p>
+      <input class="card-input" type="file" multiple (change)="handleFiles(this.files)">
+  </p>
+  -->
+  <p>
+      <!--<input class="visually-hidden" type="file" multiple #fileInput (change)="handleFiles(this.files)">-->
+      <input type="file" multiple (change)="handleFiles($event.srcElement.files)">
+      <button mat-raised-button (click)="handleClick();">Select Files</button>
+  </p>
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+  <button mat-button [mat-dialog-close]="filesContent" cdkFocusInitial color="primary">Load</button>
+</div>

@@ -178,9 +178,15 @@
         </mat-tab>
       </mat-tab-group>
       <div class="card-actions">
-          <button mat-raised-button color="accent" (click)="onDrop()">Remove</button>
-          <button mat-raised-button color="primary" (click)="onSave()">Save</button>
-          <!--<button mat-raised-button style="background-color:rgba(50,50,50,.1)" routerLink="/contactus" routerLinkActive="active">Invest</button>-->
+          <button mat-raised-button color="accent" (click)="onDrop()" matTooltip="Remove">
+            <img src="assets/cancel.svg" alt="Remove rental" style="filter:contrast(4) invert(1)">
+          </button>
+          <button mat-raised-button color="primary" (click)="onSave()" matTooltip="Save">
+            <img src="assets/save.svg" alt="Save data locally" style="filter:contrast(4) invert(1)">
+          </button>
+          <button mat-raised-button (click)="onDownload()" matTooltip="Download">
+            <img src="assets/cloud_download.svg" alt="download rental">
+          </button>
       </div>
   </mat-card-content>
 </mat-card>

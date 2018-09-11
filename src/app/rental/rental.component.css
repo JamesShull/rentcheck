@@ -20,7 +20,7 @@
     width: 100%;
     text-align: center;
 }
-.card-actions button {  margin: 5px 10px;}
+.card-actions button {  margin: 5px; min-width: 60px;}
 .short-input {  width: 75px !important;}
 .mid-input { width: 125px !important;}
 .edit-toggle {  margin-left: 10px;}

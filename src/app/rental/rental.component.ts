@@ -207,15 +207,13 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.snackBar.open('saved rental data for next time','',{duration: 1500});
     }
   }
-  /*
-  public onInvest(){
-    let street = (this.rentalData.stateAddress) ? this.rentalData.stateAddress: '';
-    let zip = (this.rentalData.zipAddress) ? this.rentalData.zipAddress: '';
-    if (street && zip){
-      window.open('mailto:james.shull@gmail.com?Subject=invest,'+this.rentalData.streetAddress+' - '+this.rentalData.zipAddress,'_blank')
-    } else {
-      window.open('mailto:james.shull@gmail.com?Subject=invest','_blank')
-    }
-  }
-  */
+ public onDownload(){
+    let fileLink = document.createElement('a');
+    fileLink.setAttribute('href','data:text/json;charset=utf-8,' +encodeURIComponent(JSON.stringify(this.rentalData)));
+    fileLink.setAttribute('download','rentcheck_id_'+this.rentalData.rentalId+'.json');
+    fileLink.style.display = 'none';
+    document.body.appendChild(fileLink);
+    fileLink.click();
+    document.body.removeChild(fileLink);
+ }
 }

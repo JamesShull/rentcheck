@@ -12,6 +12,7 @@
             <button mat-menu-item routerLink="/privacy" routerLinkActive="active">Privacy Policy</button>
             <button mat-menu-item routerLink="/terms" routerLinkActive="active">Terms of Use</button>
             <div style="border-bottom: 2px solid rgba(63, 81, 181,.5);"></div>
+            <button mat-menu-item (click)="loadRentals();">Load Rentals</button>
             <button mat-menu-item (click)="clearLocalStorage();">Reset App</button>
       </mat-menu>
       <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Home:rental income guesstimator">
@@ -31,12 +32,14 @@
 
 <!-- Main Body -->
 <div class="help" *ngIf="showHelp">
-      <button mat-button class="menu" (click)="closeHelp()">X</button>
+      <button mat-button class="menu" (click)="closeHelp()">
+            <img src="assets/cancel.svg" alt="Remove guide message">
+      </button>
       <p>Welcome to rencheck.ninja! We have a  
             <a routerLink="/guide" routerLinkActive="active">guide</a>.
       </p>
 </div>
-<!--Google Ads will go here-->
+
 <router-outlet></router-outlet>
 
 <!-- Footer -->

@@ -16,6 +16,7 @@ import { ErrorComponent } from './error/error.component';
 import { GuideComponent } from './guide/guide.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
+import { LoadDialogComponent } from './load-dialog/load-dialog.component';
 
 const appRoutes : Routes = [
   {path:'home', component: DeckComponent},
@@ -40,7 +41,8 @@ const appRoutes : Routes = [
     ErrorComponent,
     GuideComponent,
     PrivacyComponent,
-    TermsComponent
+    TermsComponent,
+    LoadDialogComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,
@@ -54,6 +56,6 @@ const appRoutes : Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DefaultsDialogComponent]
+  entryComponents: [DefaultsDialogComponent, LoadDialogComponent]
 })
 export class AppModule { }
