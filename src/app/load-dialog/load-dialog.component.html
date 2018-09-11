@@ -1,15 +1,12 @@
 <h2 mat-dialog-title>Load Rentals from File</h2>
 <div mat-dialog-content>
-  <!--<p>
-      <input class="card-input" type="file" multiple (change)="handleFiles(this.files)">
-  </p>
-  -->
   <p>
-      <!--<input class="visually-hidden" type="file" multiple #fileInput (change)="handleFiles(this.files)">-->
-      <input type="file" multiple (change)="handleFiles($event.srcElement.files)">
-      <button mat-raised-button (click)="handleClick();">Select Files</button>
+      <input type="file" multiple class="visually-hidden" #fi accept="*.json" (change)="handleFiles($event.srcElement.files)">
+      <button mat-raised-button (click)="fi.click();">Select Files</button>
   </p>
-  
+  <ul *ngIf="fileNames" style="list-style: none;padding-left:5px;">Selected Files
+    <li *ngFor="let name of fileNames">{{name}}</li>
+  </ul>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()" color="accent">Cancel</button>

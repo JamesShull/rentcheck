@@ -9,22 +9,23 @@ import { promise } from 'protractor';
 })
 export class LoadDialogComponent {
   public filesContent: string;
+  public fileNames: string[];
 
   constructor(public dialogRef: MatDialogRef<LoadDialogComponent>) { }
 
   public onCancel(){
     this.dialogRef.close();
   }
-  public handleClick(){
-    console.log('click');
-  }
+
   public handleFiles(files: FileList){
     if(!files){return;}
     this.filesContent = '[';
+    this.fileNames = new Array();
     for (let i=0, numFiles = files.length; i<numFiles;i++){
       (async ()=>{
         try {
           this.filesContent += await this.promiseReadFileAsText(files[i]);
+          this.fileNames.push((i+1)+': '+files[i].name);
           if (i != numFiles - 1){ 
             this.filesContent += ',';
           }else{
