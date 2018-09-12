@@ -53,7 +53,10 @@ export class AppComponent implements OnInit {
   public loadRentals() : void {
     const loadDialogRef = this.dialog.open(LoadDialogComponent);
     loadDialogRef.afterClosed().subscribe(
-      result =>{console.log(result);}
+      result =>{
+        // add rental data to existing array
+        console.log(result);
+      }
     );
   }
 
