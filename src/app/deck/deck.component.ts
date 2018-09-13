@@ -12,20 +12,27 @@ export class DeckComponent implements OnInit {
   rentals : Array<number>;
   showAbout = false;
   showContact = false;
-  private subscription : Subscription;
+  private addSubscription : Subscription;
+  private initSubscription: Subscription;
 
   constructor(private _defaults: DefaultsService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.initRentals();
-    this.subscription = this._defaults.addObs$.subscribe( 
+    this.addSubscription = this._defaults.addObs$.subscribe( 
       () => {this.addRental();},
       (error) => {console.log(error);},
-      ()=> {console.log('complete');}
+      ()=> {}
+    );
+    this.initSubscription = this._defaults.initObs$.subscribe( 
+      () => {this.initRentals();},
+      (error) => {console.error(error);},
+      ()=> {}
     );
   }
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    this.addSubscription.unsubscribe();
+    this.initSubscription.unsubscribe();
   }
   private initRentals(){
     let rentalItem = localStorage.getItem('rentals');

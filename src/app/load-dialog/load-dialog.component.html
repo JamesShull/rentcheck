@@ -1,14 +1,19 @@
 <h2 mat-dialog-title>Load Rentals from File</h2>
 <div mat-dialog-content>
-  <p>
-      <input type="file" multiple class="visually-hidden" #fi accept="*.json" (change)="handleFiles($event.srcElement.files)">
+  <p style="text-align: center;">
+      <input type="file" multiple class="visually-hidden" #fi accept=".json" (change)="handleFiles($event.srcElement.files)">
       <button mat-raised-button (click)="fi.click();">Select Files</button>
   </p>
+  <!--<ul *ngIf="fileNames" style="list-style: none;padding-left:5px;">Selected Files
+    <li *ngFor="let name of fileNames">{{name}}</li>
+  </ul>-->
+</div>
+<div mat-dialog-actions class="action-buttons">
+  <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+  <button mat-button [mat-dialog-close]="filesContent" cdkFocusInitial color="primary">Load</button>
+</div>
+<div mat-dialog-content>
   <ul *ngIf="fileNames" style="list-style: none;padding-left:5px;">Selected Files
     <li *ngFor="let name of fileNames">{{name}}</li>
   </ul>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()" color="accent">Cancel</button>
-  <button mat-button [mat-dialog-close]="filesContent" cdkFocusInitial color="primary">Load</button>
 </div>

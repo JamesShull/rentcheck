@@ -14,3 +14,8 @@
 input.visually-hidden:focus + label {
   outline: thin dotted;
 }
+
+.action-buttons button{
+  width: calc(50% - 8px);
+  text-align: center;
+}

@@ -52,12 +52,48 @@ export class AppComponent implements OnInit {
 
   public loadRentals() : void {
     const loadDialogRef = this.dialog.open(LoadDialogComponent);
-    loadDialogRef.afterClosed().subscribe(
-      result =>{
-        // add rental data to existing array
-        console.log(result);
-      }
-    );
+    loadDialogRef.afterClosed().subscribe(result =>{this.loadStorage(result);});
   }
 
+  private loadStorage(result:any){
+    console.log(result);
+    let jsonFileRentals: any;
+    // Try to parse result as JSON
+    if (typeof result === "string"){
+      try {
+        jsonFileRentals = JSON.parse(result);
+      } catch (e) {
+        console.error(e);
+        return;
+      }
+    }
+    // Get current 'rentals' object (of rental ids)
+    let rentalItem = localStorage.getItem('rentals');
+    let tempRentals : Array<number> = (rentalItem) ? rentalItem.split(',').map(Number) : new Array();
+    // Keep any that have rental data in local storage
+    let updatedRentals = new Array<number>();
+    for (let i=0;i<tempRentals.length;i++){
+      if(localStorage.getItem(tempRentals[i].toString())){ updatedRentals.push(tempRentals[i]); }
+    }
+    // Add rentals from file import to 'rentals' array
+    // Add full rental data from file import to local storage
+    for (let i=0;i<jsonFileRentals.length;i++){
+      let fileRentalId = Number(jsonFileRentals[i]["rentalId"]);
+      updatedRentals.push(fileRentalId);
+      localStorage.setItem(jsonFileRentals[i]["rentalId"], JSON.stringify(jsonFileRentals[i]));
+    }
+    // remove duplicate entries (overwrote working data with file data in localStorage)
+    let uniqueUpdatedRentals = new Array<boolean>();
+      updatedRentals.filter((item)=>{
+        return uniqueUpdatedRentals.hasOwnProperty(item) ? false : (uniqueUpdatedRentals[item] = true);
+      }
+    );
+    //Array.include(val) will search for element
+    console.log(uniqueUpdatedRentals);
+
+    // store rentals array in storage before reloading rental cards
+    localStorage.setItem('rentals',updatedRentals.toString());
+    // refresh and let deck.init() handle the UI
+    this._defaults.initRentals();
+  }
 }

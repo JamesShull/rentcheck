@@ -25,10 +25,16 @@ export class DefaultsService {
   
   private source = new Subject<boolean>();
   private addSource = new Subject<any>();
+  private initSource = new Subject<any>();
   obs$ = this.source.asObservable();
   addObs$ = this.addSource.asObservable();
+  initObs$ = this.initSource.asObservable();
 
   constructor() { }
+
+  public initRentals(){
+    this.initSource.next(); // notify rentals to reinitialize (based on localStorage)
+  }
 
   public addRental() {
     this.addSource.next();
