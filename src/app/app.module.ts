@@ -17,6 +17,7 @@ import { GuideComponent } from './guide/guide.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { LoadDialogComponent } from './load-dialog/load-dialog.component';
+import { HelpSnackbarComponent } from './help-snackbar/help-snackbar.component';
 
 const appRoutes : Routes = [
   {path:'home', component: DeckComponent},
@@ -42,7 +43,8 @@ const appRoutes : Routes = [
     GuideComponent,
     PrivacyComponent,
     TermsComponent,
-    LoadDialogComponent
+    LoadDialogComponent,
+    HelpSnackbarComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,
@@ -56,6 +58,6 @@ const appRoutes : Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DefaultsDialogComponent, LoadDialogComponent]
+  entryComponents: [DefaultsDialogComponent, LoadDialogComponent, HelpSnackbarComponent]
 })
 export class AppModule { }

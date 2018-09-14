@@ -1,0 +1,28 @@
+.menu{
+  min-width: 55px;
+}
+.menu img{
+  filter: contrast(4) invert(1);
+  height: 36px;
+  vertical-align: middle;
+}
+.help-container{
+  display: inline-block;
+  vertical-align: middle;
+}
+.help-container p {
+  display: inline-block;
+  margin: auto 5px;
+}
+.help-container a>img {
+  display: inline-block;
+  vertical-align: middle;
+}
+.help-container a{
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+}
+.help-container a:hover{
+  text-decoration: underline;
+}

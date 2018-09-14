@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 import { DefaultsService } from './defaults-service/defaults.service';
 import { DefaultsDialogComponent } from './defaults-dialog/defaults-dialog.component';
 import { LoadDialogComponent } from './load-dialog/load-dialog.component';
 import { environment } from '../environments/environment.prod';
+import { HelpSnackbarComponent } from './help-snackbar/help-snackbar.component';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +14,32 @@ import { environment } from '../environments/environment.prod';
   styleUrls: ['./app.component.css'],
   providers : [DefaultsService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   title = 'rentcheck';
   year = (new Date()).getFullYear().toString();
   appVersion = environment.version;
   showHelp = true;
 
-  constructor(private _defaults: DefaultsService, public dialog: MatDialog) {}
+  constructor(
+    private _defaults: DefaultsService, 
+    public dialog: MatDialog, 
+    public snackBar: MatSnackBar
+  ) { 
+    
+   }
   
   ngOnInit(){
-    this.showHelp = (localStorage.getItem('showHelp')==='false')? false: true;
+    this.showHelp = (localStorage.getItem('showHelp')==='false')? false: true;  //default to true
+    window.setTimeout(()=>{
+      this.helpSnackBar();
+    }, 3000);
   }
 
+  public helpSnackBar(){
+    if (this.showHelp){
+      this.snackBar.openFromComponent(HelpSnackbarComponent, {duration: 60000});
+    }
+  }
   public addRental(){
     this._defaults.addRental();
   }
@@ -33,10 +49,8 @@ export class AppComponent implements OnInit {
     let len = localStorage.length
     let removedItems = 0;
     for ( let i = 0; i < len; i++ ) {
-      if (localStorage.key(i).substr(0,6) != 'google' ){
-        localStorage.removeItem(localStorage.key(i-removedItems));
-        removedItems++;
-      }
+      localStorage.removeItem(localStorage.key(i-removedItems));
+      removedItems++;
     }
   }
 
@@ -83,16 +97,16 @@ export class AppComponent implements OnInit {
       localStorage.setItem(jsonFileRentals[i]["rentalId"], JSON.stringify(jsonFileRentals[i]));
     }
     // remove duplicate entries (overwrote working data with file data in localStorage)
-    let uniqueUpdatedRentals = new Array<boolean>();
-      updatedRentals.filter((item)=>{
-        return uniqueUpdatedRentals.hasOwnProperty(item) ? false : (uniqueUpdatedRentals[item] = true);
+    let uniqueRentals = new Array<number>();
+    updatedRentals.filter((item)=>{
+        if (!uniqueRentals.includes(item)){ //Array.includes(val) will search for element
+          uniqueRentals.push(item);
+        }
       }
     );
-    //Array.include(val) will search for element
-    console.log(uniqueUpdatedRentals);
 
     // store rentals array in storage before reloading rental cards
-    localStorage.setItem('rentals',updatedRentals.toString());
+    localStorage.setItem('rentals',uniqueRentals.toString());
     // refresh and let deck.init() handle the UI
     this._defaults.initRentals();
   }

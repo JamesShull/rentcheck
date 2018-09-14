@@ -1,8 +1,8 @@
 <!-- ToolBar -->
 <mat-toolbar color="primary" class="fixed">
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu ninja" matTooltip="Menu">
-            <!--<img src="assets/menu.svg" alt="menu icon">-->
-            <img src="assets/ninja.svg" alt="ninja menu">
+      <button mat-button [matMenuTriggerFor]="menu" class="menu" matTooltip="Menu">
+            <img src="assets/menu.svg" alt="menu icon">
+            <!--<img src="assets/ninja.svg" alt="ninja menu">-->
       </button>
       <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
@@ -20,7 +20,7 @@
       </a>
       
       <span class="filler"></span>
-      <button mat-icon-button class="menu" (click)="addRental();" matTooltip="Add Rental">
+      <button mat-button class="menu" (click)="addRental();" matTooltip="Add Rental">
             <!--<img src="assets/plus.png" alt="add rental">-->
             <img src="assets/ninja-star.svg" alt="add rental">
       </button>
@@ -30,16 +30,17 @@
 </mat-toolbar>
 <div class="top-buffer"></div>
 
-<!-- Main Body -->
-<div class="help" *ngIf="showHelp">
+<!-- Help Message -->
+<div class="help" *ngIf="showHelp" (click)="helpSnackBar();"></div>
+<!--<div class="help" *ngIf="showHelp">
       <button mat-button class="menu" (click)="closeHelp()">
             <img src="assets/cancel.svg" alt="Remove guide message">
       </button>
-      <p>Welcome to rencheck.ninja! We have a  
-            <a routerLink="/guide" routerLinkActive="active">guide</a>.
-      </p>
-</div>
+      <p>Welcome to rencheck.ninja! We have a <a routerLink="/guide" routerLinkActive="active">guide.</a></p>
+      <a routerLink="/guide" routerLinkActive="active"><img src="assets/ninja.svg" alt="ninja guide" height="32px;"></a>
+</div>-->
 
+<!-- Router Outlet -->
 <router-outlet></router-outlet>
 
 <!-- Footer -->

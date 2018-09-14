@@ -43,9 +43,11 @@ export class DeckComponent implements OnInit {
   }
   public onDrop(rentalId : number) : void {
     this.rentals = this.rentals.filter(el=>{if(el!= rentalId){return el;}});
-    let tempRentals = localStorage.getItem('rentals').split(',').map(Number);
-    tempRentals = tempRentals.filter(el=>{if(el!= rentalId){return el;}});
-    localStorage.setItem('rentals', tempRentals.toString());
+    if (localStorage.getItem('rentals')){
+      let tempRentals = localStorage.getItem('rentals').split(',').map(Number);
+      tempRentals = tempRentals.filter(el=>{if(el!= rentalId){return el;}});
+      localStorage.setItem('rentals', tempRentals.toString());
+    }
     this.snackBar.open('Removed rental','',{duration: 1500});
   }
   public addRental(init?:boolean) : void { 
