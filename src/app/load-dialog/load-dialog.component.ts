@@ -8,7 +8,7 @@ import { promise } from 'protractor';
   styleUrls: ['./load-dialog.component.css']
 })
 export class LoadDialogComponent {
-  public filesContent: string;
+  public filesContent: string[];
   public fileNames: string[];
 
   constructor(public dialogRef: MatDialogRef<LoadDialogComponent>) { }
@@ -19,18 +19,16 @@ export class LoadDialogComponent {
 
   public handleFiles(files: FileList){
     if(!files){return;}
-    this.filesContent = '[';
-    this.fileNames = new Array();
+    if(!this.filesContent){ 
+      this.filesContent = new Array<string>();
+      this.fileNames = new Array<string>();
+    }
     for (let i=0, numFiles = files.length; i<numFiles;i++){
       (async ()=>{
         try {
-          this.filesContent += await this.promiseReadFileAsText(files[i]);
+          this.filesContent.push((await this.promiseReadFileAsText(files[i])).toString());
+          //this.filesContent += await this.promiseReadFileAsText(files[i]);
           this.fileNames.push((i+1)+': '+files[i].name);
-          if (i != numFiles - 1){ 
-            this.filesContent += ',';
-          }else{
-            this.filesContent += ']';
-          }
         } catch (e) {
           console.warn(e.message);
         }
