@@ -37,7 +37,7 @@ export class AppComponent implements OnInit{
 
   public helpSnackBar(){
     if (this.showHelp){
-      this.snackBar.openFromComponent(HelpSnackbarComponent, {duration: 60000});
+      this.snackBar.openFromComponent(HelpSnackbarComponent, {duration: 30000});
     }
   }
   public addRental(){
