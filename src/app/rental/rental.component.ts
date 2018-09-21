@@ -208,8 +208,10 @@ export class RentalComponent implements OnInit, OnDestroy {
     }
   }
  public onDownload(){
+    let file = {};
+    file["rentalData"]=this.rentalData;
     let fileLink = document.createElement('a');
-    fileLink.setAttribute('href','data:text/json;charset=utf-8,' +encodeURIComponent(JSON.stringify(this.rentalData)));
+    fileLink.setAttribute('href','data:text/json;charset=utf-8,' +encodeURIComponent(JSON.stringify(file)));
     fileLink.setAttribute('download','rentcheck_id_'+this.rentalData.rentalId+'.json');
     fileLink.style.display = 'none';
     document.body.appendChild(fileLink);

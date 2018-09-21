@@ -30,9 +30,7 @@ export class AppComponent implements OnInit{
   
   ngOnInit(){
     this.showHelp = (localStorage.getItem('showHelp')==='false')? false: true;  //default to true
-    window.setTimeout(()=>{
-      this.helpSnackBar();
-    }, 3000);
+    window.setTimeout(()=>{this.helpSnackBar();}, 3000);
   }
 
   public helpSnackBar(){
@@ -43,7 +41,6 @@ export class AppComponent implements OnInit{
   public addRental(){
     this._defaults.addRental();
   }
-
   public clearLocalStorage(){
     this.showHelp = true;
     let len = localStorage.length
@@ -53,22 +50,18 @@ export class AppComponent implements OnInit{
       removedItems++;
     }
   }
-
   public closeHelp(){
     this.showHelp = false;
     localStorage.setItem('showHelp','false');
   }
-
   public defaultsDialog() : void {
     const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});
     dialogRef.afterClosed().subscribe(result => {if (result != undefined ){this._defaults.saveDefaults(result);}});
   }
-
   public loadRentals() : void {
     const loadDialogRef = this.dialog.open(LoadDialogComponent);
     loadDialogRef.afterClosed().subscribe(result =>{this.loadStorage(result);});
   }
-
   private loadStorage(result:any){
     let jsonFileRentals: any;
     // Try to parse result as JSON
@@ -79,7 +72,14 @@ export class AppComponent implements OnInit{
       console.error(e);
       return;
     }
-    // Get current 'rentals' object (of rental ids)
+
+    console.log(jsonFileRentals);
+    // jsonFileRentals["showHelp"] is undefined for some reason
+    if (jsonFileRentals["showHelp"]){
+      localStorage.setItem('showHelp', jsonFileRentals["showHelp"])
+    }
+
+    // Get current 'rentals' from localStorage (of rental ids)
     let rentalItem = localStorage.getItem('rentals');
     let updatedRentals = new Array<number>();
     if (rentalItem){
@@ -89,17 +89,25 @@ export class AppComponent implements OnInit{
         if(localStorage.getItem(tempRentals[i].toString())){ updatedRentals.push(tempRentals[i]); }
       }
     }
-    // Add rentals from file import to 'rentals' array
-    // Add full rental data from file import to local storage
-    if (jsonFileRentals){
-      for (let i=0;i<jsonFileRentals.length;i++){
-        let fileRentalId = Number(jsonFileRentals[i]["rentalId"]);
-        updatedRentals.push(fileRentalId);
-        localStorage.setItem(jsonFileRentals[i]["rentalId"], JSON.stringify(jsonFileRentals[i]));
+    
+    if (jsonFileRentals["rentalData"]){
+      // Add full rental data from file import to local storage
+      for (let i=0;i<jsonFileRentals["rentalData"].length;i++){
+        let fileRentalId = Number(jsonFileRentals["rentalData"][i]["rentalId"]);
+        updatedRentals.push(fileRentalId); 
+        localStorage.setItem(jsonFileRentals["rentalData"][i]["rentalId"], JSON.stringify(jsonFileRentals["rentalData"][i]));
+      }
+      // Add rentals from file import to 'rentals' array (without rental data)
+      let fileRentals = jsonFileRentals["rentals"];
+      let tempRentals : Array<number> = (fileRentals) ? fileRentals.split(',').map(Number) : undefined;
+      if (tempRentals){
+        for (let i=0;i<tempRentals.length;i++){
+          updatedRentals.push(tempRentals[i]);
+        }
       }
     }
-    
-    // remove duplicate entries (overwrote working data with file data in localStorage)
+
+    // remove duplicate entries
     let uniqueRentals = new Array<number>();
     updatedRentals.filter((item)=>{
         if (!uniqueRentals.includes(item)){ //Array.includes(val) will search for element
@@ -112,5 +120,36 @@ export class AppComponent implements OnInit{
     localStorage.setItem('rentals',uniqueRentals.toString());
     // refresh and let deck.init() handle the UI
     this._defaults.initRentals();
+  }
+
+  public saveAll(){
+    let file = {};
+    if (localStorage.getItem('rentals')){file["rentals"]=localStorage.getItem('rentals');}
+    if(localStorage.getItem('showHelp')){file["showHelp"]=localStorage.getItem('showHelp');}
+    
+    let dataArray = new Array();
+    let tempRentalData = '';
+    let tempRentalRecord = {};
+    let rentalsNumbers : number[] = file["rentals"].split(',').map(Number);
+    rentalsNumbers.forEach(rental =>{
+      tempRentalData = localStorage.getItem(rental.toString());
+      if (tempRentalData){
+        tempRentalRecord = {};
+        tempRentalRecord[rental.toString()] = tempRentalData.toString();
+        dataArray.push(tempRentalRecord);
+      }
+    });
+    file["rentalData"] = dataArray;
+    
+    // Download File
+    let fileLink = document.createElement('a');
+    fileLink.setAttribute('href','data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(file)));
+    fileLink.setAttribute('download','rentcheck_all_'
+        + (new Date()).toLocaleDateString('en-US',{year:'numeric', month:'2-digit', day:'2-digit'}).replace('/','_')
+        +'.json');
+    fileLink.style.display = 'none';
+    document.body.appendChild(fileLink);
+    fileLink.click();
+    document.body.removeChild(fileLink);
   }
 }

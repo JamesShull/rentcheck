@@ -12,6 +12,7 @@
             <button mat-menu-item routerLink="/privacy" routerLinkActive="active">Privacy Policy</button>
             <button mat-menu-item routerLink="/terms" routerLinkActive="active">Terms of Use</button>
             <div style="border-bottom: 2px solid rgba(63, 81, 181,.5);"></div>
+            <button mat-menu-item (click)="saveAll();">Save All</button>
             <button mat-menu-item (click)="loadRentals();">Load Rentals</button>
             <button mat-menu-item (click)="clearLocalStorage();">Reset App</button>
       </mat-menu>
