@@ -64,7 +64,7 @@ export class AppComponent implements OnInit{
   }
   private loadStorage(result: any){
     let jsonFileRentals: any;
-    let validKeys = ['defaults', 'rentals', 'showHelp','dataVersion'];
+    let validKeys = ['defaults', 'rentals', 'showHelp','dataVersion','rentalData'];
     // Validate and convert JSON to object
     try {
       jsonFileRentals = JSON.parse(result);
@@ -84,10 +84,21 @@ export class AppComponent implements OnInit{
       return isNum || isValid;
     });
     // Store to localStorage
-    localStorage.clear();
-    let len = filteredKeys.length; 
-    for (let i=0;i<len;i++){
-      localStorage.setItem(filteredKeys[i], jsonFileRentals[filteredKeys[i]]);
+    let len = filteredKeys.length;
+    if (filteredKeys[0] != 'rentalData'){
+      // Clear existing localStorage if restoring from Save All
+      localStorage.clear();
+      for (let i=0;i<len;i++){
+        localStorage.setItem(filteredKeys[i], jsonFileRentals[filteredKeys[i]]);
+      }
+    } else {
+      // Otherwise just add 1 rental to existing localStorage 'rentals' and '<rentalId>'
+      let rentalsStorage = localStorage.getItem('rentals');
+      let rentalId= jsonFileRentals['rentalData']['rentalId'];
+      if (rentalId){
+        localStorage.setItem('rentals',rentalsStorage+','+rentalId);
+        localStorage.setItem(rentalId.toString(), JSON.stringify(jsonFileRentals['rentalData']));
+      }
     }
     // Call service to reinit the rentals
     this._defaults.initRentals();
