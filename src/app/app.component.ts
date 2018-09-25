@@ -62,85 +62,43 @@ export class AppComponent implements OnInit{
     const loadDialogRef = this.dialog.open(LoadDialogComponent);
     loadDialogRef.afterClosed().subscribe(result =>{this.loadStorage(result);});
   }
-  private loadStorage(result:any){
+  private loadStorage(result: any){
     let jsonFileRentals: any;
-    // Try to parse result as JSON
-    let resultString = '[' + result.toString() + ']';
+    let validKeys = ['defaults', 'rentals', 'showHelp','dataVersion'];
+    // Validate and convert JSON to object
     try {
-      jsonFileRentals = JSON.parse(resultString);
+      jsonFileRentals = JSON.parse(result);
     } catch (e) {
       console.error(e);
       return;
     }
-
-    console.log(jsonFileRentals);
-    // jsonFileRentals["showHelp"] is undefined for some reason
-    if (jsonFileRentals["showHelp"]){
-      localStorage.setItem('showHelp', jsonFileRentals["showHelp"])
+    // Filter keys from JSON for valid storage entries
+    let keys = Object.keys(jsonFileRentals);
+    let filteredKeys = keys.filter((key)=>{
+      let isValid = false;
+      if (validKeys.includes(key)){
+        isValid = true;
+      }
+      let keyNumber = Number(key);
+      let isNum = keyNumber !== undefined && typeof(keyNumber) === 'number' && !isNaN(keyNumber);
+      return isNum || isValid;
+    });
+    // Store to localStorage
+    localStorage.clear();
+    let len = filteredKeys.length; 
+    for (let i=0;i<len;i++){
+      localStorage.setItem(filteredKeys[i], jsonFileRentals[filteredKeys[i]]);
     }
-
-    // Get current 'rentals' from localStorage (of rental ids)
-    let rentalItem = localStorage.getItem('rentals');
-    let updatedRentals = new Array<number>();
-    if (rentalItem){
-      let tempRentals : Array<number> = (rentalItem) ? rentalItem.split(',').map(Number) : new Array();
-      // Keep any that have rental data in local storage
-      for (let i=0;i<tempRentals.length;i++){
-        if(localStorage.getItem(tempRentals[i].toString())){ updatedRentals.push(tempRentals[i]); }
-      }
-    }
-    
-    if (jsonFileRentals["rentalData"]){
-      // Add full rental data from file import to local storage
-      for (let i=0;i<jsonFileRentals["rentalData"].length;i++){
-        let fileRentalId = Number(jsonFileRentals["rentalData"][i]["rentalId"]);
-        updatedRentals.push(fileRentalId); 
-        localStorage.setItem(jsonFileRentals["rentalData"][i]["rentalId"], JSON.stringify(jsonFileRentals["rentalData"][i]));
-      }
-      // Add rentals from file import to 'rentals' array (without rental data)
-      let fileRentals = jsonFileRentals["rentals"];
-      let tempRentals : Array<number> = (fileRentals) ? fileRentals.split(',').map(Number) : undefined;
-      if (tempRentals){
-        for (let i=0;i<tempRentals.length;i++){
-          updatedRentals.push(tempRentals[i]);
-        }
-      }
-    }
-
-    // remove duplicate entries
-    let uniqueRentals = new Array<number>();
-    updatedRentals.filter((item)=>{
-        if (!uniqueRentals.includes(item)){ //Array.includes(val) will search for element
-          uniqueRentals.push(item);
-        }
-      }
-    );
-
-    // store rentals array in storage before reloading rental cards
-    localStorage.setItem('rentals',uniqueRentals.toString());
-    // refresh and let deck.init() handle the UI
+    // Call service to reinit the rentals
     this._defaults.initRentals();
   }
 
   public saveAll(){
     let file = {};
-    if (localStorage.getItem('rentals')){file["rentals"]=localStorage.getItem('rentals');}
-    if(localStorage.getItem('showHelp')){file["showHelp"]=localStorage.getItem('showHelp');}
-    
-    let dataArray = new Array();
-    let tempRentalData = '';
-    let tempRentalRecord = {};
-    let rentalsNumbers : number[] = file["rentals"].split(',').map(Number);
-    rentalsNumbers.forEach(rental =>{
-      tempRentalData = localStorage.getItem(rental.toString());
-      if (tempRentalData){
-        tempRentalRecord = {};
-        tempRentalRecord[rental.toString()] = tempRentalData.toString();
-        dataArray.push(tempRentalRecord);
-      }
-    });
-    file["rentalData"] = dataArray;
-    
+    for (let i=0, len=localStorage.length;i<len;i++){
+      file[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+    }
+
     // Download File
     let fileLink = document.createElement('a');
     fileLink.setAttribute('href','data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(file)));
