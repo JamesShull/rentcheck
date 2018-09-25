@@ -12,10 +12,8 @@ Hosted locally for development with typical `npm start` command with a site view
 
 Run `npm run build --prod` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build. The post build scripts automagically detect windows/os x, compress appropriate files in `dist/` with gzip and upload to s3 with appropriate metadata.
 
-## Running unit tests
-
-[//]: <> Not yet implemented, run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-[//]: <> Not yet implemented, run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Not yet implemented 
+### Unit Tests
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### End-to-End tests
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
