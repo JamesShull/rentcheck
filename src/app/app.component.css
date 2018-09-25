@@ -19,6 +19,10 @@
     filter: contrast(4) invert(1);
     height: 24px;
 }
+button.mat-menu-item.little-menu {
+    font-size: .75em;
+    height: 2em; line-height: 2em; 
+}
 .title {
     min-width: 100px;
 }

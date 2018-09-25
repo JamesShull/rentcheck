@@ -2,15 +2,14 @@
 <mat-toolbar color="primary" class="fixed">
       <button mat-button [matMenuTriggerFor]="menu" class="menu" matTooltip="Menu">
             <img src="assets/menu.svg" alt="menu icon">
-            <!--<img src="assets/ninja.svg" alt="ninja menu">-->
       </button>
       <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
             <button mat-menu-item routerLink="/guide" routerLinkActive="active">Training</button>
-            <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
             <button mat-menu-item routerLink="/contactus" routerLinkActive="active">Contact Us</button>
-            <button mat-menu-item routerLink="/privacy" routerLinkActive="active">Privacy Policy</button>
-            <button mat-menu-item routerLink="/terms" routerLinkActive="active">Terms of Use</button>
+            <button mat-menu-item class="little-menu" routerLink="/about" routerLinkActive="active">About</button>
+            <button mat-menu-item class="little-menu" routerLink="/privacy" routerLinkActive="active">Privacy Policy</button>
+            <button mat-menu-item class="little-menu" routerLink="/terms" routerLinkActive="active">Terms of Use</button>
             <div style="border-bottom: 2px solid rgba(63, 81, 181,.5);"></div>
             <button mat-menu-item (click)="saveAll();">Save All</button>
             <button mat-menu-item (click)="loadRentals();">Load Rentals</button>
@@ -33,13 +32,6 @@
 
 <!-- Help Message -->
 <div class="help" *ngIf="showHelp" (click)="helpSnackBar();"></div>
-<!--<div class="help" *ngIf="showHelp">
-      <button mat-button class="menu" (click)="closeHelp()">
-            <img src="assets/cancel.svg" alt="Remove guide message">
-      </button>
-      <p>Welcome to rencheck.ninja! We have a <a routerLink="/guide" routerLinkActive="active">guide.</a></p>
-      <a routerLink="/guide" routerLinkActive="active"><img src="assets/ninja.svg" alt="ninja guide" height="32px;"></a>
-</div>-->
 
 <!-- Router Outlet -->
 <router-outlet></router-outlet>
@@ -48,8 +40,8 @@
 <footer class="footer">
       <a mat-button routerLink="/home" routerLinkActive="active"><img src="assets/myCheck_dark.png" alt="rent check home" width="24px;">&nbsp;Home</a>
       <a mat-button routerLink="/guide" routerLinkActive="active"><img src="assets/ninja.svg" alt="ninja menu" height="24px"> Training</a>
-      <a mat-button routerLink="/about" routerLinkActive="active">About</a>
       <a mat-button routerLink="/contactus" routerLinkActive="active">Contact Us</a>
+      <a mat-button routerLink="/about" routerLinkActive="active">About</a>
       <a mat-button routerLink="/privacy" routerLinkActive="active">Privacy Policy</a>
       <a mat-button routerLink="/terms" routerLinkActive="active">Terms of Use</a>
       <h4>Copyright © {{year}} James Shull. All rights reserved.</h4>
