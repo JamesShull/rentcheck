@@ -18,3 +18,16 @@
 .input-text { width: 80%;}
 .input-body { width: 90%;}
 .send-button { width: 100%; text-align: center;}
+.icon {
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+}
+.small-icon {
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+.small-icon-img{
+  height: 24px;
+}

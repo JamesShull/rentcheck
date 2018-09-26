@@ -21,6 +21,14 @@
     text-align: center;
 }
 .card-actions button {  margin: 5px; min-width: 60px;}
+.card-actions button svg {
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+}
+.white {
+    filter: contrast(4) invert(1);
+}
 .short-input {  width: 75px !important;}
 .mid-input { width: 125px !important;}
 .edit-toggle {  margin-left: 10px;}

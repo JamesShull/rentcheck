@@ -179,13 +179,13 @@
       </mat-tab-group>
       <div class="card-actions">
           <button mat-raised-button color="accent" (click)="onDrop()" matTooltip="Remove">
-            <img src="assets/cancel.svg" alt="Remove rental" style="filter:contrast(4) invert(1)">
+            <svg role="img" class="white" title="remove icon"><use xlink:href="assets/menu_sprite.svg#cancel"></use></svg>
           </button>
-          <button mat-raised-button color="primary" (click)="onSave()" matTooltip="Save">
-            <img src="assets/save.svg" alt="Save data locally" style="filter:contrast(4) invert(1)">
+          <button mat-raised-button (click)="onSave()" matTooltip="Save to browser">
+              <svg role="img" title="download icon"><use xlink:href="assets/menu_sprite.svg#cloud_download"></use></svg>
           </button>
-          <button mat-raised-button (click)="onDownload()" matTooltip="Download">
-            <img src="assets/cloud_download.svg" alt="download rental">
+          <button mat-raised-button color="primary" (click)="onDownload()" matTooltip="Download File">
+              <svg role="img" class="white" title="save icon"><use xlink:href="assets/menu_sprite.svg#save"></use></svg>
           </button>
       </div>
   </mat-card-content>

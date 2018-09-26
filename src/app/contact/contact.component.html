@@ -36,7 +36,7 @@
     <mat-card-title><h2>Investing</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <img src="assets/investment-sheet.jpeg" alt="investment image" height="240px;">
+    <img src="assets/investment-sheet.jpg" alt="investment image" height="240px;">
     <p>If you're contemplating a purchase in Southern California, please fill out the contact us form if you need a broker for the transaction.</p>
   </mat-card-content>
 </mat-card>
@@ -48,31 +48,33 @@
   <mat-card-content>
     <ul class="credit-list">
       <li>
-        <a href="https://angular.io/"><img src="assets/angular.svg" alt="angular icon" height="36px;"></a>
+        <a href="https://angular.io/"><!--<img src="assets/angular.svg" alt="angular icon" height="36px;"></a>-->
+        <svg role="img" class="icon" title="angular icon"><use xlink:href="assets/web_sprite.svg#angular"></use></svg></a>
         <span>ngular is used for the front-end framework along with 
           <a href="https://material.angular.io/">Angular Material</a> 
           UI components.
         </span>
       </li>
       <li>Static site hosting is provided by <a href="https://aws.amazon.com/">
-          <img src="assets/aws-s3.svg" alt="s3 icon" height="36px;"></a>
+        <svg role="img" class="icon" title="aws s3 icon"><use xlink:href="assets/web_sprite.svg#aws_s3"></use></svg></a>
            AWS S3 (Amazon Web Services - Simple Storage Service).
       </li>
       <li>AWS is also providing 'Serverless' back end support via 
-        <a href="https://aws.amazon.com/"><img src="assets/aws-api.svg" alt="s3 icon" height="36px;"></a>
+        <a href="https://aws.amazon.com/"><svg role="img" class="icon" title="aws api icon"><use xlink:href="assets/web_sprite.svg#aws_api"></use></svg></a>
          + 
-         <a href="https://aws.amazon.com/"><img src="assets/aws-lambda.svg" alt="s3 icon" height="36px;"></a>
+         <a href="https://aws.amazon.com/"><svg role="img" class="icon" title="aws lambda icon"><use xlink:href="assets/web_sprite.svg#aws_lambda"></use></svg></a>
         
          (AWS API Gateway and AWS Lambda)
       </li>
       <li>Development is done on <a href="https://code.visualstudio.com/">
-        <img src="assets/vscode-icon.svg" alt="s3 icon" height="24px;"></a> Visual Studio Code.
+        <svg role="img" class="small-icon" title="VS Code icon"><use xlink:href="assets/web_sprite.svg#vscode_icon"></use></svg>
+      </a> Visual Studio Code.
       </li>
-      <li><a href="https://nodejs.org/"><img src="assets/node-icon.svg" alt="s3 icon" height="24px;"></a> 
+      <li><a href="https://nodejs.org/"><img src="assets/node-icon.svg" alt="nodejs icon" class="small-icon-img"></a>
         Node.js is used for package management.
       </li>
       <li>Version control is provided by 
-        <a href="https://github.com/"><img src="assets/github.svg" alt="s3 icon" height="24px;"></a> GitHub.
+        <a href="https://github.com/"><svg role="img" class="small-icon" title="GitHub icon"><use xlink:href="assets/web_sprite.svg#github"></use></svg></a> GitHub.
       </li>
     </ul>
   </mat-card-content>

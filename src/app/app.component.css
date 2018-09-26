@@ -15,8 +15,10 @@
     padding: 0 14px;
     min-width: 60px;
 }
-.menu img{
+.menu svg {
+    background-color: transparent;
     filter: contrast(4) invert(1);
+    width: 24px;
     height: 24px;
 }
 button.mat-menu-item.little-menu {
@@ -26,9 +28,17 @@ button.mat-menu-item.little-menu {
 .title {
     min-width: 100px;
 }
-.icon {
+.title svg {
+    background-color: transparent;
+    filter: contrast(4) invert(1);
     height: 30px;
-    padding: 0px 6px 6px 6px;
+    width: 30px;
+    padding: 0 4px;
+}
+.icon {
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
 }
 .filler {
     flex: 1 1 auto;
@@ -63,4 +73,10 @@ button.mat-menu-item.little-menu {
 .footer a {
     padding: 0px 10px;
     min-width: 66px !important;
+}
+.footer-check{
+    background-color: transparent;
+    height: 30px;
+    width: 30px;
+    padding: 0 4px;
 }

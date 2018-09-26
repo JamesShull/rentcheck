@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol id="cancel" viewBox="0 0 24 24">
+    <path d="M21 19.1H3V5h18v14.1zM21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+    <path fill="none" d="M21 19.1H3V5h18v14.1zM21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+    <path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/>
+    <path fill="none" d="M0 0h24v24H0z"/>
+
+</symbol>
+<symbol id="cloud_download" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+
+</symbol>
+<symbol id="menu" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+
+</symbol>
+<symbol id="more_vert" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+
+</symbol>
+<symbol id="ninja" viewBox="0 0 135.46666 135.46666">
+<g transform="translate(0 -161.53)" stroke="#000">
+<path d="m50.355 193.5c-26.829 0-48.428 16.036-48.428 35.955v7.1551c0 19.919 21.599 35.955 48.428 35.955h28.714c26.829 0 48.428-16.036 48.428-35.955v-7.1551c-1e-5 -19.919-21.599-35.955-48.428-35.955zm-23.324 15.856h61.415c7.6174 0 13.75 6.1327 13.75 13.75v0.3762c0 7.6174-6.1322 13.75-13.75 13.75h-61.415c-7.6174 0-13.75-6.1327-13.75-13.75v-0.3762c0-7.6174 6.1322-13.75 13.75-13.75z" stroke-linecap="round" stroke-width="1.0611" style="paint-order:normal"/>
+<ellipse cx="111.3" cy="199.86" rx="7.465" ry="6.9926" stroke-linecap="round" stroke-width=".63368" style="paint-order:normal"/>
+<path transform="rotate(90)" d="m196.91-113.31a11.855 10.356 0 0 1 -7.1627 9.5104 11.855 10.356 0 0 1 -12.833 -1.9815 11.855 10.356 0 0 1 -2.9966 -11.079l11.137 3.5501z" fill="#00000c" stroke-linecap="round" stroke-width=".83621" style="paint-order:normal"/>
+<ellipse cx="36.853" cy="224" rx="3.5655" ry="1.9591" fill="#00000c" stroke-linecap="round" stroke-width=".30631" style="paint-order:normal"/>
+<ellipse cx="63.462" cy="224" rx="3.5655" ry="1.9591" fill="#00000c" stroke-linecap="round" stroke-width=".30631" style="paint-order:normal"/>
+<ellipse cx="57.169" cy="235.77" rx="37.325" ry="4.7247" fill="#00000c" stroke-linecap="round" stroke-width=".63368" style="paint-order:normal"/>
+<path d="m21.698 214.51-2.5483 1.4638 26.752 7.2694 0.04353-1.4347z" fill="#00000c" stroke-linejoin="round" stroke-width="1.8521"/>
+<path d="m80.081 214.51 2.5483 1.4638-26.752 7.2694-0.04353-1.4347z" fill="#00000c" stroke-linejoin="round" stroke-width="1.8521"/>
+<path transform="rotate(124.64)" d="m97.744-210.22a11.855 10.356 0 0 1 -7.1627 9.5104 11.855 10.356 0 0 1 -12.833 -1.9815 11.855 10.356 0 0 1 -2.9966 -11.079l11.137 3.5501z" fill="#00000c" stroke-linecap="round" stroke-width=".83621" style="paint-order:normal"/>
+</g>
+
+</symbol>
+<symbol id="ninja_star" viewBox="0 0 135.46666 135.46667">
+<g transform="translate(0 -161.53)">
+<g transform="matrix(1.9054 0 0 1.927 -62.642 -164.33)" stroke="#000">
+<path d="m68.542 228.08z" fill="none" stroke-width=".26458px"/>
+<path d="m60.85 194.72c1.3074-10.688 7.9122-18.42 14.122-23.673-0.17032 10.875-2.1696 18.994 3.0373 24.15-6.3311-1.9497-11.051-2.7554-17.16-0.47726z" stroke-width=".26675px"/>
+<ellipse cx="69.467" cy="204.61" rx="8.5052" ry="8.5052" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.4505" style="paint-order:normal"/>
+<path d="m79.068 195.73c10.688 1.3074 18.42 7.9122 23.673 14.122-10.875-0.17032-18.994-2.1696-24.15 3.0373 1.9497-6.3311 2.7554-11.051 0.47726-17.16z" stroke-width=".26675px"/>
+<path d="m78.63 213.97c-1.3074 10.688-7.9122 18.42-14.122 23.673 0.17032-10.875 2.1696-18.994-3.0373-24.15 6.3311 1.9497 11.051 2.7554 17.16 0.47726z" stroke-width=".26675px"/>
+<path d="m59.728 213.48c-10.688-1.3074-18.42-7.9122-23.673-14.122 10.875 0.17032 18.994 2.1696 24.15-3.0373-1.9497 6.3311-2.7554 11.051-0.47726 17.16z" stroke-width=".26675px"/>
+</g>
+</g>
+
+</symbol>
+<symbol id="rentcheck" viewBox="0 0 135.46666 135.46667">
+<g transform="translate(0 -161.53)" stroke="#000">
+<rect x="5.8923" y="201.82" width="120.22" height="62.87" fill="none" stroke-linejoin="round" stroke-width="7.6249" style="paint-order:normal"/>
+<path d="m19.489 233.26 60.237 0.34173v0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7.4886"/>
+<path d="m19.567 247.69 79.292 0.26997v0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7.4886"/>
+<g transform="matrix(.86218 .78488 -.62205 1.0879 121.93 55.327)">
+<path d="m46.074 117.12 8.1785 13.652 7.1165-12.775 1e-6 -46.786-15.295 0.29242z" fill="none" stroke-width="4.156"/>
+<rect x="45.97" y="73.028" width="15.234" height="7.2163" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" style="paint-order:normal"/>
+<path d="m46.238 116.59 14.7-0.26727" fill="none" stroke-width=".865"/>
+</g>
+</g>
+
+</symbol>
+<symbol id="save" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+
+</symbol></svg>
