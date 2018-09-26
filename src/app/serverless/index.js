@@ -6,7 +6,6 @@ const account = settings.account;
 const password = settings.password;
 
 exports.handler =  (event, context) => {
-    //const replyAddress = "jdubshull@gmail.com";
     if (!event.email.match(/^[^@]+@[^@]+$/)) {
         console.log('Not sending: invalid email address', event);
         context.done(null, "Failed on email address");
@@ -31,12 +30,12 @@ exports.handler =  (event, context) => {
         </html>
     `;
 
-    const textBody = 'Hi ' + name + ', ' + event.content;
+    const textBody = 'Hi from' + name + ', ' + event.content;
 
     // Create sendEmail params
     const params = {
       Destination: {
-        ToAddresses: ['rentcheck.ninja@gmail.com']
+        ToAddresses: ['james.shull@gmail.com']
       },
       Message: {
         Body: {
@@ -54,7 +53,7 @@ exports.handler =  (event, context) => {
           Data: "rentcheck feedback - " + event.name
         }
       },
-      Source: "Tester <rentcheck.ninja@gmail.com>",
+      Source: "Feedback <rentcheck.ninja@gmail.com>",
       ReplyToAddresses: [replyAddress]
     };
   

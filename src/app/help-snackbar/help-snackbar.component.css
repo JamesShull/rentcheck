@@ -1,5 +1,9 @@
 .menu{
-  min-width: 55px;
+  min-width: 48px !important;
+  width: 48px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
 }
 .menu img{
   filter: contrast(4) invert(1);
