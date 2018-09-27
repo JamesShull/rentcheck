@@ -1,8 +1,7 @@
 <!-- ToolBar -->
 <mat-toolbar color="primary" class="fixed">
       <button mat-button [matMenuTriggerFor]="menu" class="menu" matTooltip="Menu">
-            <!--<img src="assets/menu.svg" alt="menu icon">-->
-            <svg role="img" title="menu icon"><use xlink:href="assets/menu_sprite.svg#menu"></use></svg>
+            <svg role="img" title="menu icon"><use xlink:href="assets/sprites.svg#menu"></use></svg>
       </button>
       <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
@@ -17,18 +16,15 @@
             <button mat-menu-item (click)="clearLocalStorage();">Reset App</button>
       </mat-menu>
       <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Home: rental income guesstimator">
-            <!--<img class="icon" src="assets/myCheck_light.png" alt="rent-check-icon">{{ title }}-->
-            <svg role="img" title="rentcheck icon"><use xlink:href="assets/menu_sprite.svg#rentcheck"></use></svg>{{ title }}
+            <svg role="img" title="rentcheck icon"><use xlink:href="assets/sprites.svg#rentcheck"></use></svg>{{ title }}
       </a>
       
       <span class="filler"></span>
       <button mat-button class="menu" (click)="addRental();" matTooltip="Add Rental">
-            <svg role="img" title="add icon"><use xlink:href="assets/menu_sprite.svg#ninja_star"></use></svg>
-            <!--<img src="assets/ninja-star.svg" alt="add rental">-->
+            <svg role="img" title="add rental"><use xlink:href="assets/sprites.svg#ninja_star"></use></svg>
       </button>
       <button mat-button class="menu" matTooltip="Global Defaults" (click)="defaultsDialog();">
-            <svg role="img" title="add icon"><use xlink:href="assets/menu_sprite.svg#more_vert"></use></svg>
-            <!--<img src="assets/more_vert.svg" alt="menu icon">-->
+            <svg role="img" title="add icon"><use xlink:href="assets/sprites.svg#more_vert"></use></svg>
       </button>
 </mat-toolbar>
 <div class="top-buffer"></div>
@@ -41,10 +37,9 @@
 
 <!-- Footer -->
 <footer class="footer">
-      <a mat-button routerLink="/home" routerLinkActive="active"><svg role="img" class="footer-check" title="rentcheck icon"><use xlink:href="assets/menu_sprite.svg#rentcheck"></use></svg>&nbsp;Home</a>
+      <a mat-button routerLink="/home" routerLinkActive="active"><svg role="img" class="footer-check" title="rentcheck icon"><use xlink:href="assets/sprites.svg#rentcheck"></use></svg>&nbsp;Home</a>
       <a mat-button routerLink="/guide" routerLinkActive="active">
-            <!--<img src="assets/ninja.svg" alt="ninja menu" height="24px">-->
-            <svg role="img" class="icon" title="ninja icon"><use xlink:href="assets/menu_sprite.svg#ninja"></use></svg>
+            <svg role="img" class="icon" title="ninja icon"><use xlink:href="assets/sprites.svg#ninja"></use></svg>
              Training</a>
       <a mat-button routerLink="/contactus" routerLinkActive="active">Contact Us</a>
       <a mat-button routerLink="/about" routerLinkActive="active">About</a>

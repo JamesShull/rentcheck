@@ -11,16 +11,18 @@
 .guide-body li {
   padding-bottom: 3px;
 }
+.icon {
+  background-color: transparent;
+  width: 14px;
+  height: 14px;
+}
 .guide-body ul>li::before {
-  /*content: url("/assets/ninja-star.svg");*/
-  background-image: url('/assets/ninja-star.svg');
-  background-size: 18px 18px; 
+  background-image: url('/assets/ninja_star.svg');
+  background-size: 16px 16px; 
   display: inline-block;
-  width: 18px; 
-  height: 18px;
-  content:"";
-  /*color: #3f51b5; 
-  color: #ff4081;*/
+  width: 16px; 
+  height: 16px;
+  content:'';
   font-weight: 700;
   margin-left: .5em; 
   margin-right: .5em;
