@@ -27,7 +27,7 @@ const appRoutes : Routes = [
   {path:'guide', component: GuideComponent},
   {path:'privacy', component: PrivacyComponent},
   {path:'terms', component: TermsComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  //{ path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', component: ErrorComponent } // update to have error view
 ];
 

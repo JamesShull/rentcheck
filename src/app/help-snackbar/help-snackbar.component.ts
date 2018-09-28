@@ -13,5 +13,5 @@ export class HelpSnackbarComponent {
   public closeHelp(): void {
     localStorage.setItem('showHelp', 'false');
     this.snackBar.dismiss();
-}
+  }
 }

@@ -35,7 +35,10 @@ export class AppComponent implements OnInit{
 
   public helpSnackBar(){
     if (this.showHelp){
-      this.snackBar.openFromComponent(HelpSnackbarComponent, {duration: 30000});
+      const loadHelpRef = this.snackBar.openFromComponent(HelpSnackbarComponent, {duration: 30000});
+      loadHelpRef.afterDismissed().subscribe(()=>{
+        this.showHelp = (localStorage.getItem('showHelp') == 'false')? false : true;
+      });
     }
   }
   public addRental(){

@@ -43,13 +43,13 @@ button.mat-menu-item.little-menu {
 .filler {
     flex: 1 1 auto;
 }
-.help{
+/* .help{
     display: flex;
     flex-direction: row;
     width: 100%;
     background-color: rgba(63, 81, 181,.5);
     vertical-align: middle;
-}
+}*/
 .help button{
     color: rgb(220, 220, 220);
     font-size: 24px;
