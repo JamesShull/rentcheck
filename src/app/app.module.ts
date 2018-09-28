@@ -20,6 +20,7 @@ import { LoadDialogComponent } from './load-dialog/load-dialog.component';
 import { HelpSnackbarComponent } from './help-snackbar/help-snackbar.component';
 
 const appRoutes : Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path:'home', component: DeckComponent},
   {path:'index.html', component: DeckComponent},
   {path:'about', component: AboutComponent},
@@ -27,7 +28,6 @@ const appRoutes : Routes = [
   {path:'guide', component: GuideComponent},
   {path:'privacy', component: PrivacyComponent},
   {path:'terms', component: TermsComponent},
-  { path: '', component: DeckComponent},
   { path: '**', component: ErrorComponent } // update to have error view
 ];
 
