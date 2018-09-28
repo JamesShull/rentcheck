@@ -18,7 +18,7 @@
   display: inline-block;
   margin: auto 5px;
 }
-.help-container a>img {
+.help-container a>svg {
   display: inline-block;
   vertical-align: middle;
 }
@@ -29,4 +29,12 @@
 }
 .help-container a:hover{
   text-decoration: underline;
+}
+.icon{
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+}
+.white {
+  filter: contrast(4) invert(1);
 }

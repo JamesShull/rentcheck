@@ -4,23 +4,25 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class DefaultsService {
   private defaults : IDefaultsData = {
+    state : 'CA',
     interestRate: .04625,
     loanTerm : 360,
     downPayment : .20,
     insuranceRate : .0020,
     maintenanceRate : .0018,
     vacancyRate : .042,
-    propertyTaxRate : .0125,
+    propertyTaxRate : .0118,
     salaryTaxRate : 0.22,
     managementRate : 0.1
   };
 
-  private states : string[] = [ 'AK','AL','AR','AS','AZ','CA','CO','CT','DC','DE',
-            'FL','FM','GA','GU','HI','IA','ID','IL','IN','KS',
-            'KY','LA','MA','MD','ME','MH','MI','MN','MO','MP',
-            'MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
-            'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN',
-            'TX','UT','VA','VI','VT','WA','WI','WV','WY'];
+  private states : string[] = [ 
+            'AK','AL','AR','AZ','CA','CO','CT','DC','DE','FL',
+            'GA','HI','IA','ID','IL','IN','KS','KY','LA','MA',
+            'MD','ME','MI','MN','MO','MS','MT','NC','ND','NE',
+            'NH','NJ','NM','NV','NY','OH','OK','OR','PA','RI',
+            'SC','SD','TN','TX','UT','VA','VT','WA','WI','WV',
+            'WY'];
   
   
   private source = new Subject<boolean>();
@@ -72,7 +74,7 @@ export class DefaultsService {
       insuranceRate: .0020,
       maintenanceRate: .0018,
       vacancyRate: .042,
-      propertyTaxRate: .0125,
+      propertyTaxRate: .0118,
       salaryTaxRate: .22,
       managementRate: .1,
       dirtyPurchaseDate: false,
@@ -95,6 +97,7 @@ export class DefaultsService {
 }
 
 export interface IDefaultsData {
+  state: string;
   interestRate: number;
   loanTerm: number;
   downPayment: number;

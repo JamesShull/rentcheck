@@ -55,7 +55,7 @@ export class AppComponent implements OnInit{
     localStorage.setItem('showHelp','false');
   }
   public defaultsDialog() : void {
-    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults()}});
+    const dialogRef = this.dialog.open(DefaultsDialogComponent, {data: {defaults: this._defaults.getDefaults(), states: this._defaults.getStates()}});
     dialogRef.afterClosed().subscribe(result => {if (result != undefined ){this._defaults.saveDefaults(result);}});
   }
   public loadRentals() : void {
