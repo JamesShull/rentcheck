@@ -1,14 +1,7 @@
-.card-input {
-  width: 125px !important;
-  margin-left: 15px;
-}
-.assumption-default { 
-  color: grey; 
-  margin-left: 30px;
-}
 p{
   margin-block-start: .75em;
   margin-block-end: .75em;
+  text-align: center;
 }
 .highlight{
   background-color: #ff4081;
