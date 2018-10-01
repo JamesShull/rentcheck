@@ -49,7 +49,7 @@
                   <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rentalData.rent" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
-              <p class="centered">
+              <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
                   <input matInput placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
@@ -65,56 +65,56 @@
         <mat-tab label="Assumptions">
           <div class="centered">
             <p>
-              <mat-form-field class="card-input date" matTooltip="prinicipal and interest change monthly">
+              <mat-form-field class="card-input">
                 <input matInput [matDatepicker]="picker" placeholder="Purchase Date" [formControl]="purchaseDate" 
                   (blur)="datePurchased()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
-              <mat-form-field class="card-input" style="margin-left:10px;" matTooltip="influences mortgage payment and outflow">
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Interest Rate" name="interestRate" 
                       [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
-              </mat-form-field>%
+              </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="heavily effects performance">
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Down Payment" name="downPayment" 
                       [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
-              </mat-form-field>%
-              <mat-form-field class="card-input" matTooltip="30yrs = 360 months">
+              </mat-form-field>
+              <mat-form-field class="card-input"><span matSuffix>mo.</span>
                 <input matInput placeholder="Loan Term" name="loanTerm" 
                       [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
-              </mat-form-field>mo.
+              </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="effects tax savings">
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
                       [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
-              </mat-form-field>%
-              <mat-form-field class="card-input" matTooltip="typical CA property tax is about 1.25%">
+              </mat-form-field>
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Property Tax Rate" name="propertyTaxRate" 
                       [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
-              </mat-form-field>%
+              </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="insurance premiums (annualized)">
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Insurance Rate" name="insuranceRate" 
                       [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
-              </mat-form-field>%
-              <mat-form-field class="card-input" matTooltip="maintenance costs (annualized)">
+              </mat-form-field>
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Maintenance Rate" name="salaryTaxRate" 
                       [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
-              </mat-form-field>%
+              </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="card-input" matTooltip="vacancy from turnover">
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
                       [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
-              </mat-form-field>%
-              <mat-form-field class="card-input" matTooltip="usually 10% of rent">
+              </mat-form-field>
+              <mat-form-field class="card-input"><span matSuffix>%</span>
                 <input matInput placeholder="Management Rate" name="managementRate"
                       [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
-              </mat-form-field>%
+              </mat-form-field>
             </p>
           </div>
         </mat-tab>

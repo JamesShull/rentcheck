@@ -1,20 +1,20 @@
-.centered {text-align: center;}
 .rental-card {
     margin: 10px;
     padding: 10px !important;
-    /*min-width: 375px;*/
     max-width: 500px;
     display: inline-block;
     vertical-align: top;
 }
-.card-input {
-    width: 100px !important;
-    margin-left: 25px;
+.centered {
+    text-align: center;
 }
-.date {
-    width: 100px !important;
-    padding-right: 25px;
-    /*margin-left: 0px;*/
+.centered p {
+    display: inline-block;
+    width: 100%;
+}
+.card-input {
+    width: 45%;
+    margin: 0 2.5%;
 }
 .card-actions {
     width: 100%;
