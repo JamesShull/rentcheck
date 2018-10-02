@@ -32,6 +32,22 @@
 .short-input {  width: 75px !important;}
 .mid-input { width: 125px !important;}
 .edit-toggle {  margin-left: 10px;}
+.result-box {
+    display: inline-block;
+    margin: auto;
+    width: 24%;
+    text-align: center;
+    background-color: #ff4081;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.result-box p { margin: 0px;}
+.result-box h4 { margin-top: 5px; margin-bottom: 5px;}
+.right-border {
+    border-right: 1px solid black;
+}
+/*
 .outflow {
     display: inline-block;
     margin: auto;
@@ -47,10 +63,7 @@
     margin: auto;
     width: 32%;
     text-align: center;
-    /*background-color: #ff4081; accent - pink*/
-    /*background-color: #28a745; green */
-    /*background-color: #20c997; teal*/
-    /*background-color: #17a2b8; cyan*/
+    
     background-color: #ff4081;
     border-right: 1px solid black;
 }
@@ -65,6 +78,10 @@
 }
 .yield>p {  margin: 0px;}
 .yield>h4 { margin-top: 5px; margin-bottom: 5px;}
+*/
+.line{
+    border-bottom: 2px solid rgba(63, 81, 181,.5);
+}
 .positive {  background-color: #28a745;}
 .detail-text {    color: grey;}
 .details ul li h5 { margin-top: 5px; margin-bottom: 5px;}

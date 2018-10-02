@@ -5,7 +5,7 @@
           <input matInput placeholder="Street" name="street" [(ngModel)]="rentalData.streetAddress">
         </mat-form-field>
         <span *ngIf="!rentalData.editAddress"><h2 style="display:inline-block;">{{rentalData.streetAddress}}</h2></span>
-        <mat-slide-toggle class="edit-toggle" [(ngModel)]="rentalData.editAddress">Edit Address</mat-slide-toggle>
+        <mat-slide-toggle class="edit-toggle" [(ngModel)]="rentalData.editAddress">Edit</mat-slide-toggle>
     </mat-card-title>
     <mat-card-subtitle *ngIf="rentalData.editAddress">
         <mat-form-field  class="mid-input">
@@ -27,13 +27,16 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="outflow" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="monthly cashflow">
+    <span class="result-box" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="monthly expenses before taxes">
       <p>outflow</p><h4>{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</h4>
     </span>
-    <span class="income" [class.positive]="monthlyIncome>0" matTooltip="resulting monthly income">
-      <p>income</p><h4>{{monthlyIncome | currency:'USD':'symbol':'1.0-0'}}</h4>
+    <span class="result-box" [class.positive]="(monthlyIncome-monthlyPrincipal)>0" matTooltip="monthly income after taxes">
+      <p>income</p><h4>{{(monthlyIncome-monthlyPrincipal) | currency:'USD':'symbol':'1.0-0'}}</h4>
     </span>
-    <span class="yield" [class.positive]="yield>0" matTooltip="Cap Rate: {{(monthlyIncome*12) / (rentalData.price*(1+feesPercentage)) | percent:'1.2-2'}}">
+    <span class="result-box" [class.positive]="monthlyPrincipal>=0" matTooltip="monthly equity contribution">
+      <p>equity</p><h4>{{monthlyPrincipal | currency:'USD':'symbol':'1.0-0'}}</h4>
+    </span>
+    <span class="result-box right-border" [class.positive]="yield>0" matTooltip="Cap Rate: {{((monthlyIncome-monthlyPrincipal)*12) / (rentalData.price*(1+feesPercentage)) | percent:'1.2-2'}}">
       <p>yield</p><h4>{{yield | percent:'1.2-2'}}</h4>
     </span>
     <mat-tab-group>

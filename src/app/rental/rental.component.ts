@@ -141,7 +141,7 @@ export class RentalComponent implements OnInit, OnDestroy {
     // Income
     this.monthlyIncome = this.rentalData.rent - this.monthlyExpense;
     //this.yield = (this.monthlyIncome*12) /(this.rentalData.downPayment*this.rentalData.price);
-    this.yield = (this.monthlyIncome*12) / this.cost;
+    this.yield = ((this.monthlyIncome - this.monthlyPrincipal)*12) / this.cost;
   }
   private calcPayment(principal : number) : number{
     return principal * (this.rentalData.interestRate/12) 
