@@ -129,16 +129,6 @@ export class RentalComponent implements OnInit, OnDestroy {
     // Investment total
     this.cost = this.rentalData.price*(this.rentalData.downPayment + this.feesPercentage);
     // Tax savings
-    let propertyTaxCap = 10000/this.rentalData.salaryTaxRate;
-    /* //Investment properties maybe don't fall victim to SALT cap
-    let taxBasis = (this.monthlyPropertyTax<=propertyTaxCap)? 
-                      this.monthlyPropertyTax + this.monthlyInterest:
-                      10000 + this.monthlyInterest;
-    taxBasis += this.monthlyDepreciation;
-    */
-
-    // maintenance, insurance, management should all be deducted too. is it?
-
     let taxBasis =  this.monthlyPropertyTax + this.monthlyInterest + this.monthlyDepreciation;
     taxBasis += this.monthlyPMI + this.monthlyInsurance + this.monthlyMaintenance +this.monthlyVacancy;
     this.monthlyTaxSavings = this.rentalData.salaryTaxRate * taxBasis;
