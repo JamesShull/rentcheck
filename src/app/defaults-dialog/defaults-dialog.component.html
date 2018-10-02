@@ -1,8 +1,8 @@
 
-<h2 mat-dialog-title>Update Default Assumptions</h2>
+<h2 mat-dialog-title style="border-bottom: 1px solid rgba(63, 81, 181,.5);;">Update Default Assumptions</h2>
 <div mat-dialog-content>
   <p>
-    <mat-form-field class="card-input">
+    <mat-form-field>
       <mat-select [(value)]="data.defaults.state" placeholder="State" (blur)="onSelected()">
           <mat-option *ngFor="let state of data.states" [value]="state">
             {{state}}
@@ -12,63 +12,71 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="effects tax savings">
+    <!--<mat-form-field class="card-input" matTooltip="effects tax savings">-->
+    <mat-form-field matTooltip="effects tax savings">
       <input matInput placeholder="Default Income Tax Rate" name="salaryTaxRate" 
             [ngModel]="data.defaults.salaryTaxRate*100 | number:'1.0-0'" (blur)="data.defaults.salaryTaxRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.salaryTaxRate | percent}}</mat-hint>      
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="influences mortgage payment and outflow">
+    <!-- <mat-form-field class="card-input" matTooltip="influences mortgage payment and outflow"> -->
+    <mat-form-field>
       <input matInput placeholder="Default Interest Rate" name="interestRate" 
             [ngModel]="data.defaults.interestRate*100 | number:'1.1-4'" (blur)="data.defaults.interestRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.interestRate | percent:'1.1-4'}}</mat-hint>
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="30yrs = 360 months">
+    <!-- <mat-form-field class="card-input" matTooltip="30yrs = 360 months"> -->
+    <mat-form-field>
       <input matInput placeholder="Default Loan Term" name="loanTerm" 
             [ngModel]="data.defaults.loanTerm" (blur)="data.defaults.loanTerm=$event.target.value;">
       <mat-hint align="start">originally: {{textDefaults.loanTerm}} months</mat-hint>
     </mat-form-field>mo.
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="heavily effects performance">
+    <!-- <mat-form-field class="card-input" matTooltip="heavily effects performance"> -->
+    <mat-form-field>
       <input matInput placeholder="Default Down Payment" name="downPayment" 
             [ngModel]="data.defaults.downPayment*100 | number:'1.0-0'" (blur)="data.defaults.downPayment=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.downPayment | percent}}</mat-hint>
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="updated by state selection above">
+    <!-- <mat-form-field class="card-input" matTooltip="updated by state selection above"> -->
+    <mat-form-field>
       <input matInput [ngClass]="{'highlight':recent}" placeholder="Default Property Tax" name="propertyTaxRate" 
             [ngModel]="data.defaults.propertyTaxRate*100 | number:'1.3-4'" (blur)="data.defaults.propertyTaxRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.propertyTaxRate | percent:'1.3-4'}}</mat-hint>
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="insurance premiums (annualized)">
+    <!--<mat-form-field class="card-input" matTooltip="insurance premiums (annualized)">-->
+    <mat-form-field>
       <input matInput placeholder="Default Insurance Rate" name="insuranceRate" 
             [ngModel]="data.defaults.insuranceRate*100 | number:'1.2-3'" (blur)="data.defaults.insuranceRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.insuranceRate | percent:'1.2-3'}}</mat-hint>     
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input">
+    <mat-form-field>
       <input matInput placeholder="Default Maintenance Rate" name="salaryTaxRate" 
             [ngModel]="data.defaults.maintenanceRate*100 | number:'1.2-3'" (blur)="data.defaults.maintenanceRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.maintenanceRate | percent:'1.2-3'}}</mat-hint>
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="vacancy from turnover (annualized)">
+    <!--<mat-form-field class="card-input" matTooltip="vacancy from turnover (annualized)">-->
+    <mat-form-field>
       <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
             [ngModel]="data.defaults.vacancyRate*100 | number:'1.2-3'" (blur)="data.defaults.vacancyRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.vacancyRate | percent:'1.2-3'}}</mat-hint>
     </mat-form-field>%
   </p>
   <p>
-    <mat-form-field class="card-input" matTooltip="Management fees are about 10% of rent">
+    <!--<mat-form-field class="card-input" matTooltip="Management fees are about 10% of rent">-->
+    <mat-form-field>
       <input matInput placeholder="Management Rate" name="managementRate" 
             [ngModel]="data.defaults.managementRate*100 | number:'1.2-3'" (blur)="data.defaults.managementRate=$event.target.value/100;">
       <mat-hint align="start">originally: {{textDefaults.managementRate | percent:'1.1-2'}}</mat-hint>
