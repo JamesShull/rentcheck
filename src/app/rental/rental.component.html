@@ -27,8 +27,8 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <span class="result-box" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="monthly expenses before taxes">
-      <p>outflow</p><h4>{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</h4>
+    <span class="result-box" [class.positive]="rentalData.rent>monthlyOutflow" matTooltip="{{(monthlyOutflow - rentalData.rent) | currency:'USD':'symbol':'1.0-0'}} / mo. with rent">
+      <p>expenses</p><h4>{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</h4>
     </span>
     <span class="result-box" [class.positive]="(monthlyIncome-monthlyPrincipal)>0" matTooltip="monthly income after taxes">
       <p>income</p><h4>{{(monthlyIncome-monthlyPrincipal) | currency:'USD':'symbol':'1.0-0'}}</h4>
