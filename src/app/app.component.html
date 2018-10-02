@@ -12,8 +12,8 @@
             <button mat-menu-item class="little-menu" routerLink="/terms" routerLinkActive="active">Terms of Use</button>
             <div style="border-bottom: 2px solid rgba(63, 81, 181,.5);"></div>
             <button mat-menu-item (click)="saveAll();">Save All</button>
-            <button mat-menu-item (click)="loadRentals();">Load Rentals</button>
-            <button mat-menu-item (click)="clearLocalStorage();">Reset App</button>
+            <button mat-menu-item (click)="loadRentals();">Load File</button>
+            <button mat-menu-item (click)="clearLocalStorage();">Reset</button>
       </mat-menu>
       <a mat-button class="title" routerLink="/home" routerLinkActive="active" matTooltip="Home: rental income guesstimator">
             <svg role="img" title="rentcheck icon"><use xlink:href="assets/sprites.svg#rentcheck"></use></svg>{{ title }}
