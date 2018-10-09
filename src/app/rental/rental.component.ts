@@ -84,9 +84,11 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   public inputBlur(event: any){  // Called by input fields during editing
     let name : string = event.target.name;
-    (name!='loanTerm' && name!='purchaseDate') ? 
-      this.rentalData[name]=event.target.value/100 :
+    if (name!='loanTerm' && name!='purchaseDate'){
+      this.rentalData[name]=event.target.value/100;
+    } else {
       this.rentalData[name]=event.target.value;
+    }
     let keyName = 'dirty'+name.substring(0,1).toUpperCase() + name.substring(1);
     this.rentalData[keyName] = true;
     this.updatePerformance();
@@ -125,7 +127,10 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.monthlyVacancy = this.rentalData.rent*(this.rentalData.vacancyRate);
     this.monthlyPropertyTax = this.rentalData.price*(this.rentalData.propertyTaxRate/12);
     this.monthlyDepreciation = ((this.rentalData.price * this.depreciationPercentage) / (27.5*12));
-    this.monthlyManagement = (this.rentalData.rent * this.rentalData.managementRate) ;
+    this.monthlyManagement = (this.rentalData.rent * this.rentalData.managementRate);
+    //console.log('price: '+this.rentalData.price);
+    console.log('maintenance: '+this.monthlyMaintenance);
+    console.log('insurance: '+this.monthlyInsurance);
     // Investment total
     this.cost = this.rentalData.price*(this.rentalData.downPayment + this.feesPercentage);
     // Tax savings
