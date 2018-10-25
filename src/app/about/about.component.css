@@ -18,3 +18,33 @@
   vertical-align: middle;
   padding-left: 5px;
 }
+.contact-card {
+  margin: 10px;
+  padding: 10px !important;
+  /*min-width: 375px;*/
+  width: 375px;
+  display: inline-block;
+  vertical-align: top;
+}
+.credit-list{
+  padding-left: 10px;
+}
+.credit-list li {
+  line-height: 36px;
+}
+.credit-list li img {
+  vertical-align: middle;
+}
+.credit-icon{
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+}
+.small-icon {
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+.small-icon-img{
+  height: 24px;
+}

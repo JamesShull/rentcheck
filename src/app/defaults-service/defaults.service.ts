@@ -3,9 +3,11 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DefaultsService {
+  private startingInterestRate = 0.0475;
+
   private defaults : IDefaultsData = {
     state : 'CA',
-    interestRate: .04625,
+    interestRate: this.startingInterestRate,
     loanTerm : 360,
     downPayment : .20,
     insuranceRate : .0020,
@@ -68,7 +70,7 @@ export class DefaultsService {
       hoa: 250,
       melloRoos: 0,
       purchaseDate: undefined,
-      interestRate: .04625,
+      interestRate: this.startingInterestRate,
       loanTerm: 360,
       downPayment: 0.20,
       insuranceRate: .0020,
