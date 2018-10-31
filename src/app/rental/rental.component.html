@@ -167,6 +167,7 @@
                 <li><h5>Interest: <span class="detail-text">{{monthlyInterest | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
                 <li><h5>Principal: <span class="detail-text">{{monthlyPrincipal | currency:'USD':'symbol':'1.0-0'}}</span></h5></li>
                 <li><h5>Loan Term: <span class="detail-text">{{term}} months ({{rentalData.loanTerm - term}} remaining)</span></h5></li>
+                <li><h5>Principal Accumulated: <span class="detail-text">{{ accumulatedPrincipal(term)/1000 | currency:'USD':'symbol':'1.1-1'}}K</span></h5></li>
               </ul>
             <div class="card-actions">
               <button *ngIf="showAmmortization" mat-stroked-button (click)="generateAmmortizationSchedule()">Hide Ammortization Schedule</button>

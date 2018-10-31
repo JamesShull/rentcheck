@@ -164,6 +164,12 @@ export class RentalComponent implements OnInit, OnDestroy {
     }
     return previous - current;
   }
+  public accumulatedPrincipal(currentTerm: number) : number {
+    let totalPrincipal = 0;
+    currentTerm++;  // not 0 indexed
+    for (let i=1; i<currentTerm; i++) { totalPrincipal+= this.calcPrincipal(((1-this.rentalData.downPayment)*this.rentalData.price), i)}
+    return totalPrincipal
+  }
   private calcInterest(principal : number, period : number) : number{
     let localPrincipal = this.calcPrincipal(principal, period);
     return this.calcPayment(principal) - localPrincipal;
