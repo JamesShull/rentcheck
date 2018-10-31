@@ -45,21 +45,21 @@
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Price Estimate" name="price" [(ngModel)]="rentalData.price" (blur)="updatePerformance();">
+                  <input matInput type="number" step="1000" placeholder="Price Estimate" name="price" [(ngModel)]="rentalData.price" (blur)="updatePerformance();">
                 </mat-form-field>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Rent Estimate" name="rent" [(ngModel)]="rentalData.rent" (blur)="updatePerformance();">
+                  <input matInput type="number" step="100" placeholder="Rent Estimate" name="rent" [(ngModel)]="rentalData.rent" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field class="card-input">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
+                  <input matInput type="number" step="10" placeholder="HOA" name="hoa" [(ngModel)]="rentalData.hoa" (blur)="updatePerformance();">
                 </mat-form-field>
                 <mat-form-field class="card-input" matTooltip="parcel tax (common in CA)">
                   <span matPrefix>$ &nbsp;</span>
-                  <input matInput placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();">
+                  <input matInput type="number" step="10" placeholder="Mello-Roos" name="melloRoos" [(ngModel)]="rentalData.melloRoos" (blur)="updatePerformance();">
                 </mat-form-field>
               </p>
           </div>
@@ -75,47 +75,47 @@
                 <mat-datepicker #picker  (closed)="datePurchased();"></mat-datepicker>
               </mat-form-field>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Interest Rate" name="interestRate" 
+                <input matInput type="number" step="0.25" placeholder="Interest Rate" name="interestRate" 
                       [ngModel]="rentalData.interestRate*100 | number:'1.1-4'" (blur)="inputBlur($event);">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Down Payment" name="downPayment" 
+                <input matInput type="number" step="5" placeholder="Down Payment" name="downPayment" 
                       [ngModel]="rentalData.downPayment*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>
               <mat-form-field class="card-input"><span matSuffix>mo.</span>
-                <input matInput placeholder="Loan Term" name="loanTerm" 
+                <input matInput type="number" step="60" placeholder="Loan Term" name="loanTerm" 
                       [ngModel]="rentalData.loanTerm" (blur)="inputBlur($event);">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Income Tax Rate" name="salaryTaxRate" 
+                <input matInput type="number" placeholder="Income Tax Rate" name="salaryTaxRate" 
                       [ngModel]="rentalData.salaryTaxRate*100 | number:'1.0-0'" (blur)="inputBlur($event);">
               </mat-form-field>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Property Tax Rate" name="propertyTaxRate" 
+                <input matInput type="number" step=".01" placeholder="Property Tax Rate" name="propertyTaxRate" 
                       [ngModel]="rentalData.propertyTaxRate*100 | number:'1.3-4'" (blur)="inputBlur($event);">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Insurance Rate" name="insuranceRate" 
+                <input matInput type="number" step=".01" placeholder="Insurance Rate" name="insuranceRate" 
                       [ngModel]="rentalData.insuranceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Maintenance Rate" name="maintenanceRate" 
+                <input matInput type="number" step=".01" placeholder="Maintenance Rate" name="maintenanceRate" 
                       [ngModel]="rentalData.maintenanceRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Vacancy Rate" name="vacancyRate" 
+                <input matInput type="number" step="1.05" placeholder="Vacancy Rate" name="vacancyRate" 
                       [ngModel]="rentalData.vacancyRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>
               <mat-form-field class="card-input"><span matSuffix>%</span>
-                <input matInput placeholder="Management Rate" name="managementRate"
+                <input matInput type="number" placeholder="Management Rate" name="managementRate"
                       [ngModel]="rentalData.managementRate*100 | number:'1.2-3'" (blur)="inputBlur($event);">
               </mat-form-field>
             </p>
@@ -128,6 +128,19 @@
             <ul>
                 <li><h5>Down Payment: <span class="detail-text">{{ ((rentalData.downPayment*rentalData.price)/1000) | currency:'USD':'symbol':'1.1-1' }}K</span></h5></li>
                 <li><h5>Transaction Fees: <span class="detail-text">{{ (rentalData.price*feesPercentage) | currency:'USD':'symbol':'1.0-0' }}</span></h5></li>
+            </ul>
+            <div class="divider"></div>
+            <h3>Income: <span class="detail-text">{{(monthlyIncome-monthlyPrincipal) | currency:'USD':'symbol':'1.0-0'}}</span></h3>
+            <ul>
+              <li><h5>Income before taxes: <span class="detail-text">{{(monthlyIncome-monthlyPrincipal-monthlyTaxSavings) | currency:'USD':'symbol':'1.0-0'}} 
+                (yield: {{(12*(monthlyIncome-monthlyPrincipal-monthlyTaxSavings))/cost | percent:'1.2-2'}})</span></h5></li>
+              <li><h5>Income after taxes: <span class="detail-text">{{(monthlyIncome-monthlyPrincipal) | currency:'USD':'symbol':'1.0-0'}} 
+                (yield: {{(12*(monthlyIncome-monthlyPrincipal))/cost | percent:'1.2-2'}})</span></h5></li>
+              <li><h5>Income after taxes with Equity: <span class="detail-text">{{(monthlyIncome) | currency:'USD':'symbol':'1.0-0'}} 
+                (yield: {{(12*(monthlyIncome))/cost | percent:'1.2-2'}})</span></h5></li>
+              <li><h5>Capitalization Rate: <span class="detail-text">{{((monthlyIncome-monthlyPrincipal)*12) / ((rentalData.price*(1+feesPercentage))) | percent:'1.2-2'}} 
+                ( {{(monthlyIncome-monthlyPrincipal) | currency:'USD':'symbol':'1.0-0'}} / {{((rentalData.price*(1+feesPercentage))/1000) | currency:'USD':'symbol':'1.0-0'}}K )</span></h5></li>
+              <li><h5></h5></li>
             </ul>
             <div class="divider"></div>
             <h3>Cash Outflow (monthly): <span class="detail-text">{{monthlyOutflow | currency:'USD':'symbol':'1.0-0'}}</span></h3>
