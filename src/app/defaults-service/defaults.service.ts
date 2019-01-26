@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DefaultsService {
-  private startingInterestRate = 0.0475;
+  private startingInterestRate = 0.055;
 
   private defaults : IDefaultsData = {
     state : 'CA',
