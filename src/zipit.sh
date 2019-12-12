@@ -2,9 +2,12 @@
 
 cd dist/rentcheck
 # Zip it
-gzip -9 runtime.*.js
-gzip -9 main.*.js
-gzip -9 polyfills.*.js
+gzip -9 runtime-es5.*.js
+gzip -9 runtime-es2015.*.js
+gzip -9 main-es5.*.js
+gzip -9 main-es2015.*.js
+gzip -9 polyfills-es5.*.js
+gzip -9 polyfills-es2015.*.js
 gzip -9 styles.*.css
 
 # Rename for AWS
